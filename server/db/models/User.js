@@ -10,11 +10,36 @@ const User = db.define('user', {
   username: {
     type: Sequelize.STRING,
     unique: true,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      isEmail: true
+    }
   },
   password: {
     type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      len: [8, 127]
+    }
+  },
+  imageUrl: {
+    type: Sequelize.STRING,
+    defaultValue: 'https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png'
+  },
+  firstName: {
+    type: Sequelize.STRING
+  },
+  lastName: {
+    type: Sequelize.STRING
+  },
+  address: {
+    type: Sequelize.TEXT
+  },
+  admin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   }
+
 })
 
 module.exports = User
