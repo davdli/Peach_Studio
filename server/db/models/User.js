@@ -18,13 +18,6 @@ const User = db.define("user", {
       isEmail: true
     }
   },
-  password: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      len: [8, 127]
-    }
-  },
   imageUrl: {
     type: Sequelize.STRING,
     defaultValue: 'https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png'
