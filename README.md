@@ -1,4 +1,4 @@
-# FS-App-Template
+# Peach Studio
 
 ## Setup
 
