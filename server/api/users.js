@@ -2,6 +2,7 @@ const router = require('express').Router()
 const { models: { User }} = require('../db')
 module.exports = router
 
+// api/users/
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
@@ -15,3 +16,6 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+// api/users/products
+
