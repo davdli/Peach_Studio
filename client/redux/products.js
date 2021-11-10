@@ -7,7 +7,7 @@ export const _fetchProducts = (products) => {
     type: FETCH_PRODUCTS,
     products
   }
-}
+};
 
 export const fetchProducts = () => {
   return async (dispatch) => {
@@ -18,7 +18,7 @@ export const fetchProducts = () => {
       console.log(error);
     }
   }
-}
+};
 
 export default function productsReducer(state = [], action) {
   switch (action.type) {
