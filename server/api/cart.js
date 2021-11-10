@@ -1,29 +1,29 @@
 const router = require('express').Router();
-const {Product, OrderItem, Order} = require('../db')
+const {Order, Cart, Product} = require('../db')
 
 
 // increment, decrement, remove product from cart
 router.put('/:action/:productId/:orderId', async (req, res, next) => {
   try {
-    const orderItem = await Order.findOne({
+    const cartItem = await Cart.findOne({
       where: {
         productId: req.params.productId,
         orderId: req.params.orderId
       }
     })
 
-    const currrentOrder = await Order.findByPk(orderItem.orderId);
-    const productInOrder = await Product.findByPk(orderItem.productId);
+    const userCart = await Cart.findByPk(cartItem.orderId);
+    const productInCart = await Product.findByPk(cartItem.productId);
 
     if (req.params.action === 'increment') {
-      await orderItem.update({quantity: orderItem.quantity++})
+      await cartItem.increment('quantity', { by: 1 })
     } else if (req.params.action === 'decrement') {
-      await orderItem.update({quantity: orderItem.quantity++})
+      await cartItem.decrement('quantity', { by: 1 })
     } else if (req.params.action === 'remove') {
-      await currrentOrder.removeProduct(productInOrder);
+      await userCart.destroy(productInCart);
     }
 
-    res.send(productInOrder);
+    res.send(cartItem);
 
   } catch (error) {
     next(error);
