@@ -16,7 +16,8 @@ async function seed() {
   const products = await Promise.all([
     Product.create({
       name: "peachyChair",
-      imageUrl: "chair.png",
+      imageUrl:
+        "https://a.1stdibscdn.com/ellen-dining-chair-in-rust-and-powder-pink-by-essential-home-for-sale/1121189/f_126135721542199199973/12613572_master.jpg?disable=upscale&auto=webp&quality=60&width=1318",
       description: "Its a cute lil chair!",
       price: 800,
       inventory: 100,
@@ -24,7 +25,8 @@ async function seed() {
     }),
     Product.create({
       name: "peachySofa",
-      imageUrl: "sofa.png",
+      imageUrl:
+        "https://media.istockphoto.com/photos/liivng-coralcolor-of-the-year-2019interior-design-for-living-area-or-picture-id1134702834?b=1&k=6&m=1134702834&s=170667a&w=0&h=2q1rjh0eKl02t3ZCfbeweubkljyd64fZJON5862nXRg=",
       description: "Its a cute lil sofa!",
       price: 2200,
       inventory: 5,
@@ -32,7 +34,8 @@ async function seed() {
     }),
     Product.create({
       name: "peachyTable",
-      imageUrl: "table.png",
+      imageUrl:
+        "   https://images.urbndata.com/is/image/Anthropologie/60451051_012_b?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=960",
       description: "Its a cute lil table!",
       price: 1300,
       inventory: 11,
@@ -40,7 +43,8 @@ async function seed() {
     }),
     Product.create({
       name: "peachyDresser",
-      imageUrl: "dresser.png",
+      imageUrl:
+        "https://images.urbndata.com/is/image/Anthropologie/40800781_006_b?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",
       description: "Its a cute lil dresser!",
       price: 2400,
       inventory: 22,
