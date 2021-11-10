@@ -275,3 +275,13 @@ form div {
 .section-footer div:nth-child(3) {
   display: none;
 }
+
+/* dummy data images/data for seed only below -- comment out before deploy */
+.test-products {
+  text-align: center;
+}
+
+.test-products img {
+  width: 100px;
+  height: 100px;
+}
