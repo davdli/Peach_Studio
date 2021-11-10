@@ -1,7 +1,11 @@
 const router = require('express').Router()
 module.exports = router
 
+// api/users
 router.use('/users', require('./users'))
+
+// api/products
+router.use('/products', require('./products'))
 
 router.use((req, res, next) => {
   const error = new Error('Not Found')
