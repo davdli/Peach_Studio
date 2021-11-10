@@ -8,6 +8,7 @@ import AllProducts from './components/AllProducts';
 import SingleProduct from './components/SingleProduct';
 import { me } from './store'
 
+
 /**
  * COMPONENT
  */
@@ -17,28 +18,25 @@ class Routes extends Component {
   }
 
   render() {
-
     const { isLoggedIn } = this.props;
+
     return (
       <div>
         {isLoggedIn ? (
           <Switch>
-            <Route path='/home' component={Home} />
-            <Redirect to='/home' />
+            <Route path="/home" component={Home} />
+            <Redirect to="/home" />
           </Switch>
         ) : (
           <Switch>
-
-            <Route path='/' exact component={Landing} />
-            <Route path='/login' component={Login} />
-            <Route path='/signup' component={Signup} />
-
-            <Route exact path='/' exact component={Landing} />
+            <Route path="/" exact component={Landing} />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
+            <Route exact path="/" exact component={Landing} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/products" component={AllProducts} />
             <Route exact path="/products/:id" component={SingleProduct} />
-
           </Switch>
         )}
       </div>

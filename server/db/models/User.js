@@ -14,29 +14,26 @@ const User = db.define("user", {
   },
   password: {
     type: Sequelize.STRING,
-    validate: {
-      isEmail: true
-    }
   },
   imageUrl: {
     type: Sequelize.STRING,
-    defaultValue: 'https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png'
+    defaultValue:
+      "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png",
   },
   firstName: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   lastName: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   address: {
-    type: Sequelize.TEXT
+    type: Sequelize.TEXT,
   },
   admin: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false
-  }
-
-})
+    defaultValue: false,
+  },
+});
 
 module.exports = User;
 
