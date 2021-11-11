@@ -8,9 +8,11 @@ const Product = require('../server/db/models/Product');
  * seed - this function clears the database, updates tables to
  *      match the models, and populates the database.
  */
-  function randomCategory (max){
-    return Math.floor(Math.random()*max) + 1;
-  } 
+function randomCategory(max) {
+  return Math.floor(Math.random() * max) + 1;
+}
+const values = ["chair", "sofa", "table", "dresser"];
+let randomCate= values[randomCategory(3)];
 
 // Products Dummy data
 const dummyProducts = [
@@ -19,8 +21,8 @@ const dummyProducts = [
     description: faker.commerce.productDescription(),
     imageUrl: faker.image.imageUrl(),
     price: faker.commerce.price(),
-    inventory: faker.random.number(),
-    category: randomCategory(3),
+    inventory: faker.datatype.number(),
+    category: randomCate,
   }
 ]
 
@@ -30,12 +32,12 @@ async function seed() {
 
   // Creating Users
   const users = await Promise.all([
-    User.create({ username: 'cody@fsa.com', password: '123' }),
-    User.create({ username: 'murphy@fsa.com', password: '123' }),
+    User.create({ email: 'cody@fsa.com', password: '123' }),
+    User.create({ email: 'murphy@fsa.com', password: '123' }),
   ]);
 
   // Creating Products
-  const products = await Promise.all(dummyProducts.map(prod => {
+  let products = await Promise.all(dummyProducts.map(prod => {
     return Product.create(prod);
   }))
 
@@ -45,7 +47,8 @@ async function seed() {
     users: {
       cody: users[0],
       murphy: users[1]
-    }
+    },
+    products,
   }
 }
 

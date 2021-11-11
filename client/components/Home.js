@@ -6,10 +6,10 @@ import {connect} from 'react-redux'
  */
 export const Home = props => {
   const {username} = props
-
+  const cleanName= username.split('@');
   return (
     <div>
-      <h3>Welcome, {username}</h3>
+      <h3>Welcome, {cleanName[0]}</h3>
     </div>
   )
 }
@@ -19,7 +19,7 @@ export const Home = props => {
  */
 const mapState = state => {
   return {
-    username: state.auth.username
+    username: state.auth.email
   }
 }
 
