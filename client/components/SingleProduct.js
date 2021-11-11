@@ -1,29 +1,32 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
+import React from "react";
 import { fetchSingleProduct } from "../redux/singleProduct";
-import { addToCart } from "../redux/cart";
-const mapStateToProps = ({ product }) => {
-  return { product };
-};
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchSingleProduct: (id) => dispatch(fetchSingleProduct(id)),
-});
-
-const SingleProduct = ({ product, fetchSingleProduct, match }) => {
+const SingleProduct = (props) => {
+  const product = useSelector((state) => state.product);
+  // this is like mapdispatch
+  const dispatch = useDispatch();
   useEffect(() => {
-    fetchSingleProduct(match.params.id);
+    dispatch(fetchSingleProduct(props.match.params.id));
+    // Safe to add dispatch to the dependencies array
   }, []);
-
   return (
     <div>
-      <h3>{product.name}</h3>
-      <img src={product.imageUrl} />
-      <p>{product.description}</p>
-      <h3>Price: ${product.price}</h3>
-      <h3>Left in stock: {product.inventory}</h3>
+      <div className="single-product-view">
+        <div className="right">
+          <h3>Left in stock: {product.inventory}</h3>
+          <h3>Price: ${product.price}</h3>
+          <button className="btn first">Add to Cart</button>
+        </div>
+        <div>
+          <h3>{product.name}</h3>
+          <img src={product.imageUrl} />
+          <p>{product.description}</p>
+        </div>
+      </div>
     </div>
   );
 };
-
-export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct);
+export default SingleProduct;
