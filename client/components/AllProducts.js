@@ -2,39 +2,32 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchProducts } from "../redux/products";
-
-class AllProducts extends React.Component {
-  componentDidMount() {
-    this.props.loadProducts();
-  }
-  render() {
-    return (
-      <div className="test-products">
-        All Products
-        {this.props.products.map((product) => (
-          <div key={product.id}>
-            <Link to={`/products/${product.id}`}>
-              <img id="productPhoto" src={product.imageUrl} />
-              <p>{product.name}</p>
-            </Link>
-            <p>${product.price}</p>
-          </div>
-        ))}
-      </div>
-    );
-  }
-}
-
-const mapStateToProps = (state) => {
-  return {
-    products: state.products,
-  };
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+const AllProducts = (props) => {
+  // this is the same  mapstate
+  const products = useSelector((state) => state.products);
+  // this is the same  mapdispatch
+  const dispatch = useDispatch();
+  //when we pass in an empty arr it acts as componentdidmount and when we dont pass in a second arg it acts as componentdidupdate
+  useEffect(() => {
+    dispatch(fetchProducts());
+    // Safe to add dispatch to the dependencies array
+  }, []);
+  return (
+    <div className="test-products">
+      All Products
+      {products.map((product) => (
+        <div key={product.id}>
+          <Link to={`/products/${product.id}`}>
+            <img id="productPhoto" src={product.imageUrl} />
+            <p>{product.name}</p>
+          </Link>
+          <p>${product.price}</p>
+        </div>
+      ))}
+    </div>
+  );
 };
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    loadProducts: () => dispatch(fetchProducts()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(AllProducts);
+export default AllProducts;
