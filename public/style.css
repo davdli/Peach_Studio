@@ -407,15 +407,56 @@ form div {
   display: flex;
 }
 
-/* .cart-product-detail div {
-  display: flex;
-} */
-
 .cart-product-detail img {
   width: 200px;
   height: 200px;
 }
 
+.cart-product-detail div {
+  padding: 20px;
+  justify-content: space-around;
+}
+
+.cart-product-color {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+
 .cart-product-price {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-product-amount {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.cart-product-amount p {
+  font-size: 24px;
+  margin: 5px;
+}
+
+.cart-product-amount button {
+  font-size: 24px;
+  background-color: white;
+  border-style: none;
+  cursor: pointer;
+}
+
+.cart-product-cost {
+  font-size: 24px;
+  font-weight: 300px;
+}
+
+.cart-bottom-summary button {
+  padding: 10px;
+  cursor: pointer;
+  background: #f4d0a5;
+  border-style: none;
 }
