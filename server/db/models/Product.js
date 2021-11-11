@@ -5,19 +5,22 @@ const Product = db.define("product", {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
+    validate:{
+      notEmpty: true,
+    }
   },
   description: {
     type: Sequelize.TEXT,
+    defaultValue: 'Waiting for a nice description :)',
   },
   imageUrl: {
     type: Sequelize.TEXT,
     defaultValue: "sofa.png",
   },
   price: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.DECIMAL,
     allowNull: false,
     validate: {
-      isInt: true,
       min: 0,
     },
   },

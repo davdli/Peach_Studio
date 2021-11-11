@@ -4,7 +4,6 @@ const User = require('../db/models/User');
 module.exports = router
 
 // GET api/products
-
 router.get('/', async (req, res, next) => {
     try {
         const products = await Product.findAll();
@@ -15,7 +14,6 @@ router.get('/', async (req, res, next) => {
 });
 
 // GET api/products/:productId
-
 router.get('/:productId', async (req, res, next) => {
     try {
         const productId = await Product.findByPk(req.params.productId);
@@ -25,12 +23,8 @@ router.get('/:productId', async (req, res, next) => {
     }
 });
 
-// Product.belongsToMany(Users, {through: Order});
-// Users.belongsToMany(Product, {through: Order});
-
-
 // PUT api/products/:productId
-// This is the cart route
+// Is this the cart route?
 router.put('/:productId', async (req, res, next) => {
     try {
         const product = await Product.findByPk(req.params.productId, {
