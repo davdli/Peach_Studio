@@ -7,15 +7,19 @@ const axios = require("axios");
 const SALT_ROUNDS = 5;
 
 const User = db.define("user", {
-  username: {
+  email: {
     type: Sequelize.STRING,
     unique: true,
     allowNull: false,
+    validate:{
+      isEmail: true,
+    },
   },
   password: {
     type: Sequelize.STRING,
-    validate: {
-      isEmail: true
+    allowNull: false,
+    validate:{
+      notEmpty: true,
     }
   },
   imageUrl: {
@@ -23,19 +27,43 @@ const User = db.define("user", {
     defaultValue: 'https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png'
   },
   firstName: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate:{
+      notEmpty: true,
+    }
   },
   lastName: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate:{
+      notEmpty: true,
+    }
   },
-  address: {
-    type: Sequelize.TEXT
+  shippingAddress: {
+    type: Sequelize.TEXT,
+    allowNull: false,
+    validate:{
+      notEmpty: true,
+    }
   },
-  admin: {
+  billingAddress: {
+    type: Sequelize.TEXT,
+    allowNull: false,
+    validate:{
+      notEmpty: true,
+    }
+  },
+  isAdmin: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
+  },
+  creditCard:{
+    type: Sequelize.INTEGER,
+    validate:{
+      isCreditCard: true,
+    }
   }
-
 })
 
 module.exports = User;

@@ -3,27 +3,24 @@
 const db = require("./db");
 
 const User = require("./models/User");
-
 const Order = require("./models/Order");
-const OrderItem = require("./models/OrderItem");
+const Cart = require("./models/Cart");
 const Product = require("./models/Product");
 
-// Order.hasMany(OrderItem);
-// OrderItem.belongsTo(Order);
-// OrderItem.belongsTo(Product);
 
-Product.belongsToMany(Order, { through: OrderItem });
-Order.belongsToMany(Product, { through: OrderItem });
+Product.belongsToMany(Order, { through: Cart });
+Order.belongsToMany(Product, { through: Cart });
 
 Order.belongsTo(User);
-User.hasOne(Order);
+User.hasMany(Order);
+
 
 module.exports = {
   db,
   models: {
     User,
     Order,
-    OrderItem,
+    Cart,
     Product,
   },
 };

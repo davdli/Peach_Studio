@@ -5,9 +5,13 @@ const Product = db.define("product", {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
+    validate:{
+      notEmpty: true,
+    }
   },
   description: {
     type: Sequelize.TEXT,
+    defaultValue: 'Waiting for a nice description :)',
   },
   imageUrl: {
     type: Sequelize.TEXT,
@@ -15,10 +19,9 @@ const Product = db.define("product", {
       "https://cdn-images.article.com/products/SKU12298/2890x1500/image43595.jpg?fit=max&w=970&q=80&fm=webp",
   },
   price: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.DECIMAL,
     allowNull: false,
     validate: {
-      isInt: true,
       min: 0,
     },
   },

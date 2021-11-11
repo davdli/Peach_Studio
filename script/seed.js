@@ -1,20 +1,43 @@
 'use strict'
 
-const {db, models: {User} } = require('../server/db')
+const { db, models: { User } } = require('../server/db');
+const faker = require('faker');
+const Product = require('../server/db/models/Product');
 
 /**
  * seed - this function clears the database, updates tables to
  *      match the models, and populates the database.
  */
+  function randomCategory (max){
+    return Math.floor(Math.random()*max) + 1;
+  } 
+
+// Products Dummy data
+const dummyProducts = [
+  {
+    name: faker.commerce.productName(),
+    description: faker.commerce.productDescription(),
+    imageUrl: faker.image.imageUrl(),
+    price: faker.commerce.price(),
+    inventory: faker.random.number(),
+    category: randomCategory(3),
+  }
+]
+
 async function seed() {
   await db.sync({ force: true }) // clears db and matches models to tables
   console.log('db synced!')
 
   // Creating Users
   const users = await Promise.all([
-    User.create({ username: 'cody', password: '123' }),
-    User.create({ username: 'murphy', password: '123' }),
-  ])
+    User.create({ username: 'cody@fsa.com', password: '123' }),
+    User.create({ username: 'murphy@fsa.com', password: '123' }),
+  ]);
+
+  // Creating Products
+  const products = await Promise.all(dummyProducts.map(prod => {
+    return Product.create(prod);
+  }))
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
