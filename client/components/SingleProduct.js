@@ -1,45 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchSingleProduct } from "../redux/singleProduct";
 import { addToCart } from "../redux/cart";
-
-export class SingleProduct extends React.Component {
-  componentDidMount() {
-    this.props.fetchSingleProduct(this.props.match.params.id);
-  }
-  render() {
-    const product = this.props.product;
-    return (
-      <div>
-        <div className="single-product-view">
-          <div className="right">
-            <h3>Left in stock: {product.inventory}</h3>
-            <h3>Price: ${product.price}</h3>
-            <button className="btn first">Add to Cart</button>
-          </div>
-          <div className="left">
-            <h3>{product.name}</h3>
-            <img src={product.imageUrl} />
-            <p>{product.description}</p>
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
-
-const mapState = (state) => {
-  return {
-    product: state.product,
-  };
+const mapStateToProps = ({ product }) => {
+  return { product };
 };
 
-const mapDispatch = (dispatch) => {
-  return {
-    fetchSingleProduct: (id) => {
-      dispatch(fetchSingleProduct(id));
-    },
-  };
+const mapDispatchToProps = (dispatch) => ({
+  fetchSingleProduct: (id) => dispatch(fetchSingleProduct(id)),
+});
+
+const SingleProduct = ({ product, fetchSingleProduct, match }) => {
+  useEffect(() => {
+    fetchSingleProduct(match.params.id);
+  }, []);
+
+  return (
+    <div>
+      <h3>{product.name}</h3>
+      <img src={product.imageUrl} />
+      <p>{product.description}</p>
+      <h3>Price: ${product.price}</h3>
+      <h3>Left in stock: {product.inventory}</h3>
+    </div>
+  );
 };
 
-export default connect(mapState, mapDispatch)(SingleProduct);
+export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct);

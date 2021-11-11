@@ -1,12 +1,12 @@
-import axios from 'axios';
+import axios from "axios";
 
-const FETCH_SINGLE_PRODUCT = 'FETCH_SINGLE_PRODUCT';
+const FETCH_SINGLE_PRODUCT = "FETCH_SINGLE_PRODUCT";
 
 export const _fetchSingleProduct = (product) => {
   return {
     type: FETCH_SINGLE_PRODUCT,
-    product
-  }
+    product,
+  };
 };
 
 export const fetchSingleProduct = (id) => {
@@ -17,7 +17,7 @@ export const fetchSingleProduct = (id) => {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 };
 
 export default function singleProductReducer(state = {}, action) {
