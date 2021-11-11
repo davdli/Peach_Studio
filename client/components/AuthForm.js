@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { authenticate } from "../store";
-
+import Footer from "./Footer";
+import { Link } from "react-router-dom";
 /**
  * COMPONENT
  */
@@ -10,24 +11,42 @@ const AuthForm = (props) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor='username'>
-            <small>Username</small>
-          </label>
-          <input name='username' type='text' />
+      <section id='sectionform'>
+        <div class='box-1'>    <hr /></div>
+        <div class='box-2 text'>
+
+          <div class='login-div'>
+            <div class='logopeach'></div>
+            <div class='title'>{displayName}</div>
+
+            <form class='fields' onSubmit={handleSubmit} name={name}>
+              <div>
+                <label htmlFor='username'>
+                  <small>Username</small>
+                </label>
+                <input class='username' name='username' type='text' />
+              </div>
+              <div>
+                <label htmlFor='password'>
+                  <small>Password</small>
+                </label>
+                <input class='password' name='password' type='password' />
+              </div>
+              <div>
+                {displayName === "signup" ? ( <div class='sub-title'>already have an account? <Link class='navlink' to='/signup'>
+            SIGN UP
+          </Link> </div>):("")}
+
+                <button class='signin-button' type='submit'>
+                  {displayName}
+                </button>
+              </div>
+              {error && error.response && <div> {error.response.data} </div>}
+            </form>
+          </div>{" "}
         </div>
-        <div>
-          <label htmlFor='password'>
-            <small>Password</small>
-          </label>
-          <input name='password' type='password' />
-        </div>
-        <div>
-          <button type='submit'>{displayName}</button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
+      </section>
+      <Footer></Footer>
     </div>
   );
 };
@@ -42,7 +61,7 @@ const AuthForm = (props) => {
 const mapLogin = (state) => {
   return {
     name: "login",
-    displayName: "Login",
+    displayName: "LOGIN",
     error: state.auth.error,
   };
 };
@@ -50,7 +69,7 @@ const mapLogin = (state) => {
 const mapSignup = (state) => {
   return {
     name: "signup",
-    displayName: "Sign Up",
+    displayName: "SIGN UP",
     error: state.auth.error,
   };
 };
