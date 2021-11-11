@@ -11,16 +11,16 @@ const User = db.define("user", {
     type: Sequelize.STRING,
     unique: true,
     allowNull: false,
-    validate:{
+    validate: {
       isEmail: true,
     },
   },
   password: {
     type: Sequelize.STRING,
     allowNull: false,
-    validate:{
+    validate: {
       notEmpty: true,
-    }
+    },
   },
   imageUrl: {
     type: Sequelize.STRING,
@@ -30,46 +30,46 @@ const User = db.define("user", {
   firstName: {
     type: Sequelize.STRING,
     allowNull: false,
-    defaultValue: 'Not defined',
-    validate:{
+    defaultValue: "Not defined",
+    validate: {
       notEmpty: true,
-    }
+    },
   },
   lastName: {
     type: Sequelize.STRING,
-    defaultValue: 'Not defined',
+    defaultValue: "Not defined",
     allowNull: false,
-    validate:{
+    validate: {
       notEmpty: true,
-    }
+    },
   },
   shippingAddress: {
     type: Sequelize.TEXT,
-    defaultValue: 'Not defined',
+    defaultValue: "Not defined",
     allowNull: false,
-    validate:{
+    validate: {
       notEmpty: true,
-    }
+    },
   },
   billingAddress: {
     type: Sequelize.TEXT,
-    defaultValue: 'Not defined',
+    defaultValue: "Not defined",
     allowNull: false,
-    validate:{
+    validate: {
       notEmpty: true,
-    }
+    },
   },
   isAdmin: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false
+    defaultValue: false,
   },
-  creditCard:{
+  creditCard: {
     type: Sequelize.INTEGER,
-    validate:{
+    validate: {
       isCreditCard: true,
-    }
-  }
-})
+    },
+  },
+});
 
 module.exports = User;
 
@@ -91,7 +91,7 @@ User.prototype.generateToken = function () {
 User.authenticate = async function ({ email, password }) {
   const user = await this.findOne({ where: { email } });
   if (!user || !(await user.correctPassword(password))) {
-    const error = Error("Incorrect username/password");
+    const error = Error("Incorrect email/password");
     error.status = 401;
     throw error;
   }

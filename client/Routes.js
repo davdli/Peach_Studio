@@ -1,13 +1,13 @@
-import React, { Component, Fragment } from 'react'
-import { connect } from 'react-redux'
-import { withRouter, Route, Switch, Redirect } from 'react-router-dom'
-import { Login, Signup } from './components/AuthForm';
-import Home from './components/Home';
-import Landing from './components/Landing';
-import Cart from './components/Cart';
-import AllProducts from './components/AllProducts';
-import SingleProduct from './components/SingleProduct';
-import { me } from './store'
+import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
+import { withRouter, Route, Switch, Redirect } from "react-router-dom";
+import { Login, Signup } from "./components/AuthForm";
+import Home from "./components/Home";
+import Landing from "./components/Landing";
+import Cart from "./components/Cart";
+import AllProducts from "./components/AllProducts";
+import SingleProduct from "./components/SingleProduct";
+import { me } from "./store";
 
 /**
  * COMPONENT
@@ -24,15 +24,16 @@ class Routes extends Component {
       <div>
         {isLoggedIn ? (
           <Switch>
-            <Route path="/home" component={Home} />
-            <Redirect to="/home" />
+            <Route exact path="/" component={Home} />
+            {/* <Redirect to="/home" /> */}
+            {/* <Route exact path="/" component={Landing} /> */}
+            <Route exact path="/cart" component={Cart} />
+            <Route exact path="/products" component={AllProducts} />
+            <Route exact path="/products/:id" component={SingleProduct} />
           </Switch>
         ) : (
           <Switch>
-            <Route path="/" exact component={Landing} />
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-            <Route exact path="/" exact component={Landing} />
+            <Route exact path="/" component={Landing} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/cart" component={Cart} />

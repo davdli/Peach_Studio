@@ -8,10 +8,10 @@ import Landing from "./Landing";
 
 export const Home = (props) => {
   const { email } = props;
-
+  const welcomeName = email.split("@");
   return (
     <div>
-      <h3 class='welcomeuser'>Welcome, {email}</h3>
+      <h3 class="welcomeuser">Welcome, {welcomeName[0]}</h3>
       <Landing></Landing>
     </div>
   );
@@ -22,8 +22,8 @@ export const Home = (props) => {
  */
 const mapState = (state) => {
   return {
-    username: state.auth.email
-  }
-}
+    email: state.auth.email,
+  };
+};
 
 export default connect(mapState)(Home);

@@ -8,41 +8,44 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
     {" "}
     {/* The navbar will show these links after you log in */}
     {isLoggedIn ? (
-      <div class='navcontainer'>
-        <Link class='navlink' to='/'>
+      <div class="navcontainer">
+        <Link class="navlink" to="/">
           {" "}
-          <h1 class='logo'>PEACH STUDIO</h1>
+          <h1 class="logo">PEACH STUDIO</h1>
         </Link>
-        <div class='navbuttons'>
-          <Link class='navlink' to='/'>
+        <div class="navbuttons">
+          <Link class="navlink" to="/cart">
+            CART
+          </Link>
+          <Link class="navlink" to="/">
             HOME
           </Link>
-          <Link onClick={handleClick} class='navlink' to='/'>
+          <Link onClick={handleClick} class="navlink" to="/">
             LOGOUT
           </Link>
-          <Link class='navlink' to='/products'>
+          <Link class="navlink" to="/products">
             SHOP
           </Link>
         </div>
       </div>
     ) : (
-      <div class='navcontainer'>
+      <div class="navcontainer">
         {/* The navbar will show these before you log in */}
-        <Link to='/'>
+        <Link to="/">
           {" "}
-          <h1 class='logo'>PEACH STUDIO</h1>
+          <h1 class="logo">PEACH STUDIO</h1>
         </Link>
-        <div class='navbuttons'>
-          <Link class='navlink' to='/products'>
+        <div class="navbuttons">
+          <Link class="navlink" to="/products">
             SHOP
           </Link>
-          <Link class='navlink' to='/login'>
+          <Link class="navlink" to="/login">
             LOGIN
           </Link>
-          <Link class='navlink' to='/signup'>
+          <Link class="navlink" to="/signup">
             SIGN UP
           </Link>
-          <Link class='navlink' to='/cart'>
+          <Link class="navlink" to="/cart">
             CART
           </Link>
         </div>
