@@ -24,7 +24,8 @@ const User = db.define("user", {
   },
   imageUrl: {
     type: Sequelize.STRING,
-    defaultValue: 'https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png'
+    defaultValue:
+      "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png",
   },
   firstName: {
     type: Sequelize.STRING,
