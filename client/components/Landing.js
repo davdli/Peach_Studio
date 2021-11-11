@@ -2,8 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import Footer from "./Footer";
 
-// import {connect} from 'react-redux'
-
 /**
  * COMPONENT
  */
@@ -92,10 +90,10 @@ export const Landing = () => {
  * CONTAINER
  */
 
-// const mapState = state => {
-//   return {
+const mapState = (state) => {
+  return {
+    isLoggedIn: !!state.auth.id,
+  };
+};
 
-//     }
-// }
-
-export default Landing;
+export default connect(mapState, null)(Landing);

@@ -6,13 +6,13 @@ const Footer = () => (
   <div>
     {" "}
     <footer class='section-footer'>
-      <div class='container'>
+      <div class='containerfooter'>
         <div>
-          <Link class='footerlink' to='/home'>
+          <Link class='footerlink' to='/products'>
             SHOP
           </Link>
 
-          <Link class='footerlink' to='/home'>
+          <Link class='footerlink' to='/about'>
             ABOUT PEACH STUDIO
           </Link>
 
