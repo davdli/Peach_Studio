@@ -11,33 +11,42 @@ const AuthForm = (props) => {
 
   return (
     <div>
-      <section id='sectionform'>
-        <div class='box-1'>    <hr /></div>
-        <div class='box-2 text'>
+      <section id="sectionform">
+        <div class="box-1">
+          {" "}
+          <hr />
+        </div>
+        <div class="box-2 text">
+          <div class="login-div">
+            <div class="logopeach"></div>
+            <div class="title">{displayName}</div>
 
-          <div class='login-div'>
-            <div class='logopeach'></div>
-            <div class='title'>{displayName}</div>
-
-            <form class='fields' onSubmit={handleSubmit} name={name}>
+            <form class="fields" onSubmit={handleSubmit} name={name}>
               <div>
-                <label htmlFor='username'>
-                  <small>Username</small>
+                <label htmlFor="email">
+                  <small>Email</small>
                 </label>
-                <input class='username' name='username' type='text' />
+                <input class="username" name="email" type="text" />
               </div>
               <div>
-                <label htmlFor='password'>
+                <label htmlFor="password">
                   <small>Password</small>
                 </label>
-                <input class='password' name='password' type='password' />
+                <input class="password" name="password" type="password" />
               </div>
               <div>
-                {displayName === "signup" ? ( <div class='sub-title'>already have an account? <Link class='navlink' to='/signup'>
-            SIGN UP
-          </Link> </div>):("")}
+                {displayName === "signup" ? (
+                  <div class="sub-title">
+                    already have an account?{" "}
+                    <Link class="navlink" to="/signup">
+                      SIGN UP
+                    </Link>{" "}
+                  </div>
+                ) : (
+                  ""
+                )}
 
-                <button class='signin-button' type='submit'>
+                <button class="signin-button" type="submit">
                   {displayName}
                 </button>
               </div>
@@ -79,7 +88,7 @@ const mapDispatch = (dispatch) => {
     handleSubmit(evt) {
       evt.preventDefault();
       const formName = evt.target.name;
-      const email = evt.target.username.value;
+      const email = evt.target.email.value;
       const password = evt.target.password.value;
       dispatch(authenticate(email, password, formName));
     },
