@@ -590,7 +590,7 @@ button:focus {
   background-size: cover;
   background-repeat: no-repeat;
 }
- 
+
 =======
 /* dummy data images/data for seed only below -- comment out before deploy */
 .test-products {
@@ -664,7 +664,6 @@ button:focus {
   font-size: 14px;
   margin-top: 20%;
 }
-
 
 /* Cart */
 
@@ -775,4 +774,52 @@ button:focus {
   cursor: pointer;
   background: #f4d0a5;
   border-style: none;
+}
+
+table {
+  font-family: "Lato", "sans-serif";
+}
+
+table.one {
+  margin-bottom: 3em;
+  border-collapse: collapse;
+}
+
+td {
+  text-align: center;
+  width: 10em;
+  padding: 1em;
+}
+
+th {
+  text-align: center;
+  padding: 1em;
+  background-color: #f5ccb9;
+  color: white;
+}
+
+tr {
+  height: 1em;
+}
+
+table tr:nth-child(even) {
+  background-color: #eee;
+}
+
+table tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+table img {
+  height: 20px;
+  width: 20px;
+}
+
+.user-table {
+  text-align: center;
+}
+.portal {
+  float: left;
+  font-size: 12px;
+  background-color: yellowgreen;
 }

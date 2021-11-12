@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
 
-const Navbar = ({ handleClick, isLoggedIn }) => (
+const Navbar = ({ handleClick, isLoggedIn, admin, email, user }) => (
   <div>
     {" "}
     {/* The navbar will show these links after you log in */}
@@ -13,6 +13,21 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           {" "}
           <h1 class="logo">PEACH STUDIO</h1>
         </Link>
+        {admin ? (
+          <span className="portal">
+            <p>Admin Portal</p>
+            <button className="navbuttons">
+              <Link class="navlink" to="/users">
+                View Users
+              </Link>
+            </button>
+            <button>
+              <Link to="/products">Add an Item</Link>
+            </button>
+          </span>
+        ) : (
+          ""
+        )}
         <div class="navbuttons">
           <Link class="navlink" to="/cart">
             CART
@@ -57,14 +72,17 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
 /**
  * CONTAINER
  */
-const mapState = (state) => {
+const mapState = ({ auth }) => {
   return {
-    isLoggedIn: !!state.auth.id,
+    isLoggedIn: !!auth.id,
+    admin: auth.isAdmin,
+    auth,
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
+    singleUser: (email) => dispatch(setSingleUser(email)),
     handleClick() {
       dispatch(logout());
     },

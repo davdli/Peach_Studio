@@ -1,16 +1,15 @@
-const router = require('express').Router()
-const Cart = require('../db/models/Cart')
+const router = require("express").Router();
+const Cart = require("../db/models/Cart");
 
-
-// api/cart
-router.get('/', async (req, res, next) => {
+// increment, decrement, remove product from cart
+router.get("/", async (req, res, next) => {
   try {
-    const users = await Cart.findAll({
-    })
-    res.json(users)
-  } catch (err) {
-    next(err)
+    const cartItems = await Cart.findAll();
+    res.json(cartItems);
+  } catch (error) {
+    next(error);
   }
-})
+});
+
 
 module.exports = router;

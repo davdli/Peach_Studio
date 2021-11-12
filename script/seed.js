@@ -104,7 +104,7 @@ async function seed() {
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
     email: 'admin@admin.com',
-    password: '12345',
+    password: '1234',
     isAdmin: true
   });
   console.log('Seeded admin');

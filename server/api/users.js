@@ -11,24 +11,52 @@ router.get('/', requireToken, requireAdmin, async (req, res, next) => {
       // explicitly select only the id and username fields - even though
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
-      attributes: ['id', 'email']
-    })
-    res.json(users)
+      attributes: [
+        "id",
+        "email",
+        "firstName",
+        "lastName",
+        "isAdmin",
+        "imageUrl",
+        "shippingAddress",
+        "billingAddress",
+      ],
+    });
+    res.json(users);
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
 
-// api/users/cart
-router.get('/cart', async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
   try {
-    const users = await Cart.findAll({
-    })
-    res.json(users)
-  } catch (err) {
-    next(err)
+    res.send(
+      await User.findAll({
+        where: {
+          id: req.params.id,
+        },
+        attributes: ["id", "email", "firstName", "lastName", "isAdmin"],
+      })
+    );
+  } catch (ex) {
+    next(ex);
   }
-})
+});
 
-// api/users/products
+router.post("/", async (req, res, next) => {
+  try {
+    res.status(201).send(await User.create(req.body));
+  } catch (ex) {
+    next(ex);
+  }
+});
 
+router.delete("/:id", async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.id);
+    await user.destroy();
+    req.send(user);
+  } catch (ex) {
+    next(ex);
+  }
+});
