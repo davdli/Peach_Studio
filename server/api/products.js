@@ -6,7 +6,8 @@ module.exports = router
 // GET api/products
 router.get('/', async (req, res, next) => {
     try {
-        const products = await Product.findAll();
+        const products = await Product.findAll({
+        });
         res.json(products);
     } catch (error) {
         next(error);
@@ -27,14 +28,16 @@ router.get('/:productId', async (req, res, next) => {
 // Is this the cart route?
 router.put('/:productId', async (req, res, next) => {
     try {
-        const product = await Product.findByPk(req.params.productId, {
+        // for protecting our database against injection attacks
+        const { productId } = req.params;
+        const product = await Product.findByPk(productId, {
             include: [{
                 model: OrderItem,
             }]
         });
         const user = await User
-            // Order.create(product);
-            res.status(201).send(await Product.setUser(req.body));
+        // Order.create(product);
+        res.status(201).send(await Product.setUser(req.body));
     } catch (error) {
         next(error);
     }

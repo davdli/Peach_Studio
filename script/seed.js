@@ -5,20 +5,14 @@ const {
   models: { User, Product, Order, Cart },
 } = require("../server/db");
 const faker = require("faker");
-
 /**
  * seed - this function clears the database, updates tables to
  *      match the models, and populates the database.
  */
-function randomNumber(max) {
-  return Math.floor(Math.random() * max) + 1;
-}
-const values = ["chair", "sofa", "table", "dresser"];
-let randomCategory = values[randomNumber(3)];
 
-function generateUsers(num) {
+function generateUsers(qtyOfUsers) {
   let users = []
-  for (let i = 0; i < num; i++) {
+  for (let i = 0; i < qtyOfUsers; i++) {
     users.push({
       email: faker.internet.email(),
       password: '123',
@@ -27,57 +21,73 @@ function generateUsers(num) {
       shippingAddress: `${faker.address.streetAddress()},${faker.address.city()},${faker.address.state()},${faker.address.zipCode()}`,
       billingAddress: `${faker.address.streetAddress()},${faker.address.city()},${faker.address.state()},${faker.address.zipCode()}`,
       isAdmin: faker.datatype.boolean(),
-      // creditCard: faker.finance.creditCardNumber(),
+      // creditCard: faker.finance.creditCardNumber(), For some reason Sequelize throws an Error saying that is not a valid credit card
     });
   }
   return users;
 };
-
-function generateProducts(num) {
-  let products = []
-  for (let i = 0; i < num; i++) {
-    products.push({
-      name: faker.commerce.productName(),
-      description: faker.commerce.productDescription(),
-      imageUrl: faker.image.imageUrl(),
-      price: faker.commerce.price(),
-      inventory: faker.datatype.number(),
-      category: randomCategory,
-    });
-  }
-  return products;
-};
-
-function generateOrders(num) {
-  let orders = []
-  for (let i = 1; i <= num; i++) {
+const totalCategories = ['chair', 'dresser', 'sofa', 'table'];
+const qtyOfCategories = totalCategories.length;
+// function generateProducts(qtyOfProducts, qtyOfCategories) {
+//   let products = []
+//   for (let i = 0; i < qtyOfCategories; i++) {
+//     for (let j = 0; j < qtyOfProducts; j++) {
+//       products.push({
+//         name: faker.commerce.productName(),
+//         description: faker.commerce.productDescription(),
+//         imageUrl: faker.image.imageUrl(), // Random image generator
+//         price: faker.commerce.price(),
+//         inventory: faker.datatype.number(),
+//         category: totalCategories[i],
+//       });
+//     }
+//   }
+//   return products;
+// };
+// Considering that one User can have only one ACTIVE order we create as many Orders as Users
+function generateOrders(qtyOfUsers) {
+  let orders = [];
+  for (let i = 1; i <= qtyOfUsers; i++) {
     orders.push({
       userId: i,
     });
   }
   return orders;
 };
+// The Cart can have any amount of Products(well no more than our INVENTORY)
+// The logic in here is that ONE static OrderId can have many ProductsId, but THAT IS WRONG because we will overwrite the order with new items,BUT...
+// function generateCarts(qtyOfActiveOrders) {
+//   let carts = [];
+//   for (let i = 1; i <= qtyOfActiveOrders; i++) {
+//     for (let j = 1; j <= 4; j++) {
+//       carts.push({
+//         orderId: i,
+//         productId:j,
+//       });
+//     }
+//   }
+//   return carts;
+// }
+// ^^^Not sure if this is correct ^^^
 
-function generateCarts(num) {
-  let carts = []
-  for (let i = 1; i <= num; i++) {
-    for (let j = 1; j <= 4; j++) {
-      carts.push({
-        orderId: i,
-        productId:j,
-      });
-    }
+function generateCarts(anyQtyOfOrders) {
+  let cartsArray = [];
+  for (let i = 1; i <= anyQtyOfOrders; i++) {
+    cartsArray.push({
+      orderId: i,
+      productId: i,
+    });
   }
-  return carts;
+  return cartsArray;
 }
 
 // Creating the dummy data
 const qtyOfUsers = 10;
-const qtyOfProducts = 20;
+// const qtyOfProducts = 20;
 const dummyUsers = generateUsers(qtyOfUsers);
-const dummyProducts = generateProducts(qtyOfProducts);
+// const dummyProducts = generateProducts();
 const dummyOrders = generateOrders(qtyOfUsers);
-const dummyCarts= generateCarts(qtyOfUsers);
+const dummyCarts = generateCarts(1);
 
 async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
@@ -90,21 +100,29 @@ async function seed() {
     })
   );
   // Creating Products
-  let products = await Promise.all(
-    dummyProducts.map((prod) => {
-      return Product.create(prod);
-    })
-  );
+  // let products = await Promise.all(
+  //   dummyProducts.map((prod) => {
+  //     return Product.create(prod);
+  //   })
+  // );
+  const products = await Product.create({
+    name: faker.commerce.productName(),
+    description: faker.commerce.productDescription(),
+    imageUrl: '/chair1.jpg',
+    price: faker.commerce.price(),
+    inventory: faker.datatype.number(),
+    category: 'chair',
+  });
   // Creating Orders
   let orders = await Promise.all(
-    dummyOrders.map((prod) => {
-      return Order.create(prod);
+    dummyOrders.map((ord) => {
+      return Order.create(ord);
     })
   );
-    // Creating Carts
+  // Creating Carts
   let carts = await Promise.all(
-    dummyCarts.map((prod) => {
-      return Cart.create(prod);
+    dummyCarts.map((cart) => {
+      return Cart.create(cart);
     })
   );
 

@@ -6,9 +6,9 @@ const Order = db.define("order", {
   //   type: Sequelize.INTEGER,
   //   defaultValue: 0,
   // },
-  notPurchased: {
+  isComplete: {
     type: Sequelize.BOOLEAN,
-    defaultValue: true,
+    defaultValue: false,
   },
 });
 

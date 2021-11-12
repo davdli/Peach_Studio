@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const { models: { User }} = require('../db')
+const Cart = require('../db/models/Cart')
 module.exports = router
 
 // api/users/
@@ -10,6 +11,17 @@ router.get('/', async (req, res, next) => {
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
       attributes: ['id', 'email']
+    })
+    res.json(users)
+  } catch (err) {
+    next(err)
+  }
+})
+
+// api/users/cart
+router.get('/cart', async (req, res, next) => {
+  try {
+    const users = await Cart.findAll({
     })
     res.json(users)
   } catch (err) {
