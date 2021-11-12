@@ -99,20 +99,21 @@ async function seed() {
       return User.create(user);
     })
   );
+  //create sample admin
+  const admin = await User.create({
+    firstName: faker.name.firstName(),
+    lastName: faker.name.lastName(),
+    email: 'admin@admin.com',
+    password: '12345',
+    isAdmin: true
+  });
+  console.log('Seeded admin');
   // Creating Products
   let products = await Promise.all(
     dummyProducts.map((prod) => {
       return Product.create(prod);
     })
   );
-  // const products = await Product.create({
-  //   name: faker.commerce.productName(),
-  //   description: faker.commerce.productDescription(),
-  //   imageUrl: '/chair1.jpg',
-  //   price: faker.commerce.price(),
-  //   inventory: faker.datatype.number(),
-  //   category: 'chair',
-  // });
   // Creating Orders
   let orders = await Promise.all(
     dummyOrders.map((ord) => {
@@ -129,7 +130,7 @@ async function seed() {
   console.log("db synced!");
   console.log(`seeded successfully`);
   return {
-    users,
+    users: [users, admin],
     products,
     orders,
     carts,
