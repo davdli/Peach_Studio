@@ -2,112 +2,138 @@
 
 const {
   db,
-  models: { User, Product },
+  models: { User, Product, Order, Cart },
 } = require("../server/db");
 const faker = require("faker");
-
 /**
  * seed - this function clears the database, updates tables to
  *      match the models, and populates the database.
  */
-// function randomCategory(max) {
-//   return Math.floor(Math.random() * max) + 1;
-// }
-// const values = ["chair", "sofa", "table", "dresser"];
-// let randomCate= values[randomCategory(3)];
 
-// // Products Dummy data
-// const dummyProducts = [
-//   {
-//     name: faker.commerce.productName(),
-//     description: faker.commerce.productDescription(),
-//     imageUrl: faker.image.imageUrl(),
-//     price: faker.commerce.price(),
-//     inventory: faker.datatype.number(),
-//     category: randomCate,
+function generateUsers(qtyOfUsers) {
+  let users = []
+  for (let i = 0; i < qtyOfUsers; i++) {
+    users.push({
+      email: faker.internet.email(),
+      password: '123',
+      firstName: faker.name.firstName(),
+      lastName: faker.name.lastName(),
+      shippingAddress: `${faker.address.streetAddress()},${faker.address.city()},${faker.address.state()},${faker.address.zipCode()}`,
+      billingAddress: `${faker.address.streetAddress()},${faker.address.city()},${faker.address.state()},${faker.address.zipCode()}`,
+      isAdmin: faker.datatype.boolean(),
+      // creditCard: faker.finance.creditCardNumber(), For some reason Sequelize throws an Error saying that is not a valid credit card
+    });
+  }
+  return users;
+};
+function generateProducts(qtyOfProducts, qtyOfCategories) {
+  let products = []
+  for (let i = 0; i < qtyOfCategories; i++) {
+    for (let j = 1; j <= qtyOfProducts; j++) {
+      products.push({
+        name: faker.commerce.productName(),
+        description: faker.commerce.productDescription(),
+        imageUrl: `/${totalCategories[i]}${j}.jpg`,
+        price: faker.commerce.price(),
+        inventory: faker.datatype.number(),
+        category: totalCategories[i],
+      });
+    }
+  }
+  return products;
+};
+// Considering that one User can have only one ACTIVE order we create as many Orders as Users
+function generateOrders(qtyOfUsers) {
+  let orders = [];
+  for (let i = 1; i <= qtyOfUsers; i++) {
+    orders.push({
+      userId: i,
+    });
+  }
+  return orders;
+};
+// The Cart can have any amount of Products(well no more than our INVENTORY)
+// The logic in here is that ONE static OrderId can have many ProductsId, but THAT IS WRONG because we will overwrite the order with new items,BUT...
+// function generateCarts(qtyOfActiveOrders) {
+//   let carts = [];
+//   for (let i = 1; i <= qtyOfActiveOrders; i++) {
+//     for (let j = 1; j <= 4; j++) {
+//       carts.push({
+//         orderId: i,
+//         productId:j,
+//       });
+//     }
 //   }
-// ];
+//   return carts;
+// }
+// ^^^Not sure if this is correct ^^^
 
-const dummyProducts = [
-  {
-    name: "peachyChair",
-    imageUrl:
-      "https://media.istockphoto.com/photos/liivng-coralcolor-of-the-year-2019interior-design-for-living-area-or-picture-id1134702834?b=1&k=6&m=1134702834&s=170667a&w=0&h=2q1rjh0eKl02t3ZCfbeweubkljyd64fZJON5862nXRg=",
-    description: "Its a cute lil sofa!",
-    price: 800,
-    inventory: 100,
-    category: "chair",
-  },
-  {
-    name: "peachySofa",
-    imageUrl:
-      "https://media.istockphoto.com/photos/liivng-coralcolor-of-the-year-2019interior-design-for-living-area-or-picture-id1134702834?b=1&k=6&m=1134702834&s=170667a&w=0&h=2q1rjh0eKl02t3ZCfbeweubkljyd64fZJON5862nXRg=",
-    description: "Its a cute lil sofa!",
-    price: 2200,
-    inventory: 5,
-    category: "sofa",
-  },
-  {
-    name: "peachyTable",
-    imageUrl:
-      "   https://images.urbndata.com/is/image/Anthropologie/60451051_012_b?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=960",
-    description: "Its a cute lil table!",
-    price: 1300,
-    inventory: 11,
-    category: "table",
-  },
-  {
-    name: "peachyDresser",
-    imageUrl:
-      "https://images.urbndata.com/is/image/Anthropologie/40800781_006_b?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720",
-    description: "Its a cute lil dresser!",
-    price: 2400,
-    inventory: 22,
-    category: "dresser",
-  },
-];
+function generateCarts(anyQtyOfOrders) {
+  let cartsArray = [];
+  for (let i = 1; i <= anyQtyOfOrders; i++) {
+    cartsArray.push({
+      orderId: i,
+      productId: i,
+    });
+  }
+  return cartsArray;
+}
+
+// Creating the dummy data
+const qtyOfUsers = 10;
+const totalCategories = ['chair', 'dresser', 'sofa', 'table'];
+const qtyOfCategories = totalCategories.length;
+const qtyOfProducts = 4;
+const dummyUsers = generateUsers(qtyOfUsers);
+const dummyProducts = generateProducts(qtyOfProducts, qtyOfCategories);
+const dummyOrders = generateOrders(qtyOfUsers);
+const dummyCarts = generateCarts(1);
 
 async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
-  console.log("db synced!");
+  console.log(`starting seeding`);
 
   // Creating Users
-  const users = await Promise.all([
-    User.create({
-      email: "admin@admin.com",
-      password: "123",
-      firstName: "kelsey",
-      lastName: "smith",
-      isAdmin: true,
-      imageUrl:
-        "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png",
-      shippingAddress: "449 Evergreen Ave",
-      billingAddress: "SAME",
-    }),
-    User.create({
-      email: "murphy@fsa.com",
-      password: "123",
-      firstName: "Murphy",
-      lastName: "Jones",
-      isAdmin: false,
-    }),
-  ]);
-
+  let users = await Promise.all(
+    dummyUsers.map((user) => {
+      return User.create(user);
+    })
+  );
+  //create sample admin
+  const admin = await User.create({
+    firstName: faker.name.firstName(),
+    lastName: faker.name.lastName(),
+    email: 'admin@admin.com',
+    password: '1234',
+    isAdmin: true
+  });
+  console.log('Seeded admin');
   // Creating Products
   let products = await Promise.all(
     dummyProducts.map((prod) => {
       return Product.create(prod);
     })
   );
+  // Creating Orders
+  let orders = await Promise.all(
+    dummyOrders.map((ord) => {
+      return Order.create(ord);
+    })
+  );
+  // Creating Carts
+  let carts = await Promise.all(
+    dummyCarts.map((cart) => {
+      return Cart.create(cart);
+    })
+  );
 
-  console.log(`seeded ${users.length} users`);
+  console.log("db synced!");
   console.log(`seeded successfully`);
   return {
-    users: {
-      cody: users[0],
-      murphy: users[1],
-    },
+    users: [users, admin],
     products,
+    orders,
+    carts,
   };
 }
 /*
@@ -140,5 +166,3 @@ if (module === require.main) {
 
 // we export the seed function for testing purposes (see `./seed.spec.js`)
 module.exports = seed;
-
-// https://media.istockphoto.com/photos/liivng-coralcolor-of-the-year-2019interior-design-for-living-area-or-picture-id1134702834?b=1&k=6&m=1134702834&s=170667a&w=0&h=2q1rjh0eKl02t3ZCfbeweubkljyd64fZJON5862nXRg="

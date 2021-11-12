@@ -8,10 +8,7 @@ router.use("/users", require("./users"));
 router.use("/products", require("./products"));
 
 // api/cart
-router.use("/cart", require("./cart"));
-
-//api/users
-router.use("/users", require("./users"));
+router.get('/cart', require('./cart'))
 
 router.use((req, res, next) => {
   const error = new Error("Not Found");
