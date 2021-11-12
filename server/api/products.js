@@ -48,6 +48,7 @@ router.put("/:productId", async (req, res, next) => {
 router.post("/:productId", async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.productId);
+
     const order = await Order.create(req.body);
 
     const cartitem = await order.addProduct(product);

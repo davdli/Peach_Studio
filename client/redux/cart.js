@@ -1,7 +1,8 @@
 import axios from "axios";
 
 // action types
-export const ADD_TO_CART = "ADD_PRODUCT";
+export const ADD_TO_CART = "ADD_TO_CART";
+export const GET_CART_ITEMS = "GET_CART_ITEMS"
 // export const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
 // export const INCREMENT_QTY = 'INCREMENT_QTY'
 // export const DECREMENT_QTY = 'DECREMENT_QTY'
@@ -13,6 +14,13 @@ export const _addToCart = (cartItem) => {
     cartItem,
   };
 };
+
+export const _getCartItems = (cartItems) => {
+  return {
+    type: GET_CART_ITEMS,
+    cartItems
+  }
+}
 
 // thunks
 export const addToCart = (productId) => {
@@ -26,10 +34,23 @@ export const addToCart = (productId) => {
   };
 };
 
+export const getCartItems = () => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get('/api/cart');
+      dispatch(_getCartItems(data))
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
+
 export default function cartReducer(state = {}, action) {
   switch (action.type) {
     case ADD_TO_CART:
       return { ...action.cartItem};
+    case GET_CART_ITEMS:
+      return action.cartItems
     default:
       return state;
   }
