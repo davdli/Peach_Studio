@@ -73,8 +73,24 @@ async function seed() {
 
   // Creating Users
   const users = await Promise.all([
-    User.create({ email: "cody@fsa.com", password: "123" }),
-    User.create({ email: "murphy@fsa.com", password: "123" }),
+    User.create({
+      email: "admin@admin.com",
+      password: "123",
+      firstName: "kelsey",
+      lastName: "smith",
+      isAdmin: true,
+      imageUrl:
+        "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png",
+      shippingAddress: "449 Evergreen Ave",
+      billingAddress: "SAME",
+    }),
+    User.create({
+      email: "murphy@fsa.com",
+      password: "123",
+      firstName: "Murphy",
+      lastName: "Jones",
+      isAdmin: false,
+    }),
   ]);
 
   // Creating Products
