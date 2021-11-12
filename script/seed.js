@@ -26,24 +26,22 @@ function generateUsers(qtyOfUsers) {
   }
   return users;
 };
-const totalCategories = ['chair', 'dresser', 'sofa', 'table'];
-const qtyOfCategories = totalCategories.length;
-// function generateProducts(qtyOfProducts, qtyOfCategories) {
-//   let products = []
-//   for (let i = 0; i < qtyOfCategories; i++) {
-//     for (let j = 0; j < qtyOfProducts; j++) {
-//       products.push({
-//         name: faker.commerce.productName(),
-//         description: faker.commerce.productDescription(),
-//         imageUrl: faker.image.imageUrl(), // Random image generator
-//         price: faker.commerce.price(),
-//         inventory: faker.datatype.number(),
-//         category: totalCategories[i],
-//       });
-//     }
-//   }
-//   return products;
-// };
+function generateProducts(qtyOfProducts, qtyOfCategories) {
+  let products = []
+  for (let i = 0; i < qtyOfCategories; i++) {
+    for (let j = 1; j <= qtyOfProducts; j++) {
+      products.push({
+        name: faker.commerce.productName(),
+        description: faker.commerce.productDescription(),
+        imageUrl: `/${totalCategories[i]}${j}.jpg`,
+        price: faker.commerce.price(),
+        inventory: faker.datatype.number(),
+        category: totalCategories[i],
+      });
+    }
+  }
+  return products;
+};
 // Considering that one User can have only one ACTIVE order we create as many Orders as Users
 function generateOrders(qtyOfUsers) {
   let orders = [];
@@ -83,9 +81,11 @@ function generateCarts(anyQtyOfOrders) {
 
 // Creating the dummy data
 const qtyOfUsers = 10;
-// const qtyOfProducts = 20;
+const totalCategories = ['chair', 'dresser', 'sofa', 'table'];
+const qtyOfCategories = totalCategories.length;
+const qtyOfProducts = 4;
 const dummyUsers = generateUsers(qtyOfUsers);
-// const dummyProducts = generateProducts();
+const dummyProducts = generateProducts(qtyOfProducts, qtyOfCategories);
 const dummyOrders = generateOrders(qtyOfUsers);
 const dummyCarts = generateCarts(1);
 
@@ -100,19 +100,19 @@ async function seed() {
     })
   );
   // Creating Products
-  // let products = await Promise.all(
-  //   dummyProducts.map((prod) => {
-  //     return Product.create(prod);
-  //   })
-  // );
-  const products = await Product.create({
-    name: faker.commerce.productName(),
-    description: faker.commerce.productDescription(),
-    imageUrl: '/chair1.jpg',
-    price: faker.commerce.price(),
-    inventory: faker.datatype.number(),
-    category: 'chair',
-  });
+  let products = await Promise.all(
+    dummyProducts.map((prod) => {
+      return Product.create(prod);
+    })
+  );
+  // const products = await Product.create({
+  //   name: faker.commerce.productName(),
+  //   description: faker.commerce.productDescription(),
+  //   imageUrl: '/chair1.jpg',
+  //   price: faker.commerce.price(),
+  //   inventory: faker.datatype.number(),
+  //   category: 'chair',
+  // });
   // Creating Orders
   let orders = await Promise.all(
     dummyOrders.map((ord) => {
