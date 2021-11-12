@@ -20,7 +20,7 @@ const Cart = (props) => {
   //   const product = dispatch(fetchSingleProduct(productId));
   // }
 
-  console.log('this is cart', cart)
+  // console.log('this is cart', cart)
 
   return (
     <div>
