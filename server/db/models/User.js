@@ -3,6 +3,7 @@ const db = require("../db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const axios = require("axios");
+const Order = require("./Order");
 
 const SALT_ROUNDS = 5;
 
@@ -84,6 +85,19 @@ User.prototype.correctPassword = function (candidatePwd) {
 User.prototype.generateToken = function () {
   return jwt.sign({ id: this.id }, process.env.JWT);
 };
+
+User.afterCreate(async (user) => {
+  const order = await Order.findOne({
+    where: {
+      userId: user.id,
+    },
+  });
+
+  if (!order) {
+    let order = await Order.create();
+    order.setUser(user);
+  }
+});
 
 /**
  * classMethods

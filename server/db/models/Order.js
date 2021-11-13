@@ -10,7 +10,10 @@ const Order = db.define("order", {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
+  
 });
+
+
 
 module.exports = Order;
 
