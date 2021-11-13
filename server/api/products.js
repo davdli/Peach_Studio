@@ -29,50 +29,41 @@ router.get("/:productId", async (req, res, next) => {
 
 // PUT api/products/:productId
 // Is this the cart route?
-router.put("/:productId", async (req, res, next) => {
-  try {
-    const product = await Product.findByPk(req.params.productId, {
-      include: [
-        {
-          model: OrderItem,
-        },
-      ],
-    });
-    const user = await User;
-    // Order.create(product);
-    res.status(201).send(await Product.setUser(req.body));
-  } catch (error) {
-    next(error);
-  }
-});
+// router.put("/:productId", async (req, res, next) => {
+//   try {
+//     const product = await Product.findByPk(req.params.productId, {
+//       include: [
+//         {
+//           model: OrderItem,
+//         },
+//       ],
+//     });
+//     const user = await User;
+//     // Order.create(product);
+//     res.status(201).send(await Product.setUser(req.body));
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 // POST api/products/:productId
 router.post("/:productId", requireToken, async (req, res, next) => {
   try {
     //recieve an object with user id and order id attatched
     //
-    // if the object has an order id
-
-    //
+    console.log(req.headers);
     const product = await Product.findByPk(req.params.productId);
-    //check if the user has an order id and if they dont we have to go to line 64
 
-    //this is find the users current cart before checkout before adding to cart
-   const order = await Order.findOne({
+    const order = await Order.findOne({
       where: {
-        userId: req.user.id,
+        userId: req.body.userId,
         isComplete: false,
       },
-    });
-    // if the user doesnt have a cart we have to create a cart
-    await Order.create({
-      userId: req.user.id,
-      isComplete: false,
     });
 
     const cartItem = await order.addProduct(product);
 
-    res.json(cartItem);
+    res.status(cartItem);
   } catch (error) {
     next(error);
   }

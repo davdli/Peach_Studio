@@ -25,23 +25,20 @@ export const _getCartItems = (cartItems) => {
 };
 
 // thunks
-export const addToCart = (productId) => {
-  return async (dispatch) => {
-    try {
-      const token = window.localStorage.getItem(TOKEN);
-      if (token) {
-        const { data } = await axios.post(`/api/products/${productId}`, {
-          headers: {
-            authorization: token,
-          },
-        });
-
-        dispatch(_addToCart(data));
+export const addToCart = (userObj) => async (dispatch) => {
+  const token = window.localStorage.getItem(TOKEN);
+  if (token) {
+    const { data } = await axios.post(
+      `/api/products/${userObj.productId}`,
+      userObj,
+      {
+        headers: {
+          Authorization: token,
+        },
       }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    );
+    return dispatch(_addToCart(data));
+  }
 };
 
 export const getCartItems = () => {

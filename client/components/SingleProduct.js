@@ -7,8 +7,8 @@ import { addToCart } from "../redux/cart";
 
 const SingleProduct = (props) => {
   const product = useSelector((state) => state.product);
-  const user = useSelector((state) => state.users);
-  console.log('This is the product state: ', user);
+  const user = useSelector((state) => state.auth);
+
   // this is like mapdispatch
   const dispatch = useDispatch();
   useEffect(() => {
@@ -17,7 +17,12 @@ const SingleProduct = (props) => {
   }, []);
 
   const addProduct = (event) => {
-    dispatch(addToCart(event.target.value));
+    const userObj = {
+      productId: event.target.value,
+      userId: user.id,
+      quantity: 3,
+    };
+    dispatch(addToCart(userObj));
   };
 
   return (
