@@ -5,6 +5,7 @@ import { fetchProducts } from "../redux/products";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
+import Footer from "./Footer";
 const AllProducts = (props) => {
   // this is the same  mapstate
   const products = useSelector((state) => state.products);
@@ -27,6 +28,7 @@ const AllProducts = (props) => {
           <p>${product.price}</p>
         </div>
       ))}
+           <Footer></Footer>
     </div>
   );
 };
