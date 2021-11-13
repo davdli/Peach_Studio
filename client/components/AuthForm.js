@@ -11,50 +11,53 @@ const AuthForm = (props) => {
 
   return (
     <div>
-      <section id="sectionform">
-        <div class="box-1">
-          {" "}
-          <hr />
-        </div>
-        <div class="box-2 text">
-          <div class="login-div">
-            <div class="logopeach"></div>
-            <div class="title">{displayName}</div>
+      {" "}
+      <div>
+        <section id='sectionform'>
+          <div class='box-1'>
+            {" "}
+            <hr />
+          </div>
+          <div class='box-2 text'>
+            <div class='login-div'>
+              <div class='logopeach'></div>
+              <div class='title'>{displayName}</div>
 
-            <form class="fields" onSubmit={handleSubmit} name={name}>
-              <div>
-                <label htmlFor="email">
-                  <small>Email</small>
-                </label>
-                <input class="username" name="email" type="text" />
-              </div>
-              <div>
-                <label htmlFor="password">
-                  <small>Password</small>
-                </label>
-                <input class="password" name="password" type="password" />
-              </div>
-              <div>
-                {displayName === "signup" ? (
-                  <div class="sub-title">
-                    already have an account?{" "}
-                    <Link class="navlink" to="/signup">
-                      SIGN UP
-                    </Link>{" "}
-                  </div>
-                ) : (
-                  ""
-                )}
+              <form class='fields' onSubmit={handleSubmit} name={name}>
+                <div>
+                  <label htmlFor='email'>
+                    <small>Email</small>
+                  </label>
+                  <input class='username' name='email' type='text' />
+                </div>
+                <div>
+                  <label htmlFor='password'>
+                    <small>Password</small>
+                  </label>
+                  <input class='password' name='password' type='password' />
+                </div>
+                <div>
+                  {displayName === "signup" ? (
+                    <div class='sub-title'>
+                      already have an account?{" "}
+                      <Link class='navlink' to='/signup'>
+                        SIGN UP
+                      </Link>{" "}
+                    </div>
+                  ) : (
+                    ""
+                  )}
 
-                <button class="signin-button" type="submit">
-                  {displayName}
-                </button>
-              </div>
-              {error && error.response && <div> {error.response.data} </div>}
-            </form>
-          </div>{" "}
-        </div>
-      </section>
+                  <button class='signin-button' type='submit'>
+                    {displayName}
+                  </button>
+                </div>
+                {error && error.response && <div> {error.response.data} </div>}
+              </form>
+            </div>{" "}
+          </div>
+        </section>
+      </div>
       <Footer></Footer>
     </div>
   );

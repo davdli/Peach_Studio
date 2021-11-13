@@ -4,6 +4,7 @@ const {
 } = require("../db"); // This will depend on the model
 const Cart = require("../db/models/Cart");
 const User = require("../db/models/User");
+const { requireToken } = require("./gatekeepingMiddleware");
 module.exports = router;
 
 // GET api/products
@@ -44,16 +45,34 @@ router.put("/:productId", async (req, res, next) => {
     next(error);
   }
 });
+
 // POST api/products/:productId
-router.post("/:productId", async (req, res, next) => {
+router.post("/:productId", requireToken, async (req, res, next) => {
   try {
+    //recieve an object with user id and order id attatched
+    //
+    // if the object has an order id
+
+    //
     const product = await Product.findByPk(req.params.productId);
+    //check if the user has an order id and if they dont we have to go to line 64
 
-    const order = await Order.create(req.body);
+    //this is find the users current cart before checkout before adding to cart
+   const order = await Order.findOne({
+      where: {
+        userId: req.user.id,
+        isComplete: false,
+      },
+    });
+    // if the user doesnt have a cart we have to create a cart
+    await Order.create({
+      userId: req.user.id,
+      isComplete: false,
+    });
 
-    const cartitem = await order.addProduct(product);
+    const cartItem = await order.addProduct(product);
 
-    res.json(cartitem);
+    res.json(cartItem);
   } catch (error) {
     next(error);
   }

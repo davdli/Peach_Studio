@@ -9,6 +9,7 @@ import AllProducts from "./components/AllProducts";
 import Users from "./components/Users";
 import SingleProduct from "./components/SingleProduct";
 import { me } from "./store";
+import UserProfile from "./components/UserProfile";
 
 /**
  * COMPONENT
@@ -25,22 +26,23 @@ class Routes extends Component {
       <div>
         {isLoggedIn ? (
           <Switch>
-            <Route exact path="/" component={Home} />
+            <Route exact path='/' component={Home} />
             {/* <Redirect to="/home" /> */}
             {/* <Route exact path="/" component={Landing} /> */}
-            <Route exact path="/cart" component={Cart} />
-            <Route exact path="/products" component={AllProducts} />
-            <Route exact path="/products/:id" component={SingleProduct} />
-            <Route exact path="/users" component={Users} />
+            <Route exact path='/cart' component={Cart} />
+            <Route exact path='/products' component={AllProducts} />
+            <Route exact path='/products/:id' component={SingleProduct} />
+            <Route exact path='/users' component={Users} />
+            <Route exact path='/profile' component={UserProfile} />
           </Switch>
         ) : (
           <Switch>
-            <Route exact path="/" component={Landing} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/signup" component={Signup} />
-            <Route exact path="/cart" component={Cart} />
-            <Route exact path="/products" component={AllProducts} />
-            <Route exact path="/products/:id" component={SingleProduct} />
+            <Route exact path='/' component={Landing} />
+            <Route exact path='/login' component={Login} />
+            <Route exact path='/signup' component={Signup} />
+            <Route exact path='/cart' component={Cart} />
+            <Route exact path='/products' component={AllProducts} />
+            <Route exact path='/products/:id' component={SingleProduct} />
           </Switch>
         )}
       </div>
