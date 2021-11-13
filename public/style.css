@@ -937,6 +937,14 @@ table img {
   border-radius: 10px;
 }
 
+.checkout-bottom-info button {
+  width: 100%;
+  padding: 10px;
+  cursor: pointer;
+  background: #f4d0a5;
+  border-style: none;
+}
+
 .checkout-bottom-summary {
   flex: 1;
   border: 0.5px solid lightgray;

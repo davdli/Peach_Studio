@@ -58,6 +58,9 @@ const CheckoutForm = () => {
                 <input />
             </form>
           </div>
+
+          <br />
+          <button style={{marginLeft: "150px", width: '520px'}}>PAY NOW</button>
         </div>
 
         <div className='checkout-bottom-summary'>
