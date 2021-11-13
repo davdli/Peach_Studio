@@ -10,6 +10,7 @@ import Users from "./components/Users";
 import SingleProduct from "./components/SingleProduct";
 import { me } from "./store";
 import UserProfile from "./components/UserProfile";
+import CheckoutForm from "./components/CheckoutForm";
 
 /**
  * COMPONENT
@@ -34,6 +35,7 @@ class Routes extends Component {
             <Route exact path='/products/:id' component={SingleProduct} />
             <Route exact path='/users' component={Users} />
             <Route exact path='/profile' component={UserProfile} />
+            <Route exact path='/checkout' component={CheckoutForm} />
           </Switch>
         ) : (
           <Switch>
@@ -43,6 +45,7 @@ class Routes extends Component {
             <Route exact path='/cart' component={Cart} />
             <Route exact path='/products' component={AllProducts} />
             <Route exact path='/products/:id' component={SingleProduct} />
+            <Route exact path='/checkout' component={CheckoutForm} />
           </Switch>
         )}
       </div>

@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getCartItems } from "../redux/cart";
 import { fetchSingleProduct } from "../redux/singleProduct";
+import { Link } from 'react-router-dom';
 
 const Cart = (props) => {
   // const cart = useSelector((state) => state.cart);
@@ -26,12 +27,16 @@ const Cart = (props) => {
       <div className='cart-wrapper'>
         <h1>YOUR BAG</h1>
         <div className='cart-top'>
-          <button>CONTINUE SHOPPING</button>
+          <Link to='/products'>
+            <button>CONTINUE SHOPPING</button>
+          </Link>
           <div className='cart-top-text'>
             <p>SHOPPING BAG (2)</p>
             <p>YOUR WISHLIST (1)</p>
           </div>
-          <button>CHECKOUT NOW</button>
+          <Link to='/checkout'>
+            <button>CHECKOUT NOW</button>
+          </Link>
         </div>
         <div className='cart-bottom'>
           <div className='cart-bottom-info'>
@@ -112,7 +117,9 @@ const Cart = (props) => {
               <p>TOTAL</p>
               <p>$370</p>
             </div>
-            <button>CHECKOUT NOW</button>
+            <Link to='/checkout'>
+              <button>CHECKOUT FORM</button>
+            </Link>
           </div>
         </div>
       </div>
