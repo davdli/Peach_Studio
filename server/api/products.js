@@ -51,7 +51,7 @@ router.post("/:productId", requireToken, async (req, res, next) => {
   try {
     //recieve an object with user id and order id attatched
     //
-    console.log(req.headers);
+    // console.log(req.body);
     const product = await Product.findByPk(req.params.productId);
 
     const order = await Order.findOne({
@@ -61,7 +61,16 @@ router.post("/:productId", requireToken, async (req, res, next) => {
       },
     });
 
-    const cartItem = await order.addProduct(product);
+    // const cartItem = await order.addProduct(product);
+    const cartItem= await Cart.create({
+      orderId: order.id,
+      productId: req.params.productId,
+      quantity: req.body.quantity,
+    });
+
+    // cartItem.update({
+    //   quantity: req.body.quantity,
+    // })
 
     res.status(cartItem);
   } catch (error) {

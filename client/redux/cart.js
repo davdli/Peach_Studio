@@ -5,9 +5,7 @@ import history from "../history";
 // action types
 export const ADD_TO_CART = "ADD_TO_CART";
 export const GET_CART_ITEMS = "GET_CART_ITEMS";
-// export const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
-// export const INCREMENT_QTY = 'INCREMENT_QTY'
-// export const DECREMENT_QTY = 'DECREMENT_QTY'
+const UPDATE_CART= 'UPDATE_CART';
 
 // action creators
 export const _addToCart = (cartItem) => {
@@ -23,6 +21,7 @@ export const _getCartItems = (cartItems) => {
     cartItems,
   };
 };
+
 
 // thunks
 export const addToCart = (userObj) => async (dispatch) => {
@@ -41,10 +40,12 @@ export const addToCart = (userObj) => async (dispatch) => {
   }
 };
 
-export const getCartItems = () => {
+export const getCartItems = (user) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get("/api/cart");
+      // console.log('This is the user in the cart redux', user);
+      // const {id}= user
+      const { data } = await axios.put("/api/cart", user);
       dispatch(_getCartItems(data));
     } catch (error) {
       console.log(error);
@@ -57,92 +58,12 @@ export default function cartReducer(state = {}, action) {
     case ADD_TO_CART:
       return { ...action.cartItem };
     case GET_CART_ITEMS:
+      // cartItems.filter((cartItem)=>{
+
+      // })
       return action.cartItems;
     default:
       return state;
   }
 }
 
-// export const _removeProduct = (product) => {
-//   return {
-//     type: REMOVE_PRODUCT,
-//     product
-//   }
-// }
-
-// export const _incrementQty = (product) => {
-//   return {
-//     type: INCREMENT_QTY,
-//     product
-//   }
-// }
-
-// export const _decrementQty = (product) => {
-//   return {
-//     type: DECREMENT_QTY,
-//     product
-//   }
-// }
-
-// export const removeProduct = () => {
-//   return async (dispatch) => {
-//     try {
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-// };
-
-// export const incrementQty = () => {
-//   return async (dispatch) => {
-//     try {
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-// };
-
-// export const decrementQty = () => {
-//   return async (dispatch) => {
-//     try {
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-// };
-
-// export const addToCart = (quantity, productId, productPrice) => {
-//   return async (dispatch) => {
-//     try {
-//       const { data } = await axios.put("/api/cart/add", {
-//         quantity: quantity,
-//         id: productId,
-//         price: productPrice,
-//       });
-//       dispatch(_addToCart(data));
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-// };
-
-// export const addItemToCart = (product) => {
-//   return (dispatch) => {
-//     return axios
-//       .post(`/api/cart`, product)
-//       .then((res) => res.data)
-//       .then((count) => dispatch(actions.getCartCount(count)));
-//   };
-// };
-
-// export const putItemInCart = (id, quantity) => {
-//   return (dispatch) => {
-//     return axios
-//       .put(`/api/cart/${id}`, quantity) //
-//       .then((res) => {
-//         if (res.status === 204)
-//           dispatch(actions.updateCartLineItem(productId, quantity));
-//         else console.error("Failed to update cart");
-//       });
-//   };
-// };

@@ -6,18 +6,15 @@ import { getCartItems } from "../redux/cart";
 import { fetchSingleProduct } from "../redux/singleProduct";
 
 const Cart = (props) => {
-  // const cart = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.cart);
+  const user = useSelector((state) => state.auth);
+  console.log('This is the cart:', cart);
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(getCartItems())
-  // }, [])
-
-  // for (let i = 0; i < cart.length; i++) {
-  //   const productId = cart[i].productId;
-  //   const product = dispatch(fetchSingleProduct(productId));
-  // }
+  useEffect(() => {
+    dispatch(getCartItems(user))
+  }, [])
 
   // console.log('this is cart', cart)
 

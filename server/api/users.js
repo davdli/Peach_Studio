@@ -60,3 +60,19 @@ router.delete("/:id", async (req, res, next) => {
     next(ex);
   }
 });
+
+// api/users/:id/cart
+router.get("/:id/cart", async (req, res, next) => {
+  try {
+    res.send(
+      await User.findAll({
+        where: {
+          id: req.params.id,
+        },
+        attributes: ["id", "email", "firstName", "lastName", "isAdmin"],
+      })
+    );
+  } catch (ex) {
+    next(ex);
+  }
+});
