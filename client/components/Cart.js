@@ -31,8 +31,8 @@ const Cart = (props) => {
             <button>CONTINUE SHOPPING</button>
           </Link>
           <div className='cart-top-text'>
-            <p>SHOPPING BAG (2)</p>
-            <p>YOUR WISHLIST (1)</p>
+            <p>Shopping Bag (2)</p>
+            <p>Your Waitlist (1)</p>
           </div>
           <Link to='/checkout'>
             <button>CHECKOUT NOW</button>
@@ -45,10 +45,10 @@ const Cart = (props) => {
                 <img src='https://media.istockphoto.com/photos/liivng-coralcolor-of-the-year-2019interior-design-for-living-area-or-picture-id1134702834?b=1&k=6&m=1134702834&s=170667a&w=0&h=2q1rjh0eKl02t3ZCfbeweubkljyd64fZJON5862nXRg=' />
                 <div>
                   <p>
-                    <b>PRODUCT:</b> PEACHYCHAIR
+                    <b>Product:</b> Peachy Chair
                   </p>
                   <p>
-                    <b>ID:</b> 2
+                    <b>Id:</b> 2
                   </p>
                   <div
                     className='cart-product-color'
@@ -75,10 +75,10 @@ const Cart = (props) => {
                 <img src='https://images.urbndata.com/is/image/Anthropologie/40800781_006_b?$a15-pdp-detail-shot$&fit=constrain&fmt=webp&qlt=80&wid=720' />
                 <div>
                   <p>
-                    <b>PRODUCT:</b> PEACHYCHAIR
+                    <b>Product:</b> Peachy Table
                   </p>
                   <p>
-                    <b>ID:</b> 4
+                    <b>Id:</b> 4
                   </p>
                   <div
                     className='cart-product-color'
@@ -100,21 +100,21 @@ const Cart = (props) => {
           </div>
 
           <div className='cart-bottom-summary'>
-            <p className='order-summary'>ORDER SUMMARY</p>
+            <p className='order-summary'>Order Summary</p>
             <div>
-              <p>SUBTOTAL</p>
+              <p>Subtotal</p>
               <p>$ 300</p>
             </div>
             <div>
-              <p>ESTIMATED TAX</p>
+              <p>Estimated Tax</p>
               <p>$20</p>
             </div>
             <div>
-              <p>ESTIMATED SHIPPING</p>
+              <p>Estimated Shipping</p>
               <p>$50</p>
             </div>
             <div style={{ fontSize: "24px", fontWeight: "bolder" }}>
-              <p>TOTAL</p>
+              <p>Total</p>
               <p>$370</p>
             </div>
             <Link to='/checkout'>
