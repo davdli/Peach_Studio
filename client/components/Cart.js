@@ -118,7 +118,7 @@ const Cart = (props) => {
               <p>$370</p>
             </div>
             <Link to='/checkout'>
-              <button>CHECKOUT FORM</button>
+              <button>CHECKOUT NOW</button>
             </Link>
           </div>
         </div>
