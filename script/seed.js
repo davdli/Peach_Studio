@@ -53,30 +53,17 @@ function generateOrders(qtyOfUsers) {
   return orders;
 };
 // The Cart can have any amount of Products(well no more than our INVENTORY)
-// The logic in here is that ONE static OrderId can have many ProductsId, but THAT IS WRONG because we will overwrite the order with new items,BUT...
-// function generateCarts(qtyOfActiveOrders) {
-//   let carts = [];
-//   for (let i = 1; i <= qtyOfActiveOrders; i++) {
-//     for (let j = 1; j <= 4; j++) {
-//       carts.push({
-//         orderId: i,
-//         productId:j,
-//       });
-//     }
-//   }
-//   return carts;
-// }
-// ^^^Not sure if this is correct ^^^
-
-function generateCarts(anyQtyOfOrders) {
-  let cartsArray = [];
-  for (let i = 1; i <= anyQtyOfOrders; i++) {
-    cartsArray.push({
-      orderId: i,
-      productId: i,
-    });
+function generateCarts(qtyOfActiveOrders) {
+  let carts = [];
+  for (let i = 1; i <= qtyOfActiveOrders; i++) {
+    for (let j = 1; j <= 4; j++) {
+      carts.push({
+        orderId: i,
+        productId:j,
+      });
+    }
   }
-  return cartsArray;
+  return carts;
 }
 
 // Creating the dummy data
@@ -87,7 +74,7 @@ const qtyOfProducts = 4;
 const dummyUsers = generateUsers(qtyOfUsers);
 const dummyProducts = generateProducts(qtyOfProducts, qtyOfCategories);
 const dummyOrders = generateOrders(qtyOfUsers);
-const dummyCarts = generateCarts(1);
+const dummyCarts = generateCarts(qtyOfUsers);
 
 async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
@@ -100,14 +87,21 @@ async function seed() {
     })
   );
   //create sample admin
+  console.log('Seeded admin');
   const admin = await User.create({
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
     email: 'admin@admin.com',
     password: '1234',
-    isAdmin: true
+    isAdmin: true,
   });
-  console.log('Seeded admin');
+  const nonAdmin = await User.create({
+    firstName: faker.name.firstName(),
+    lastName: faker.name.lastName(),
+    email: 'nonadmin@nonadmin.com',
+    password: '123',
+    isAdmin: false,
+  });
   // Creating Products
   let products = await Promise.all(
     dummyProducts.map((prod) => {
@@ -130,7 +124,7 @@ async function seed() {
   console.log("db synced!");
   console.log(`seeded successfully`);
   return {
-    users: [users, admin],
+    users: [users, admin, nonAdmin],
     products,
     orders,
     carts,
