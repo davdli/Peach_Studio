@@ -3,7 +3,6 @@ import Footer from "./Footer";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getCartItems } from "../redux/cart";
-import { fetchSingleProduct } from "../redux/singleProduct";
 import { Link } from 'react-router-dom';
 
 const Cart = (props) => {
@@ -56,7 +55,7 @@ const Cart = (props) => {
                 </div>
                 <div className='cart-product-price'>
                   <div className='cart-product-cost'>
-                    <p>{product.price}</p>
+                    <p>${product.price}</p>
                   </div>
                   <div className='cart-product-amount'>
                     <button>+</button>
