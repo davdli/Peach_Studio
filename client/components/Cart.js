@@ -17,6 +17,7 @@ const Cart = (props) => {
     dispatch(getCartItems(user))
   }, [])
 
+
   return cart.length > 0 ? (
     <div>
       <div className='cart-wrapper'>
@@ -37,7 +38,7 @@ const Cart = (props) => {
 
           <div className='cart-bottom-info'>
             {cart[0].products.map(product => (
-              <div className='cart-product'>
+              <div className='cart-product' key={product.id}>
                 <div className='cart-product-detail'>
                   <img src={product.imageUrl} />
                   <div>
@@ -59,7 +60,7 @@ const Cart = (props) => {
                   </div>
                   <div className='cart-product-amount'>
                     <button>+</button>
-                    <p>3</p>
+                    <p>1</p>
                     <button>-</button>
                   </div>
                 </div>
@@ -71,19 +72,27 @@ const Cart = (props) => {
             <p className='order-summary'>Order Summary</p>
             <div>
               <p>Subtotal</p>
-              <p>$ 300</p>
+              <p>${cart[0].products.reduce((accum, product) => {
+                return accum + Number(product.price)
+              }, 0).toFixed(2)}</p>
             </div>
             <div>
               <p>Estimated Tax</p>
-              <p>$20</p>
+              <p>${(cart[0].products.reduce((accum, product) => {
+                return accum + Number(product.price)
+              }, 0) * 0.045).toFixed(2)}</p>
             </div>
             <div>
               <p>Estimated Shipping</p>
-              <p>$50</p>
+              <p>$100</p>
             </div>
             <div style={{ fontSize: "24px", fontWeight: "bolder" }}>
               <p>Total</p>
-              <p>$370</p>
+              <p>${(Number(cart[0].products.reduce((accum, product) => {
+                return accum + Number(product.price)
+              }, 0).toFixed(2)) + Number((cart[0].products.reduce((accum, product) => {
+                return accum + Number(product.price)
+              }, 0) * 0.045).toFixed(2)) + 100).toFixed(2)}</p>
             </div>
             <Link to='/checkout'>
               <button>CHECKOUT NOW</button>
