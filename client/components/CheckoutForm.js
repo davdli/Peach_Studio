@@ -111,7 +111,7 @@ const CheckoutForm = (props) => {
               }, 0) * 0.045).toFixed(2)) + 100).toFixed(2)}</p>
             </div>
             <Link to='/cart'>
-              <button>Return to Cart</button>
+              <button>RETURN TO CART</button>
             </Link>
           </div>
         </div>
