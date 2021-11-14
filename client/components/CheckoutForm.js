@@ -21,6 +21,10 @@ const CheckoutForm = (props) => {
       <div className='checkout-wrapper'>
         <h1>CHECKOUT</h1>
         <br />
+        <Link to='/products'>
+            <button>CONTINUE SHOPPING</button>
+          </Link>
+        <br />
         <div className='checkout-bottom'>
           <div className='checkout-bottom-info'>
 
