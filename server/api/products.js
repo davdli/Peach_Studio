@@ -61,16 +61,24 @@ router.post("/:productId", requireToken, async (req, res, next) => {
       },
     });
 
-    // const cartItem = await order.addProduct(product);
-    const cartItem= await Cart.create({
-      orderId: order.id,
-      productId: req.params.productId,
-      quantity: req.body.quantity,
+    const cartItem = await Cart.findOne({
+      where: {
+        orderId: order.id,
+        productId: req.params.productId,
+      },
     });
 
-    // cartItem.update({
-    //   quantity: req.body.quantity,
-    // })
+    if (!cartItem) {
+      await Cart.create({
+        orderId: order.id,
+        productId: req.params.productId,
+        quantity: req.body.quantity,
+      });
+    } else {
+      cartItem.update({ quantity: cartItem.quantity + req.body.quantity });
+    }
+
+    // const cartItem = await order.addProduct(product);
 
     res.status(cartItem);
   } catch (error) {
