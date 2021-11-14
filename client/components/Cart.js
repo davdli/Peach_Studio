@@ -26,8 +26,8 @@ const Cart = (props) => {
             <button>CONTINUE SHOPPING</button>
           </Link>
           <div className='cart-top-text'>
-            <p>Shopping Bag (2)</p>
-            <p>Your Waitlist (1)</p>
+            <p>Shopping Bag ({cart[0].products.length})</p>
+            <p>Your Wishlist (0)</p>
           </div>
           <Link to='/checkout'>
             <button>CHECKOUT NOW</button>
@@ -99,10 +99,30 @@ const Cart = (props) => {
           </div>
         </div>
       </div>
-      <Footer></Footer>
+      <Footer />
     </div>
   ) : (
-    <h3>Your cart is empty</h3>
+    <div>
+      <div className='cart-wrapper' style={{height: '70vh'}}>
+        <h1>YOUR BAG</h1>
+        <div className='cart-top'>
+          <Link to='/products'>
+            <button>CONTINUE SHOPPING</button>
+          </Link>
+          <div className='cart-top-text'>
+            <p>Shopping Bag (0)</p>
+            <p>Your Wishlist (0)</p>
+          </div>
+          <Link to='/products'>
+            <button>CONTINUE SHOPPING</button>
+          </Link>
+        </div>
+        <div>
+          <h3 style={{textAlign: 'center'}}>Your bag is empty!</h3>
+        </div>
+      </div>
+      <Footer />
+    </div>
   )
 };
 
