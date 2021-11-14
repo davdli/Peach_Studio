@@ -1,23 +1,41 @@
 import React from "react";
 import Footer from "./Footer";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { getCartItems } from "../redux/cart";
-import { fetchSingleProduct } from "../redux/singleProduct";
+import { useEffect, useState } from "react";
+import { getCartItems, updateCart } from "../redux/cart";
 import { Link } from 'react-router-dom';
 
 const Cart = (props) => {
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.auth);
   console.log('This is the cart:', cart);
+  console.log('This is the state.auth:', user);
+
+  let [quantity, changeQuantity] = useState(0);
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getCartItems(user))
-  }, [])
+  useEffect(() => {// This works as a componentDidMount?
+    dispatch(getCartItems(user));
+  }, []);
 
-  // console.log('this is cart', cart)
+  // useEffect(() => { // Is this a componentDidUpdate?
+  //   dispatch(getCartItems(user));
+  // }, [cart]);
+
+  const handleDelete = (productId, userId) =>{
+    dispatch(updateCart(productId, userId));
+  }
+
+  const handleQuantity = (event) => {
+    event.preventDefault();
+    console.log(quantity);
+    if (event.target.value === "increase") {
+      changeQuantity(quantity++);
+    } else if (event.target.value === "decrease") {
+      changeQuantity(quantity--);
+    } 
+  };
 
   return (
     <div>
@@ -28,7 +46,7 @@ const Cart = (props) => {
             <button>CONTINUE SHOPPING</button>
           </Link>
           <div className='cart-top-text'>
-            <p>Shopping Bag (2)</p>
+            <p>Shopping Bag ({cart.length})</p>
             <p>Your Waitlist (1)</p>
           </div>
           <Link to='/checkout'>
@@ -58,9 +76,10 @@ const Cart = (props) => {
                   <p>$100</p>
                 </div>
                 <div className='cart-product-amount'>
-                  <button>+</button>
+                  <button value='increase' onClick={handleQuantity}>+</button>
                   <p>3</p>
-                  <button>-</button>
+                  <button value='decrease' onClick={handleQuantity}>-</button>
+                  <button value='remove' onClick={handleDelete(0, user.id )}>Remove</button> {/* Somehow we have to pass a product Id perhaps with a map function? */}
                 </div>
               </div>
             </div>

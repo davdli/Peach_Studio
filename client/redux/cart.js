@@ -5,7 +5,7 @@ import history from "../history";
 // action types
 export const ADD_TO_CART = "ADD_TO_CART";
 export const GET_CART_ITEMS = "GET_CART_ITEMS";
-const UPDATE_CART= 'UPDATE_CART';
+const UPDATE_CART = 'UPDATE_CART';
 
 // action creators
 export const _addToCart = (cartItem) => {
@@ -21,6 +21,13 @@ export const _getCartItems = (cartItems) => {
     cartItems,
   };
 };
+
+export const _updateCart = (cartItem) => {
+  return {
+    type: UPDATE_CART,
+    removeProduct: cartItem,
+  }
+}
 
 
 // thunks
@@ -53,15 +60,28 @@ export const getCartItems = (user) => {
   };
 };
 
+export const updateCart = (productId, userId) => {
+  return async (dispatch) => {
+    try {
+      // const prodId= JSON.stringify(productId);
+      // const usId= JSON.stringify(userId);
+      // console.log('This is the ProductId and the userId in updateCart call: ', productId, userId);
+      const { data } = await axios.post("/api/cart", {productId, userId});
+      dispatch(_updateCart(data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
 export default function cartReducer(state = {}, action) {
   switch (action.type) {
     case ADD_TO_CART:
       return { ...action.cartItem };
     case GET_CART_ITEMS:
-      // cartItems.filter((cartItem)=>{
-
-      // })
       return action.cartItems;
+    case UPDATE_CART:
+      return action.removeProduct;
     default:
       return state;
   }
