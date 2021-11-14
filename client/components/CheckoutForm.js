@@ -73,7 +73,9 @@ const CheckoutForm = (props) => {
             </div>
 
             <br />
-            <button style={{marginLeft: "150px", width: '520px'}}>PAY NOW</button>
+            <Link to="/confirmation">
+              <button style={{marginLeft: "150px", width: '520px'}}>PAY NOW</button>
+            </Link>
           </div>
 
           <div className='checkout-bottom-summary'>
