@@ -84,7 +84,7 @@ const Cart = (props) => {
             </div>
             <div>
               <p>Estimated Shipping</p>
-              <p>$100</p>
+              <p>${(100).toFixed(2)}</p>
             </div>
             <div style={{ fontSize: "24px", fontWeight: "bolder" }}>
               <p>Total</p>
