@@ -715,6 +715,7 @@ button:focus {
 .cart-product {
   display: flex;
   justify-content: space-between;
+  margin: 30px;
 }
 
 .cart-product-detail {
