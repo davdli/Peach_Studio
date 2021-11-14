@@ -13,14 +13,16 @@ router.put("/", async (req, res, next) => {
         isComplete: false,
       }
     });
+    
     // console.log('This is usersOrder in cart',usersOrder);
     const cartItems = await Order.findAll({
       where: {
         id: usersOrder.id,
       },
       include: [{ model: Product }]
-
     })
+
+
     // console.log('This is req.boody in cart', cartItems[0].products); // This will show the products in our cart! YAY!
     res.json(cartItems);
   } catch (error) {
