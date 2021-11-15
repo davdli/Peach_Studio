@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
 
-const Navbar = ({ handleClick, isLoggedIn, admin, email, user }) => (
+const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
   <div>
     {isLoggedIn ? (
       <div className='navcontainer'>
@@ -70,24 +70,23 @@ const Navbar = ({ handleClick, isLoggedIn, admin, email, user }) => (
             SIGN UP
           </Link>
         </div>
-      </div>
-    )}
+      )}
+    </div>
   </div>
 );
+
 /**
  * CONTAINER
  */
-const mapState = ({ auth }) => {
+const mapState = (state) => {
   return {
-    isLoggedIn: !!auth.id,
-    admin: auth.isAdmin,
-    auth,
+    isLoggedIn: !!state.auth.id,
+    isAdmin: state.auth.isAdmin,
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
-    singleUser: (email) => dispatch(setSingleUser(email)),
     handleClick() {
       dispatch(logout());
     },

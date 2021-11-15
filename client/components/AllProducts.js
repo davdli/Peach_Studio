@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import Footer from "./Footer";
+
 const AllProducts = (props) => {
   // this is the same  mapstate
   const products = useSelector((state) => state.products);
@@ -17,18 +18,26 @@ const AllProducts = (props) => {
     // Safe to add dispatch to the dependencies array
   }, []);
   return (
-    <div className="test-products">
-      All Products
-      {products.map((product) => (
-        <div key={product.id}>
-          <Link to={`/products/${product.id}`}>
-            <img id="productPhoto" src={product.imageUrl} />
-            <p>{product.name}</p>
-          </Link>
-          <p>${product.price}</p>
+    <div>
+      <h2 className="products-header"> All Peachy Furniture</h2>
+      <div className="all-furniture">
+        <div className="furniture-grid">
+          {products.map((product) => (
+            <div key={product.id} className="furniture-item">
+              <Link to={`/products/${product.id}`}>
+                <img
+                  id="productPhoto"
+                  src={product.imageUrl}
+                  className="images"
+                />
+                <p>{product.name}</p>
+              </Link>
+              <p>${product.price}</p>
+            </div>
+          ))}
         </div>
-      ))}
-           <Footer></Footer>
+      </div>
+      <Footer></Footer>
     </div>
   );
 };
