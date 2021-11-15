@@ -9,7 +9,6 @@ const SingleProduct = (props) => {
   const user = useSelector((state) => state.auth);
   let [quantity, changeQuantity] = useState(0);
 
-
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchSingleProduct(props.match.params.id));

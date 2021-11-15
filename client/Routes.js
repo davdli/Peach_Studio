@@ -13,6 +13,9 @@ import Landing from "./components/Landing";
 import AdminUsers from "./components/AdminUsers";
 import UserProfile from "./components/UserProfile";
 import Confirmation from "./components/Confirmation";
+import AdminProducts from "./components/AdminProducts";
+import AdminEditProducts from "./components/AdminEditProducts";
+import AdminAdd from "./components/AdminAdd";
 /**
  * COMPONENT
  */
@@ -31,10 +34,13 @@ class Routes extends Component {
             <Route exact path="/" component={Home} />
             <Route path="/admin-dash" component={AdminDashboard} />
             <Route path="/admin-users" component={AdminUsers} />
+            <Route exact path="/admin-products" component={AdminProducts} />
+            <Route path="/admin-products/create" component={AdminAdd} />
             <Route path="/profile/:id" component={UserProfile} />
             <Route path="/profile" component={UserProfile} />
             <Route exact path="/products" component={AllProducts} />
             <Route exact path="/products/:id" component={SingleProduct} />
+            <Route path="/products/:id/edit" component={AdminEditProducts} />
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/profile" component={UserProfile} />
             <Route exact path="/checkout" component={CheckoutForm} />
@@ -81,4 +87,3 @@ const mapDispatch = (dispatch) => {
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
 export default withRouter(connect(mapState, mapDispatch)(Routes));
-
