@@ -9,7 +9,9 @@ import SingleProduct from "./components/SingleProduct";
 import Cart from "./components/Cart";
 import AdminDashboard from "./components/AdminDashboard";
 import CheckoutForm from "./components/CheckoutForm";
-
+import Landing from "./components/Landing";
+import AdminUsers from "./components/AdminUsers";
+import UserProfile from "./components/UserProfile";
 /**
  * COMPONENT
  */
@@ -27,6 +29,9 @@ class Routes extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/admin-dash" component={AdminDashboard} />
+            <Route path="/admin-users" component={AdminUsers} />
+            <Route path="/profile/:id" component={UserProfile} />
+            <Route path="/profile" component={UserProfile} />
             <Route exact path="/products" component={AllProducts} />
             <Route exact path="/products/:id" component={SingleProduct} />
             <Route exact path="/cart" component={Cart} />
@@ -35,7 +40,7 @@ class Routes extends Component {
           </Switch>
         ) : (
           <Switch>
-            <Route path="/" exact component={Home} />
+            <Route exact path="/" component={Landing} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route exact path="/products" component={AllProducts} />

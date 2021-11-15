@@ -5,34 +5,48 @@ import { logout } from "../store";
 
 const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
   <div>
-    <div className="navcontainer">
-      <h1 className="logo">PEACH STUDIO</h1>
-    </div>
-    <nav>
+    <div class="navcontainer">
+      <Link class="navlink" to="/">
+        <h1 class="logo">PEACH STUDIO</h1>
+      </Link>
       {isLoggedIn ? (
-        <div>
-          <Link to="/products">SHOP</Link>
-          <Link to="/cart">CART</Link>
-          {isAdmin ? <Link to="/admin-dash">ADMIN DASHBOARD</Link> : null}
-          <Link onClick={handleClick} className="navlink" to="/">
-            LOGOUT
-          </Link>
+        <div class="navcontainer">
+          <div class="navbuttons">
+            <Link class="navlink" to="/products">
+              SHOP
+            </Link>
+            <Link class="navlink" to="/cart">
+              CART
+            </Link>
+            {isAdmin ? (
+              <Link class="navlink" to="/admin-dash">
+                ADMIN
+              </Link>
+            ) : null}
+            <Link class="navlink" onClick={handleClick} class="navlink" to="/">
+              LOGOUT
+            </Link>
+          </div>
         </div>
       ) : (
-        <div className="navbuttons">
-          <Link className="navlink" to="/products">
-            SHOP
-          </Link>
-          <Link className="navlink" to="/cart">
-            CART
-          </Link>
-          <div className="account-links">
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Sign Up</Link>
+        <div class="navcontainer">
+          <div class="navbuttons">
+            <Link class="navlink" to="/products">
+              SHOP
+            </Link>
+            <Link class="navlink" to="/cart">
+              CART
+            </Link>
+            <Link class="navlink" to="/login">
+              Login
+            </Link>
+            <Link class="navlink" to="/signup">
+              Sign Up
+            </Link>
           </div>
         </div>
       )}
-    </nav>
+    </div>
   </div>
 );
 
