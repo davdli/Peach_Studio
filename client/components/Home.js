@@ -12,7 +12,9 @@ export const Home = (props) => {
   const welcomeName = email.split("@");
   return (
     <div>
-      <h3 class="welcomeuser">Welcome, {welcomeName[0]}</h3>
+
+      <h3 className="welcomeuser">Welcome, {welcomeName[0]}</h3>
+
       <Landing></Landing>
     </div>
   );

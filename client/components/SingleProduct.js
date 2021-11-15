@@ -10,7 +10,7 @@ const SingleProduct = (props) => {
   const product = useSelector((state) => state.product);
   const user = useSelector((state) => state.auth);
   let [quantity, changeQuantity] = useState(0);
-
+  // console.log('This is the product in singleProduct:',product);
   // this is like mapdispatch
   const dispatch = useDispatch();
   useEffect(() => {
@@ -18,8 +18,12 @@ const SingleProduct = (props) => {
     // Safe to add dispatch to the dependencies array
   }, []);
 
+  // useEffect(() => {
+  //   dispatch(fetchSingleProduct(props.match.params.id));
+  // }, [product]);
+
   const handleQuantity = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     console.log(quantity);
     if (event.target.value === "increase") {
       changeQuantity(quantity++);
