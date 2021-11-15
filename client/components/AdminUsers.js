@@ -27,7 +27,7 @@ const AdminUsers = () => {
         <Link to="/admin-dash">← Back To Dashboard</Link>
         {users.map((user) => {
           return (
-            <div className="admin-customers">
+            <div className="admin-customers" key={user.id}>
               <div key={user.id} className="user-table">
                 <div>
                   <table>

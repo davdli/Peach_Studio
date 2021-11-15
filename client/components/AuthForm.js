@@ -127,12 +127,20 @@ const mapDispatch = (dispatch) => {
   return {
     handleSubmit(evt) {
       evt.preventDefault();
-      const formName = evt.target.name;
-      const first = evt.target.first.value;
-      const last = evt.target.last.value;
-      const email = evt.target.email.value;
-      const password = evt.target.password.value;
-      dispatch(authenticate(first, last, email, password, formName));
+      console.log('This is evt.target.name:',evt.target.name);
+      if (evt.target.name === "signup") {
+        const formName = evt.target.name;
+        const first = evt.target.first.value;
+        const last = evt.target.last.value;
+        const email = evt.target.email.value;
+        const password = evt.target.password.value;
+        dispatch(authenticate(first, last, email, password, formName));
+      } else {
+        const formName = evt.target.name;
+        const email = evt.target.email.value;
+        const password = evt.target.password.value;
+        dispatch(authenticate(null, null, email, password, formName));
+      }
     },
   };
 };

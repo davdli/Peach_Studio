@@ -70,6 +70,7 @@ export const UserProfile = () => {
           />{" "}
           <p>EDIT INFO</p>
         </div>
+        </div>
       </section>
 
       <Footer></Footer>
