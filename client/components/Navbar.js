@@ -42,10 +42,10 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
               CART
             </Link>
             <Link class="navlink" to="/login">
-              Login
+              LOGIN
             </Link>
             <Link class="navlink" to="/signup">
-              Sign Up
+              JOIN
             </Link>
           </div>
         </div>

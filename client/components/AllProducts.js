@@ -19,21 +19,23 @@ const AllProducts = (props) => {
   }, []);
   return (
     <div>
-      <div className="content">
-        <h2> All Peachy Furniture</h2>
-        {products.map((product) => (
-          <div key={product.id}>
-            <Link to={`/products/${product.id}`}>
-              <img
-                id="productPhoto"
-                src={product.imageUrl}
-                className="images"
-              />
-              <p>{product.name}</p>
-            </Link>
-            <p>${product.price}</p>
-          </div>
-        ))}
+      <h2 className="products-header"> All Peachy Furniture</h2>
+      <div className="all-furniture">
+        <div className="furniture-grid">
+          {products.map((product) => (
+            <div key={product.id} className="furniture-item">
+              <Link to={`/products/${product.id}`}>
+                <img
+                  id="productPhoto"
+                  src={product.imageUrl}
+                  className="images"
+                />
+                <p>{product.name}</p>
+              </Link>
+              <p>${product.price}</p>
+            </div>
+          ))}
+        </div>
       </div>
       <Footer></Footer>
     </div>

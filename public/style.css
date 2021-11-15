@@ -613,8 +613,8 @@ button:focus {
 }
 
 .single-product-view img {
-  height: 150px;
-  width: 120px;
+  width: 170px;
+  height: 145px;
 }
 
 .btn {
@@ -1143,3 +1143,28 @@ h3 .fitting {
 }
 
 /*SHOP*/
+.furniture-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.furniture-item {
+  width: 32%;
+  padding-bottom: 18%; /* 32:18, i.e. 16:9 */
+  margin-bottom: 2%; /* (100-32*3)/2 */
+}
+
+.furniture-item img {
+  width: 170px;
+  height: 145px;
+}
+
+.all-furniture {
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.products-header {
+  padding-left: 100px;
+}
