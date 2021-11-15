@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import Landing from "./Landing";
 
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
@@ -20,33 +21,33 @@ const AdminUsers = () => {
   }, []);
 
   return (
-    <div className="user-table">
-      <h1>All Current Registered Customers</h1>
-      <Link className="navbuttons" to="/admin-dash">
-        ← Back To Dashboard
-      </Link>
-      <div className="content">
+    <div>
+      <div className="customer-container">
+        <h3>All Current Registered Customers</h3>
+        <Link to="/admin-dash">← Back To Dashboard</Link>
         {users.map((user) => {
           return (
-            <div key={user.id} className="user-table">
-              <div className="user-content">
-                <table>
-                  <tr>
-                    <th> Customer Profile</th>
-                    <th>Email</th>
-                    <th>EDIT </th>
-                  </tr>
-                  <tr>
-                    <td>
-                      <img src="favicon.ico" />
-                    </td>
+            <div>
+              <div key={user.id} className="user-table">
+                <div>
+                  <table>
+                    <tr>
+                      <th> Customer Profile</th>
+                      <th>Email</th>
+                      <th>EDIT </th>
+                    </tr>
+                    <tr>
+                      <td>
+                        <img src="favicon.ico" />
+                      </td>
 
-                    <td>{user.email}</td>
-                    <td>
-                      <Link to="/Admin/Customers">Manage Customer</Link>
-                    </td>
-                  </tr>
-                </table>
+                      <td>{user.email}</td>
+                      <td>
+                        <Link to="/Admin/Customers">Manage Customer</Link>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
               </div>
             </div>
           );
