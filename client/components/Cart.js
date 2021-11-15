@@ -8,6 +8,7 @@ import { useState } from "react";
 import { addToCart } from "../redux/cart";
 import { increaseQuantity } from "../redux/cart";
 import { fetchNewCart } from "../redux/cart";
+import { decreaseQuantity } from "../redux/cart";
 
 const Cart = (props) => {
   const cart = useSelector((state) => state.cart);
@@ -29,6 +30,10 @@ const Cart = (props) => {
   const handleIncrease = (event) => {
     dispatch(increaseQuantity(event.target.value, user.id));
     changeQuantity((prevCount) => prevCount + 1);
+  };
+  const handleDecrease = (event) => {
+    dispatch(decreaseQuantity(event.target.value, user.id));
+    changeQuantity((prevCount) => prevCount - 1);
   };
 
   const addProduct = (event) => {
@@ -82,9 +87,9 @@ const Cart = (props) => {
                       +
                     </button>
                     <p>Quantity: {product.cart.quantity}</p>
-                    {/* <button value='decrease' onClick={handleDecrease}>
+                    <button value={product.id} onClick={handleDecrease}>
                       -
-                    </button> */}
+                    </button>
                   </div>
                   <div className='cart-product-amount'>
                     <button
