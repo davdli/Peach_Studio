@@ -992,9 +992,45 @@ table img {
   border-style: none;
 }
 
+
+/* CONFIRMATION PAGE */
+
+.confirmation-wrapper h1 {
+  text-align: center;
+}
+
+.confirmation-order {
+  border: 0.5px solid lightgray;
+  border-radius: 10px;
+  width: 800px;
+  margin:0 auto;
+}
+
+.customer-info {
+  border: 0.5px solid lightgray;
+  border-radius: 10px;
+  width: 800px;
+  margin:0 auto;
+}
+
+.customer-details {
+  display: flex;
+  justify-content: space-around;
+}
+
+.confirmation-button {
+  text-align: center;
+  align-content: center;
+  width: 800px;
+  margin: 20px;
+  cursor: pointer;
+  background: #f4d0a5;
+  border-style: none;
+
 /* USER PROFILE */
 
 .linebk {
   color: #000;
   border-radius: 30px solid;
+
 }
