@@ -2,6 +2,7 @@ const router = require("express").Router();
 const Cart = require("../db/models/Cart");
 const Order = require("../db/models/Order");
 const Product = require("../db/models/Product");
+const User = require("../db/models/User");
 
 // increment, decrement, remove product from cart
 router.put("/", async (req, res, next) => {

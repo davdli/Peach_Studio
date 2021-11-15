@@ -613,8 +613,8 @@ button:focus {
 }
 
 .single-product-view img {
-  height: 150px;
-  width: 120px;
+  width: 170px;
+  height: 145px;
 }
 
 .btn {
@@ -863,20 +863,20 @@ table img {
   background-repeat: no-repeat;
   background-position: center;
   justify-content: center;
-  margin-top: -100px;
+  margin-top: 0;
 }
 
 /* https://images.unsplash.com/photo-1559311648-874c28a0b7c1?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1147&q=80 */
 
 .userinfo-div {
   width: 300px;
-  padding: 200px 35px 35px 35px;
+  padding: 20px 35px 35px 35px;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin-top: -100px;
+  margin-top: 0;
 }
 .userinfofields {
   width: 100%;
@@ -992,7 +992,6 @@ table img {
   border-style: none;
 }
 
-
 /* CONFIRMATION PAGE */
 
 .confirmation-wrapper h1 {
@@ -1003,14 +1002,14 @@ table img {
   border: 0.5px solid lightgray;
   border-radius: 10px;
   width: 800px;
-  margin:0 auto;
+  margin: 0 auto;
 }
 
 .customer-info {
   border: 0.5px solid lightgray;
   border-radius: 10px;
   width: 800px;
-  margin:0 auto;
+  margin: 0 auto;
 }
 
 .customer-details {
@@ -1026,11 +1025,146 @@ table img {
   cursor: pointer;
   background: #f4d0a5;
   border-style: none;
-
+}
 /* USER PROFILE */
 
 .linebk {
   color: #000;
   border-radius: 30px solid;
+}
 
+/*Admin Portal*/
+
+/*ADMIN PORTAL*/
+.admin-home {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.first-content {
+  border-radius: 25px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: #f5ccb9;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 57px;
+  padding: 50px;
+  height: 250px;
+  width: 500px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 22px;
+  text-align: center;
+  color: whitesmoke;
+}
+
+.admin-customers {
+  padding: 5px;
+}
+
+.fitting {
+  position: absolute;
+  text-align: center;
+  padding: 3px;
+  top: 0px;
+  font-family: "Montserrat";
+  font-size: 20px;
+}
+.manage-p {
+  background-color: rgb(167, 140, 140);
+  color: white;
+  border: 3px solid white;
+  width: 80%;
+  margin: 2px;
+  padding: 10px;
+  font-family: "Montserrat";
+}
+
+.adminHome {
+  display: flex;
+  font-family: "Montserrat";
+  font-size: 20px;
+  justify-content: space-around;
+}
+
+.manage {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+h3 .fitting {
+  color: black;
+}
+
+.userinfo-div {
+  width: 300px;
+  padding: 200px 35px 35px 35px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: -100px;
+}
+.user-content {
+  padding-left: 10px;
+  padding-right: 10px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: column;
+  -ms-flex-flow: column;
+  flex-flow: column;
+  z-index: 5;
+  color: black;
+  font-size: 12px;
+}
+
+.user-content img {
+  height: 50px;
+  width: 50px;
+}
+
+.customer-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  display: inline-grid;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  justify-content: center;
+  background: rgb(167, 140, 140);
+  width: 100%;
+  margin-top: -100px;
+}
+
+/*SHOP*/
+.furniture-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.furniture-item {
+  width: 32%;
+  padding-bottom: 18%; /* 32:18, i.e. 16:9 */
+  margin-bottom: 2%; /* (100-32*3)/2 */
+}
+
+.furniture-item img {
+  width: 170px;
+  height: 145px;
+}
+
+.all-furniture {
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.products-header {
+  padding-left: 100px;
 }

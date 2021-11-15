@@ -6,9 +6,7 @@ module.exports = router;
 
 router.post("/login", async (req, res, next) => {
   try {
-    // for protecting our database against injection attacks
-    const { email, password } = req.body;
-    res.send({ token: await User.authenticate({ email, password }) });
+    res.send({ token: await User.authenticate(req.body) });
   } catch (err) {
     next(err);
   }
@@ -16,13 +14,13 @@ router.post("/login", async (req, res, next) => {
 
 router.post("/signup", async (req, res, next) => {
   try {
-    // for protecting our database against injection attacks
-    const { first, last, email, password } = req.body;
+    const { email, password, firstName, lastName, shippingAddress } = req.body;
     const user = await User.create({
-      firstName: first,
-      lastName: last,
       email,
       password,
+      firstName,
+      lastName,
+      shippingAddress,
     });
     res.send({ token: await user.generateToken() });
   } catch (err) {

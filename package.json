@@ -29,7 +29,10 @@
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.9.1",
     "pg": "^8.5.1",
-    "sequelize": "^6.9.0"
+    "react-bootstrap": "^2.0.2",
+    "react-table": "^7.7.0",
+    "sequelize": "^6.9.0",
+    "simplebar-react": "^2.3.6"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",

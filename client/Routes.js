@@ -1,18 +1,17 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { withRouter, Route, Switch, Redirect } from "react-router-dom";
+import AllProducts from "./components/AllProducts";
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
-import Landing from "./components/Landing";
-import Cart from "./components/Cart";
-import AllProducts from "./components/AllProducts";
-import Users from "./components/Users";
-import SingleProduct from "./components/SingleProduct";
 import { me } from "./store";
-import UserProfile from "./components/UserProfile";
+import SingleProduct from "./components/SingleProduct";
+import Cart from "./components/Cart";
+import AdminDashboard from "./components/AdminDashboard";
 import CheckoutForm from "./components/CheckoutForm";
-import ConfirmationPage from "./components/Confirmation";
-
+import Landing from "./components/Landing";
+import AdminUsers from "./components/AdminUsers";
+import UserProfile from "./components/UserProfile";
 /**
  * COMPONENT
  */
@@ -22,33 +21,33 @@ class Routes extends Component {
   }
 
   render() {
-    const { isLoggedIn, admin } = this.props;
+    const { isLoggedIn } = this.props;
 
     return (
       <div>
         {isLoggedIn ? (
           <Switch>
-            <Route exact path='/' component={Home} />
-            {/* <Redirect to="/home" /> */}
-            {/* <Route exact path="/" component={Landing} /> */}
-            <Route exact path='/cart' component={Cart} />
-            <Route exact path='/products' component={AllProducts} />
-            <Route exact path='/products/:id' component={SingleProduct} />
-            <Route exact path='/users' component={Users} />
-            <Route exact path='/profile' component={UserProfile} />
-            <Route exact path='/checkout' component={CheckoutForm} />
-            <Route exact path='/confirmation' component={ConfirmationPage} />
+            <Route exact path="/" component={Home} />
+            <Route path="/admin-dash" component={AdminDashboard} />
+            <Route path="/admin-users" component={AdminUsers} />
+            <Route path="/profile/:id" component={UserProfile} />
+            <Route path="/profile" component={UserProfile} />
+            <Route exact path="/products" component={AllProducts} />
+            <Route exact path="/products/:id" component={SingleProduct} />
+            <Route exact path="/cart" component={Cart} />
+            <Route exact path="/profile" component={UserProfile} />
+            <Route exact path="/checkout" component={CheckoutForm} />
+            <Redirect to="/" />
           </Switch>
         ) : (
           <Switch>
-            <Route exact path='/' component={Landing} />
-            <Route exact path='/login' component={Login} />
-            <Route exact path='/signup' component={Signup} />
-            <Route exact path='/cart' component={Cart} />
-            <Route exact path='/products' component={AllProducts} />
-            <Route exact path='/products/:id' component={SingleProduct} />
-            <Route exact path='/checkout' component={CheckoutForm} />
-            <Route exact path='/checkout' component={ConfirmationPage} />
+            <Route exact path="/" component={Landing} />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
+            <Route exact path="/products" component={AllProducts} />
+            <Route exact path="/products/:id" component={SingleProduct} />
+            <Route exact path="/cart" component={Cart} />
+            <Route exact path="/checkout" component={CheckoutForm} />
           </Switch>
         )}
       </div>
@@ -64,7 +63,7 @@ const mapState = (state) => {
     // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
     // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
     isLoggedIn: !!state.auth.id,
-    admin: state.auth.isAdmin,
+    isAdmin: state.auth.isAdmin,
   };
 };
 
@@ -79,3 +78,4 @@ const mapDispatch = (dispatch) => {
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
 export default withRouter(connect(mapState, mapDispatch)(Routes));
+
