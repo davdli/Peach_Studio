@@ -2,12 +2,14 @@ const router = require("express").Router();
 const Cart = require("../db/models/Cart");
 const Order = require("../db/models/Order");
 const Product = require("../db/models/Product");
+const User = require("../db/models/User");
 
 // increment, decrement, remove product from cart
+//PUT api/cart
 router.put("/", async (req, res, next) => {
   try {
     // console.log('This is req.boody in cart',req.body);
-    const usersOrder = await Order.findOne({
+    const userOrder = await Order.findOne({
       where: {
         userId: req.body.id,
         isComplete: false,
@@ -15,15 +17,33 @@ router.put("/", async (req, res, next) => {
     });
 
     // console.log('This is usersOrder in cart',usersOrder);
-    const cartItems = await Order.findAll({
-      where: {
-        id: usersOrder.id,
-      },
-      include: [{ model: Product }],
-    });
+    // const cartItems = await Order.findAll({
+    //   where: {
+    //     id: userOrder.id,
+    //   },
+    //   include: [{ model: Product }]
 
+    // });
     // console.log('This is req.boody in cart', cartItems[0].products); // This will show the products in our cart! YAY!
-
+    let cartItems= await userOrder.getProducts();
+    // console.log('This is the cartItems',cartItems);
+    res.json(cartItems);
+  } catch (error) {
+    next(error);
+  }
+});
+// POST api/cart
+router.post("/", async (req, res, next) => {
+  try {
+    // console.log('This is req.body in cart',req.body);
+    const userOrder = await Order.findOne({
+      where: {
+        userId: req.body.userId,
+        isComplete: false,
+      }
+    });
+    let cartItems= await userOrder.removeProduct(req.body.productId);
+    // console.log('This is the cartItems',cartItems);
     res.json(cartItems);
   } catch (error) {
     next(error);
@@ -48,13 +68,8 @@ router.put("/increase", async (req, res, next) => {
     });
 
     cartItem.update({ quantity: cartItem.quantity + 1 });
+    let cartItems= await userOrder.getProducts();
 
-    const cartItems = await Order.findAll({
-      where: {
-        id: order.id,
-      },
-      include: [{ model: Product }],
-    });
     res.send(cartItems);
   } catch (error) {
     next(error);
@@ -79,12 +94,8 @@ router.put("/decrease", async (req, res, next) => {
 
     cartItem.update({ quantity: cartItem.quantity - 1 });
 
-    const cartItems = await Order.findAll({
-      where: {
-        id: order.id,
-      },
-      include: [{ model: Product }],
-    });
+    let cartItems= await userOrder.getProducts();
+
     res.send(cartItems);
   } catch (error) {
     next(error);

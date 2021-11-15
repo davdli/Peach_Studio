@@ -22,7 +22,6 @@ const AuthForm = (props) => {
               <div class='login-div'>
                 <div class='logopeach'></div>
                 <div class='title'>{displayName}</div>
-
                 <form class='fields' onSubmit={handleSubmit} name={name}>
                   <div>
                     <label htmlFor='first'>
@@ -48,7 +47,6 @@ const AuthForm = (props) => {
                     </label>
                     <input class='password' name='password' type='password' />
                   </div>
-
                   <div>
                     <button class='signin-button' type='submit'>
                       {displayName}
@@ -73,7 +71,6 @@ const AuthForm = (props) => {
               <div class='login-div'>
                 <div class='logopeach'></div>
                 <div class='title'>{displayName}</div>
-
                 <form class='fields' onSubmit={handleSubmit} name={name}>
                   <div>
                     <label htmlFor='email'>
@@ -87,7 +84,6 @@ const AuthForm = (props) => {
                     </label>
                     <input class='username' name='password' type='password' />
                   </div>
-
                   <div>
                     <button class='signin-button' type='submit'>
                       {displayName}
@@ -106,7 +102,6 @@ const AuthForm = (props) => {
     </div>
   );
 };
-
 /**
  * CONTAINER
  *   Note that we have two different sets of 'mapStateToProps' functions -
@@ -121,7 +116,6 @@ const mapLogin = (state) => {
     error: state.auth.error,
   };
 };
-
 const mapSignup = (state) => {
   return {
     name: "signup",
@@ -129,7 +123,6 @@ const mapSignup = (state) => {
     error: state.auth.error,
   };
 };
-
 const mapDispatch = (dispatch) => {
   return {
     handleSubmit(evt) {
@@ -139,11 +132,9 @@ const mapDispatch = (dispatch) => {
       const last = evt.target.last.value;
       const email = evt.target.email.value;
       const password = evt.target.password.value;
-
       dispatch(authenticate(first, last, email, password, formName));
     },
   };
 };
-
 export const Login = connect(mapLogin, mapDispatch)(AuthForm);
 export const Signup = connect(mapSignup, mapDispatch)(AuthForm);

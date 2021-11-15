@@ -1,31 +1,34 @@
 import React from "react";
 import Footer from "./Footer";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { getCartItems } from "../redux/cart";
+import { useState, useEffect } from "react";
+import { getCartItems, updateCart, increaseQuantity, decreaseQuantity } from "../redux/cart";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import { addToCart } from "../redux/cart";
-import { increaseQuantity } from "../redux/cart";
-import { fetchNewCart } from "../redux/cart";
-import { decreaseQuantity } from "../redux/cart";
 
 const Cart = (props) => {
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.auth);
-  let [counter, changeQuantity] = useState(0);
-
-  // let product = cart[0].products || [];
-
+  console.log('This is the cart:', cart);
   const dispatch = useDispatch();
+  let [counter, changeQuantity] = useState(0);
+  // console.log('This is the state.auth:', user);
+  console.log('This is counter: ', counter);
+
+
   //componentdidmount
   useEffect(() => {
     dispatch(getCartItems(user));
   }, []);
 
+  // componentDidUpdate
   useEffect(() => {
     dispatch(getCartItems(user));
   }, [counter]);
+
+  const handleDelete = (event) => {
+    dispatch(updateCart(event.target.value, user.id));
+    changeQuantity(prevCount => prevCount + 1);
+  }
 
   const handleIncrease = (event) => {
     dispatch(increaseQuantity(event.target.value, user.id));
@@ -36,14 +39,14 @@ const Cart = (props) => {
     changeQuantity((prevCount) => prevCount - 1);
   };
 
-  const addProduct = (event) => {
-    const userObj = {
-      productId: event.target.value,
-      userId: user.id,
-      quantity: quantity,
-    };
-    dispatch(addToCart(userObj));
-  };
+  // const addProduct = (event) => {
+  //   const userObj = {
+  //     productId: event.target.value,
+  //     userId: user.id,
+  //     quantity: quantity,
+  //   };
+  //   dispatch(addToCart(userObj));
+  // };
   return cart.length > 0 ? (
     <div>
       <div className='cart-wrapper'>
@@ -53,7 +56,7 @@ const Cart = (props) => {
             <button>CONTINUE SHOPPING</button>
           </Link>
           <div className='cart-top-text'>
-            <p>Shopping Bag ({cart[0].products.length})</p>
+            <p>Shopping Bag ({cart.length})</p>
             <p>Your Wishlist (0)</p>
           </div>
           <Link to='/checkout'>
@@ -62,7 +65,7 @@ const Cart = (props) => {
         </div>
         <div className='cart-bottom'>
           <div className='cart-bottom-info'>
-            {cart[0].products.map((product) => (
+            {cart.map(product => (
               <div className='cart-product' key={product.id}>
                 <div className='cart-product-detail'>
                   <img src={product.imageUrl} />
@@ -94,10 +97,10 @@ const Cart = (props) => {
                   <div className='cart-product-amount'>
                     <button
                       className=''
-                      onClick={addProduct}
-                      value={product.cart.quantity}
+                      onClick={handleDelete}
+                      value={product.id}
                     >
-                      <small>SAVE</small>
+                      Remove
                     </button>
                   </div>
                 </div>
@@ -109,25 +112,15 @@ const Cart = (props) => {
             <p className='order-summary'>Order Summary</p>
             <div>
               <p>Subtotal</p>
-              <p>
-                $
-                {cart[0].products
-                  .reduce((accum, product) => {
-                    return accum + Number(product.price);
-                  }, 0)
-                  .toFixed(2)}
-              </p>
+              <p>${cart.reduce((accum, product) => {
+                return accum + Number(product.price) * Number(product.cart.quantity)
+              }, 0).toFixed(2)}</p>
             </div>
             <div>
               <p>Estimated Tax</p>
-              <p>
-                $
-                {(
-                  cart[0].products.reduce((accum, product) => {
-                    return accum + Number(product.price);
-                  }, 0) * 0.045
-                ).toFixed(2)}
-              </p>
+              <p>${(cart.reduce((accum, product) => {
+                return accum + Number(product.price) * Number(product.cart.quantity)
+              }, 0) * 0.045).toFixed(2)}</p>
             </div>
             <div>
               <p>Estimated Shipping</p>
@@ -135,26 +128,11 @@ const Cart = (props) => {
             </div>
             <div style={{ fontSize: "24px", fontWeight: "bolder" }}>
               <p>Total</p>
-              <p>
-                $
-                {(
-                  Number(
-                    cart[0].products
-                      .reduce((accum, product) => {
-                        return accum + Number(product.price);
-                      }, 0)
-                      .toFixed(2)
-                  ) +
-                  Number(
-                    (
-                      cart[0].products.reduce((accum, product) => {
-                        return accum + Number(product.price);
-                      }, 0) * 0.045
-                    ).toFixed(2)
-                  ) +
-                  100
-                ).toFixed(2)}
-              </p>
+              <p>${(Number(cart.reduce((accum, product) => {
+                return accum + Number(product.price)
+              }, 0).toFixed(2)) + Number((cart.reduce((accum, product) => {
+                return accum + Number(product.price)
+              }, 0) * 0.045).toFixed(2)) + 100).toFixed(2)}</p>
             </div>
             <Link to='/checkout'>
               <button>CHECKOUT NOW</button>

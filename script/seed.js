@@ -11,11 +11,11 @@ const faker = require("faker");
  */
 
 function generateUsers(qtyOfUsers) {
-  let users = []
+  let users = [];
   for (let i = 0; i < qtyOfUsers; i++) {
     users.push({
       email: faker.internet.email(),
-      password: '123',
+      password: "123",
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
       shippingAddress: `${faker.address.streetAddress()},${faker.address.city()},${faker.address.state()},${faker.address.zipCode()}`,
@@ -25,9 +25,9 @@ function generateUsers(qtyOfUsers) {
     });
   }
   return users;
-};
+}
 function generateProducts(qtyOfProducts, qtyOfCategories) {
-  let products = []
+  let products = [];
   for (let i = 0; i < qtyOfCategories; i++) {
     for (let j = 1; j <= qtyOfProducts; j++) {
       products.push({
@@ -41,7 +41,7 @@ function generateProducts(qtyOfProducts, qtyOfCategories) {
     }
   }
   return products;
-};
+}
 // Considering that one User can have only one ACTIVE order we create as many Orders as Users
 function generateOrders(qtyOfUsers) {
   let orders = [];
@@ -51,7 +51,7 @@ function generateOrders(qtyOfUsers) {
     });
   }
   return orders;
-};
+}
 // The Cart can have any amount of Products(well no more than our INVENTORY)
 function generateCarts(qtyOfActiveOrders) {
   let carts = [];
@@ -59,7 +59,7 @@ function generateCarts(qtyOfActiveOrders) {
     for (let j = 1; j <= 4; j++) {
       carts.push({
         orderId: i,
-        productId:j,
+        productId: j,
       });
     }
   }
@@ -68,7 +68,7 @@ function generateCarts(qtyOfActiveOrders) {
 
 // Creating the dummy data
 const qtyOfUsers = 10;
-const totalCategories = ['chair', 'dresser', 'sofa', 'table'];
+const totalCategories = ["chair", "dresser", "sofa", "table"];
 const qtyOfCategories = totalCategories.length;
 const qtyOfProducts = 4;
 const dummyUsers = generateUsers(qtyOfUsers);
@@ -87,19 +87,17 @@ async function seed() {
     })
   );
   //create sample admin
-  console.log('Seeded admin');
+  console.log("Seeded admin");
   const admin = await User.create({
-    firstName: faker.name.firstName(),
-    lastName: faker.name.lastName(),
-    email: 'admin@admin.com',
-    password: '1234',
+    email: "admin@admin.com",
+    password: "Zitomer1",
     isAdmin: true,
   });
   const nonAdmin = await User.create({
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
-    email: 'nonadmin@nonadmin.com',
-    password: '123',
+    email: "nonadmin@nonadmin.com",
+    password: "123",
     isAdmin: false,
   });
   // Creating Products

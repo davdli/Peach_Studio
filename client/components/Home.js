@@ -8,10 +8,13 @@ import { useSelector } from "react-redux";
  */
 
 export const Home = (props) => {
-  const user = useSelector((state) => state.auth);
+  const { email } = props;
+  const welcomeName = email.split("@");
   return (
     <div>
-      <h3 class='welcomeuser'>Welcome, {user.firstName}</h3>
+
+      <h3 className="welcomeuser">Welcome, {welcomeName[0]}</h3>
+
       <Landing></Landing>
     </div>
   );
@@ -22,8 +25,11 @@ export const Home = (props) => {
  */
 const mapState = (state) => {
   return {
-    em: state.auth.em,
+    email: state.auth.email,
   };
 };
+/**
+ * CONTAINER
+ */
 
 export default connect(mapState)(Home);
