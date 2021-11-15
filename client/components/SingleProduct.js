@@ -10,7 +10,7 @@ const SingleProduct = (props) => {
   const product = useSelector((state) => state.product);
   const user = useSelector((state) => state.auth);
   let [quantity, changeQuantity] = useState(0);
-  console.log('This is the product in singleProduct:',product);
+  // console.log('This is the product in singleProduct:',product);
   // this is like mapdispatch
   const dispatch = useDispatch();
   useEffect(() => {

@@ -79,7 +79,7 @@ export default function cartReducer(state = {}, action) {
     case ADD_TO_CART:
       return { ...action.cartItem };
     case GET_CART_ITEMS:
-      return action.cartItems;
+      return [...action.cartItems];
     case UPDATE_CART:
       return action.removeProduct;
     default:
