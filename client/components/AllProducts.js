@@ -19,7 +19,7 @@ const AllProducts = (props) => {
   }, []);
   return (
     <div>
-      <div className="product-body">
+      <div className="content">
         <h2> All Peachy Furniture</h2>
         {products.map((product) => (
           <div key={product.id}>

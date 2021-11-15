@@ -18,6 +18,10 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
             <Link class="navlink" to="/cart">
               CART
             </Link>
+            <Link class="navlink" to="/profile">
+              PROFILE
+            </Link>
+
             {isAdmin ? (
               <Link class="navlink" to="/admin-dash">
                 ADMIN

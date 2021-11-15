@@ -25,26 +25,16 @@ const AuthForm = (props) => {
 
                 <form class="fields" onSubmit={handleSubmit} name={name}>
                   <div>
-                    <label htmlFor="firstName">
-                      <small>First Name</small>
+                    <label htmlFor="first">
+                      <small>First</small>
                     </label>
-                    <input className="first" name="firstName" type="text" />
+                    <input class="first" name="first" type="text" />
                   </div>
                   <div>
-                    <label htmlFor="lastName">
-                      <small>Last Name</small>
+                    <label htmlFor="last">
+                      <small>Last</small>
                     </label>
-                    <input className="last" name="lastName" type="text" />
-                  </div>
-                  <div>
-                    <label htmlFor="shippingAddress">
-                      <small>Address</small>
-                    </label>
-                    <input
-                      className="address"
-                      name="shippingAddress"
-                      type="text"
-                    />
+                    <input class="last" name="last" type="text" />
                   </div>
                   <div>
                     <label htmlFor="email">
@@ -75,35 +65,31 @@ const AuthForm = (props) => {
       ) : (
         <div>
           <section id="sectionform">
-            <div className="box-1">
+            <div class="box-1">
               {" "}
               <hr />
             </div>
-            <div className="box-2 text">
-              <div className="login-div">
-                <div className="logopeach"></div>
-                <div className="title">{displayName}</div>
+            <div class="box-2 text">
+              <div class="login-div">
+                <div class="logopeach"></div>
+                <div class="title">{displayName}</div>
 
-                <form className="fields" onSubmit={handleSubmit} name={name}>
+                <form class="fields" onSubmit={handleSubmit} name={name}>
                   <div>
                     <label htmlFor="email">
                       <small>Email</small>
                     </label>
-                    <input className="username" name="email" type="text" />
+                    <input class="username" name="email" type="text" />
                   </div>
                   <div>
                     <label htmlFor="password">
                       <small>Password</small>
                     </label>
-                    <input
-                      className="username"
-                      name="password"
-                      type="password"
-                    />
+                    <input class="username" name="password" type="password" />
                   </div>
 
                   <div>
-                    <button className="signin-button" type="submit">
+                    <button class="signin-button" type="submit">
                       {displayName}
                     </button>
                   </div>
@@ -131,7 +117,7 @@ const AuthForm = (props) => {
 const mapLogin = (state) => {
   return {
     name: "login",
-    displayName: "LOGIN",
+    displayName: "Login",
     error: state.auth.error,
   };
 };
@@ -139,7 +125,7 @@ const mapLogin = (state) => {
 const mapSignup = (state) => {
   return {
     name: "signup",
-    displayName: "SIGN UP",
+    displayName: "Sign Up",
     error: state.auth.error,
   };
 };
@@ -148,29 +134,10 @@ const mapDispatch = (dispatch) => {
   return {
     handleSubmit(evt) {
       evt.preventDefault();
-      if (evt.target.name === "login") {
-        const formName = evt.target.name;
-        const email = evt.target.email.value;
-        const password = evt.target.password.value;
-        dispatch(authenticate(email, password, formName));
-      } else {
-        const formName = evt.target.name;
-        const email = evt.target.email.value;
-        const password = evt.target.password.value;
-        const firstName = evt.target.firstName.value;
-        const lastName = evt.target.lastName.value;
-        const shippingAddress = evt.target.shippingAddress.value;
-        dispatch(
-          authenticate(
-            email,
-            password,
-            firstName,
-            lastName,
-            shippingAddress,
-            formName
-          )
-        );
-      }
+      const formName = evt.target.name;
+      const email = evt.target.email.value;
+      const password = evt.target.password.value;
+      dispatch(authenticate(email, password, formName));
     },
   };
 };
