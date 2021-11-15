@@ -5,7 +5,8 @@ import history from "../history";
 // action types
 export const ADD_TO_CART = "ADD_TO_CART";
 export const GET_CART_ITEMS = "GET_CART_ITEMS";
-const UPDATE_CART= 'UPDATE_CART';
+export const INCREASE_QUANTITY = "INCREASE_QUANTITY";
+export const UPDATED_CART = "UPDATED_CART";
 
 // action creators
 export const _addToCart = (cartItem) => {
@@ -22,6 +23,18 @@ export const _getCartItems = (cartItems) => {
   };
 };
 
+export const _increaseQuantity = (cartItems) => {
+  return {
+    type: GET_CART_ITEMS,
+    cartItems,
+  };
+};
+export const _updatedCart = (cartItems) => {
+  return {
+    type: UPDATED_CART,
+    cartItems,
+  };
+};
 
 // thunks
 export const addToCart = (userObj) => async (dispatch) => {
@@ -53,17 +66,40 @@ export const getCartItems = (user) => {
   };
 };
 
+export const increaseQuantity = (productId, userId) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.put("/api/cart/increase", {
+        productId,
+        userId,
+      });
+      dispatch(_increaseQuantity(data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const fetchNewCart = (user) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.put("/api/cart", user);
+      dispatch(_updatedCart(data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 export default function cartReducer(state = {}, action) {
   switch (action.type) {
     case ADD_TO_CART:
       return { ...action.cartItem };
     case GET_CART_ITEMS:
-      // cartItems.filter((cartItem)=>{
-
-      // })
+      return action.cartItems;
+    case INCREASE_QUANTITY:
       return action.cartItems;
     default:
       return state;
   }
 }
-
