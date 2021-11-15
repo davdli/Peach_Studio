@@ -6,9 +6,10 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import Footer from "./Footer";
+
 const AllProducts = (props) => {
   // this is the same  mapstate
-  const products = useSelector((state) => state.products);
+  const products = useSelector((state) => state);
   // this is the same  mapdispatch
   const dispatch = useDispatch();
   //when we pass in an empty arr it acts as componentdidmount and when we dont pass in a second arg it acts as componentdidupdate
@@ -28,7 +29,7 @@ const AllProducts = (props) => {
           <p>${product.price}</p>
         </div>
       ))}
-           <Footer></Footer>
+      <Footer></Footer>
     </div>
   );
 };

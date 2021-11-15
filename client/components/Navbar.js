@@ -3,91 +3,51 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
 
-const Navbar = ({ handleClick, isLoggedIn, admin, email, user }) => (
+const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
   <div>
-    {isLoggedIn ? (
-      <div class='navcontainer'>
-        <Link class='navlink' to='/'>
-          <h1 class='logo'>PEACH STUDIO</h1>
-        </Link>
-        {admin ? (
-          <div className='navbuttons'>
-            <Link class='navlink' to='/users'>
-              ALL USERS
-            </Link>
-            <Link class='navlink' to='/products'>
-              ADD ITEM
-            </Link>
-
-            <Link class='navlink' to='/'>
-              HOME
-            </Link>
-            <Link onClick={handleClick} class='navlink' to='/'>
-              LOGOUT
-            </Link>
-          </div>
-        ) : (
-          <div className='navbuttons'>
-            <Link class='navlink' to='/products'>
-              SHOP
-            </Link>
-            <Link class='navlink' to='/'>
-              HOME
-            </Link>
-            <Link class='navlink' to='/cart'>
-              CART
-            </Link>
-            <Link class='navlink' to='/profile'>
-              PROFILE
-            </Link>
-            <Link onClick={handleClick} class='navlink' to='/'>
-              LOGOUT
-            </Link>
-          </div>
-        )}
-      </div>
-    ) : (
-      <div class='navcontainer'>
-        <Link to='/'>
-          {" "}
-          <h1 class='logo'>PEACH STUDIO</h1>
-        </Link>
-
-        <div class='navbuttons'>
-          <Link class='navlink' to='/products'>
-            SHOP
-          </Link>
-          <Link class='navlink' to='/'>
-            HOME
-          </Link>
-          <Link class='navlink' to='/cart'>
-            CART
-          </Link>
-          <Link class='navlink' to='/login'>
-            LOGIN
-          </Link>
-          <Link class='navlink' to='/signup'>
-            SIGN UP
+    <div className="navcontainer">
+      <h1 className="logo">PEACH STUDIO</h1>
+    </div>
+    <nav>
+      {isLoggedIn ? (
+        <div>
+          <Link to="/products">SHOP</Link>
+          <Link to="/cart">CART</Link>
+          {isAdmin ? <Link to="/admin-dash">ADMIN DASHBOARD</Link> : null}
+          <Link onClick={handleClick} className="navlink" to="/">
+            LOGOUT
           </Link>
         </div>
-      </div>
-    )}
+      ) : (
+        <div className="navbuttons">
+          <Link className="navlink" to="/products">
+            SHOP
+          </Link>
+          <Link className="navlink" to="/cart">
+            CART
+          </Link>
+          <div className="account-links">
+            <Link to="/login">Login</Link>
+            <Link to="/signup">Sign Up</Link>
+          </div>
+        </div>
+      )}
+    </nav>
   </div>
 );
+
 /**
  * CONTAINER
  */
-const mapState = ({ auth }) => {
+const mapState = (state) => {
   return {
-    isLoggedIn: !!auth.id,
-    admin: auth.isAdmin,
-    auth,
+    isLoggedIn: !!state.auth.id,
+    isAdmin: state.auth.isAdmin,
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
-    singleUser: (email) => dispatch(setSingleUser(email)),
     handleClick() {
       dispatch(logout());
     },

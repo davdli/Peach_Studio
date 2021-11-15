@@ -4,7 +4,6 @@ const {
 } = require("../db"); // This will depend on the model
 const Cart = require("../db/models/Cart");
 const User = require("../db/models/User");
-const { requireToken } = require("./gatekeepingMiddleware");
 module.exports = router;
 
 // GET api/products
@@ -47,7 +46,7 @@ router.get("/:productId", async (req, res, next) => {
 // });
 
 // POST api/products/:productId
-router.post("/:productId", requireToken, async (req, res, next) => {
+router.post("/:productId", async (req, res, next) => {
   try {
     //recieve an object with user id and order id attatched
     //
