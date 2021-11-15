@@ -60,7 +60,7 @@ export const UserProfile = () => {
         <div className='box-1'>
           <img
             className='categimg ch'
-            src='https://cdn-icons-png.flaticon.com/512/1159/1159633.png'
+            src='https://cdn-icons-png.flaticon.com/512/1159/1159633.png'/>
 
         <div class="box-1">
           <img

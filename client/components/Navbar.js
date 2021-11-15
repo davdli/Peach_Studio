@@ -5,70 +5,49 @@ import { logout } from "../store";
 
 const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
   <div>
-    {isLoggedIn ? (
-      <div className='navcontainer'>
-        <Link className='navlink' to='/'>
-          <h1 className='logo'>PEACH STUDIO</h1>
-        </Link>
-        {admin ? (
-          <div className='navbuttons'>
-            <Link className='navlink' to='/users'>
-              ALL USERS
-            </Link>
-            <Link className='navlink' to='/products'>
-              ADD ITEM
-            </Link>
-
-            <Link className='navlink' to='/'>
-              HOME
-            </Link>
-            <Link onClick={handleClick} className='navlink' to='/'>
-              LOGOUT
-            </Link>
-          </div>
-        ) : (
-          <div className='navbuttons'>
-            <Link className='navlink' to='/products'>
+    <div class="navcontainer">
+      <Link class="navlink" to="/">
+        <h1 class="logo">PEACH STUDIO</h1>
+      </Link>
+      {isLoggedIn ? (
+        <div class="navcontainer">
+          <div class="navbuttons">
+            <Link class="navlink" to="/products">
               SHOP
             </Link>
-            <Link className='navlink' to='/'>
-              HOME
-            </Link>
-            <Link className='navlink' to='/cart'>
+            <Link class="navlink" to="/cart">
               CART
             </Link>
-            <Link className='navlink' to='/profile'>
+            <Link class="navlink" to="/profile">
               PROFILE
             </Link>
-            <Link onClick={handleClick} className='navlink' to='/'>
+
+            {isAdmin ? (
+              <Link class="navlink" to="/admin-dash">
+                ADMIN
+              </Link>
+            ) : null}
+            <Link class="navlink" onClick={handleClick} class="navlink" to="/">
               LOGOUT
             </Link>
           </div>
-        )}
-      </div>
-    ) : (
-      <div className='navcontainer'>
-        <Link to='/'>
-          {" "}
-          <h1 className='logo'>PEACH STUDIO</h1>
-        </Link>
-
-        <div className='navbuttons'>
-          <Link className='navlink' to='/products'>
-            SHOP
-          </Link>
-          <Link className='navlink' to='/'>
-            HOME
-          </Link>
-          <Link className='navlink' to='/cart'>
-            CART
-          </Link>
-          <Link className='navlink' to='/login'>
-            LOGIN
-          </Link>
-          <Link className='navlink' to='/signup'>
-            SIGN UP
-          </Link>
+        </div>
+      ) : (
+        <div class="navcontainer">
+          <div class="navbuttons">
+            <Link class="navlink" to="/products">
+              SHOP
+            </Link>
+            <Link class="navlink" to="/cart">
+              CART
+            </Link>
+            <Link class="navlink" to="/login">
+              LOGIN
+            </Link>
+            <Link class="navlink" to="/signup">
+              JOIN
+            </Link>
+          </div>
         </div>
       )}
     </div>
