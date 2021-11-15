@@ -67,8 +67,8 @@ router.put("/increase", async (req, res, next) => {
       },
     });
 
-    cartItem.update({ quantity: cartItem.quantity + 1 });
-    let cartItems= await userOrder.getProducts();
+    await cartItem.update({ quantity: cartItem.quantity + 1 });
+    let cartItems= await order.getProducts();
 
     res.send(cartItems);
   } catch (error) {
@@ -92,9 +92,9 @@ router.put("/decrease", async (req, res, next) => {
       },
     });
 
-    cartItem.update({ quantity: cartItem.quantity - 1 });
+    await cartItem.update({ quantity: cartItem.quantity - 1 });
 
-    let cartItems= await userOrder.getProducts();
+    let cartItems= await order.getProducts();
 
     res.send(cartItems);
   } catch (error) {

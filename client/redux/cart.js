@@ -56,7 +56,7 @@ export const _updatedCart = (cartItems) => {
 // thunks
 export const addToCart = (userObj) => async (dispatch) => {
   const token = window.localStorage.getItem(TOKEN);
-  console.log({userObj});
+  console.log('This is the userObj inside cart THUNK:',{userObj});
   if (token) {
     const { data } = await axios.post(
       `/api/products/${userObj.productId}`,

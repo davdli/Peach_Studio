@@ -10,33 +10,33 @@ const Cart = (props) => {
   const user = useSelector((state) => state.auth);
   console.log('This is the cart:', cart);
   const dispatch = useDispatch();
-  let [counter, changeQuantity] = useState(0);
+  // let [counter, changeQuantity] = useState(0);
   // console.log('This is the state.auth:', user);
-  console.log('This is counter: ', counter);
+  // console.log('This is counter: ', counter);
 
 
   //componentdidmount
   useEffect(() => {
     dispatch(getCartItems(user));
-  }, []);
+  }, [user]);
 
   // componentDidUpdate
-  useEffect(() => {
-    dispatch(getCartItems(user));
-  }, [counter]);
+  // useEffect(() => {
+  //   dispatch(getCartItems(user));
+  // }, []);
 
   const handleDelete = (event) => {
     dispatch(updateCart(event.target.value, user.id));
-    changeQuantity(prevCount => prevCount + 1);
+    // changeQuantity(prevCount => prevCount + 1);
   }
 
   const handleIncrease = (event) => {
     dispatch(increaseQuantity(event.target.value, user.id));
-    changeQuantity((prevCount) => prevCount + 1);
+    // changeQuantity((prevCount) => prevCount + 1);
   };
   const handleDecrease = (event) => {
     dispatch(decreaseQuantity(event.target.value, user.id));
-    changeQuantity((prevCount) => prevCount - 1);
+    // changeQuantity((prevCount) => prevCount - 1);
   };
 
   // const addProduct = (event) => {
