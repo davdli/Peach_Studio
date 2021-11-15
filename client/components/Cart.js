@@ -6,13 +6,15 @@ import { getCartItems } from "../redux/cart";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { addToCart } from "../redux/cart";
+import { increaseQuantity } from "../redux/cart";
+import { fetchNewCart } from "../redux/cart";
 
 const Cart = (props) => {
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.auth);
-  let [quantity, changeQuantity] = useState(0);
+  let [counter, changeQuantity] = useState(0);
 
-  console.log(cart[0]);
+  // let product = cart[0].products || [];
 
   const dispatch = useDispatch();
   //componentdidmount
@@ -20,19 +22,13 @@ const Cart = (props) => {
     dispatch(getCartItems(user));
   }, []);
 
-  // //componentdidupdate
-  // useEffect(() => {
-  //   dispatch(getCartItems(user));
-  // });
+  useEffect(() => {
+    dispatch(getCartItems(user));
+  }, [counter]);
 
-  const handleQuantity = (event) => {
-    event.preventDefault();
-    console.log(quantity);
-    if (event.target.value === "increase") {
-      changeQuantity(quantity++);
-    } else if (event.target.value === "decrease") {
-      changeQuantity(quantity--);
-    }
+  const handleIncrease = (event) => {
+    dispatch(increaseQuantity(event.target.value, user.id));
+    changeQuantity((prevCount) => prevCount + 1);
   };
 
   const addProduct = (event) => {
@@ -72,7 +68,7 @@ const Cart = (props) => {
                     <p>
                       <b>Id:</b> {product.id}
                     </p>
-                   
+
                     <div
                       className='cart-product-color'
                       style={{ backgroundColor: "#f4d0a5" }}
@@ -82,20 +78,19 @@ const Cart = (props) => {
                 <div className='cart-product-price'>
                   <div className='cart-product-cost'>
                     <p>Price: ${product.price}</p>
-                    <p>Quantity: {2}</p>
-                  </div>
-                  <div className='cart-product-amount'>
-                    <button value='increase' onClick={handleQuantity}>
+                    <button value={product.id} onClick={handleIncrease}>
                       +
                     </button>
-                    <div>{quantity}</div>
-                    <button value='decrease' onClick={handleQuantity}>
+                    <p>Quantity: {product.cart.quantity}</p>
+                    {/* <button value='decrease' onClick={handleDecrease}>
                       -
-                    </button>
+                    </button> */}
+                  </div>
+                  <div className='cart-product-amount'>
                     <button
                       className=''
                       onClick={addProduct}
-                      value={product.id}
+                      value={product.cart.quantity}
                     >
                       <small>SAVE</small>
                     </button>
