@@ -6,67 +6,67 @@ import { logout } from "../store";
 const Navbar = ({ handleClick, isLoggedIn, admin, email, user }) => (
   <div>
     {isLoggedIn ? (
-      <div class='navcontainer'>
-        <Link class='navlink' to='/'>
-          <h1 class='logo'>PEACH STUDIO</h1>
+      <div className='navcontainer'>
+        <Link className='navlink' to='/'>
+          <h1 className='logo'>PEACH STUDIO</h1>
         </Link>
         {admin ? (
           <div className='navbuttons'>
-            <Link class='navlink' to='/users'>
+            <Link className='navlink' to='/users'>
               ALL USERS
             </Link>
-            <Link class='navlink' to='/products'>
+            <Link className='navlink' to='/products'>
               ADD ITEM
             </Link>
 
-            <Link class='navlink' to='/'>
+            <Link className='navlink' to='/'>
               HOME
             </Link>
-            <Link onClick={handleClick} class='navlink' to='/'>
+            <Link onClick={handleClick} className='navlink' to='/'>
               LOGOUT
             </Link>
           </div>
         ) : (
           <div className='navbuttons'>
-            <Link class='navlink' to='/products'>
+            <Link className='navlink' to='/products'>
               SHOP
             </Link>
-            <Link class='navlink' to='/'>
+            <Link className='navlink' to='/'>
               HOME
             </Link>
-            <Link class='navlink' to='/cart'>
+            <Link className='navlink' to='/cart'>
               CART
             </Link>
-            <Link class='navlink' to='/profile'>
+            <Link className='navlink' to='/profile'>
               PROFILE
             </Link>
-            <Link onClick={handleClick} class='navlink' to='/'>
+            <Link onClick={handleClick} className='navlink' to='/'>
               LOGOUT
             </Link>
           </div>
         )}
       </div>
     ) : (
-      <div class='navcontainer'>
+      <div className='navcontainer'>
         <Link to='/'>
           {" "}
-          <h1 class='logo'>PEACH STUDIO</h1>
+          <h1 className='logo'>PEACH STUDIO</h1>
         </Link>
 
-        <div class='navbuttons'>
-          <Link class='navlink' to='/products'>
+        <div className='navbuttons'>
+          <Link className='navlink' to='/products'>
             SHOP
           </Link>
-          <Link class='navlink' to='/'>
+          <Link className='navlink' to='/'>
             HOME
           </Link>
-          <Link class='navlink' to='/cart'>
+          <Link className='navlink' to='/cart'>
             CART
           </Link>
-          <Link class='navlink' to='/login'>
+          <Link className='navlink' to='/login'>
             LOGIN
           </Link>
-          <Link class='navlink' to='/signup'>
+          <Link className='navlink' to='/signup'>
             SIGN UP
           </Link>
         </div>

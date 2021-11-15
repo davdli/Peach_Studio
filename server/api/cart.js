@@ -4,6 +4,7 @@ const Order = require("../db/models/Order");
 const Product = require("../db/models/Product");
 
 // increment, decrement, remove product from cart
+//PUT api/cart
 router.put("/", async (req, res, next) => {
   try {
     // console.log('This is req.boody in cart',req.body);
@@ -30,7 +31,7 @@ router.put("/", async (req, res, next) => {
     next(error);
   }
 });
-
+// POST api/cart
 router.post("/", async (req, res, next) => {
   try {
     // console.log('This is req.body in cart',req.body);
@@ -66,13 +67,6 @@ router.put("/increase", async (req, res, next) => {
     });
 
     cartItem.update({ quantity: cartItem.quantity + 1 });
-
-    // const cartItems = await Order.findAll({
-    //   where: {
-    //     id: order.id,
-    //   },
-    //   include: [{ model: Product }],
-    // });
     let cartItems= await userOrder.getProducts();
 
     res.send(cartItems);
@@ -99,12 +93,6 @@ router.put("/decrease", async (req, res, next) => {
 
     cartItem.update({ quantity: cartItem.quantity - 1 });
 
-    // const cartItems = await Order.findAll({
-    //   where: {
-    //     id: order.id,
-    //   },
-    //   include: [{ model: Product }],
-    // });
     let cartItems= await userOrder.getProducts();
 
     res.send(cartItems);

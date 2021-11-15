@@ -11,7 +11,7 @@ export const Home = (props) => {
   const user = useSelector((state) => state.auth);
   return (
     <div>
-      <h3 class='welcomeuser'>Welcome, {user.firstName}</h3>
+      <h3 className='welcomeuser'>Welcome, {user.firstName}</h3>
       <Landing></Landing>
     </div>
   );

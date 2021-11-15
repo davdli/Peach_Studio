@@ -84,22 +84,22 @@ const CheckoutForm = (props) => {
 
           <div className='checkout-bottom-summary'>
             <p className='checkout-bag'>Your Bag</p>
-              {cart[0].products.map(product => (
-                <div>
-                  <p>{product.name} (1)</p>
+              {cart.map(product => (
+                <div key={product.id}>
+                  <p>{product.name} ({product.cart.quantity})</p>
                   <p>${Number(product.price).toFixed(2)}</p>
               </div>
               ))}
             <hr />
             <div>
               <p>Subtotal</p>
-              <p>${cart[0].products.reduce((accum, product) => {
+              <p>${cart.reduce((accum, product) => {
                 return accum + Number(product.price)
               }, 0).toFixed(2)}</p>
             </div>
             <div>
               <p>Tax</p>
-              <p>${(cart[0].products.reduce((accum, product) => {
+              <p>${(cart.reduce((accum, product) => {
                 return accum + Number(product.price)
               }, 0) * 0.045).toFixed(2)}</p>
             </div>
@@ -110,9 +110,9 @@ const CheckoutForm = (props) => {
             <hr />
             <div style={{ fontSize: "24px", fontWeight: "bolder" }}>
               <p>Total</p>
-              <p>${(Number(cart[0].products.reduce((accum, product) => {
+              <p>${(Number(cart.reduce((accum, product) => {
                 return accum + Number(product.price)
-              }, 0).toFixed(2)) + Number((cart[0].products.reduce((accum, product) => {
+              }, 0).toFixed(2)) + Number((cart.reduce((accum, product) => {
                 return accum + Number(product.price)
               }, 0) * 0.045).toFixed(2)) + 100).toFixed(2)}</p>
             </div>
