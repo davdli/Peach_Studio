@@ -56,6 +56,7 @@ export const _updatedCart = (cartItems) => {
 // thunks
 export const addToCart = (userObj) => async (dispatch) => {
   const token = window.localStorage.getItem(TOKEN);
+  console.log({userObj});
   if (token) {
     const { data } = await axios.post(
       `/api/products/${userObj.productId}`,
@@ -67,6 +68,17 @@ export const addToCart = (userObj) => async (dispatch) => {
       }
     );
     return dispatch(_addToCart(data));
+  } else {
+    // localStorage.removeItem('GuestCart');
+    let guestCart = JSON.parse(localStorage.getItem('GuestCart')); // reads as object
+    if (guestCart) {
+      localStorage.setItem('GuestCart', JSON.stringify([...guestCart, userObj])); // local storage only supports string data types
+      // already in localstorage means we have products in the cart
+    } else {
+      const cartItem = [ userObj ];
+      localStorage.setItem('GuestCart', JSON.stringify(cartItem));
+      console.log(JSON.parse(localStorage.getItem('GuestCart')));
+    }
   }
 };
 

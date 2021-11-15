@@ -1,22 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { fetchSingleProduct } from "../redux/singleProduct";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useSelector, useDispatch, connect } from "react-redux";
 import { addToCart } from "../redux/cart";
-import { useState } from "react";
 
 const SingleProduct = (props) => {
+  const { isLoggedIn } = props;
   const product = useSelector((state) => state.product);
   const user = useSelector((state) => state.auth);
   let [quantity, changeQuantity] = useState(0);
-  // console.log('This is the product in singleProduct:',product);
-  // this is like mapdispatch
+
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchSingleProduct(props.match.params.id));
     // Safe to add dispatch to the dependencies array
   }, []);
+  // empty "dependency array" runs once
 
   // useEffect(() => {
   //   dispatch(fetchSingleProduct(props.match.params.id));
@@ -67,4 +66,11 @@ const SingleProduct = (props) => {
     </div>
   );
 };
-export default SingleProduct;
+
+const mapState = ({ auth }) => {
+  return {
+    isLoggedIn: !!auth.id,
+  };
+};
+
+export default connect(mapState)(SingleProduct);
