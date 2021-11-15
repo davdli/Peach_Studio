@@ -40,6 +40,7 @@ const SingleProduct = (props) => {
   return (
     <div>
       <div className='single-product-view'>
+
         <div className='right'>
           <h3>Left in stock: {product.inventory}</h3>
           <h3>Price: ${product.price}</h3>
