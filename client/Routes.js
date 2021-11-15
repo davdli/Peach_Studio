@@ -12,6 +12,7 @@ import CheckoutForm from "./components/CheckoutForm";
 import Landing from "./components/Landing";
 import AdminUsers from "./components/AdminUsers";
 import UserProfile from "./components/UserProfile";
+import Confirmation from "./components/Confirmation";
 /**
  * COMPONENT
  */
@@ -37,6 +38,7 @@ class Routes extends Component {
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/profile" component={UserProfile} />
             <Route exact path="/checkout" component={CheckoutForm} />
+            <Route exact path="/confirmation" component={Confirmation} />
             <Redirect to="/" />
           </Switch>
         ) : (
@@ -48,6 +50,7 @@ class Routes extends Component {
             <Route exact path="/products/:id" component={SingleProduct} />
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/checkout" component={CheckoutForm} />
+            <Route exact path="/confirmation" component={Confirmation} />
           </Switch>
         )}
       </div>
