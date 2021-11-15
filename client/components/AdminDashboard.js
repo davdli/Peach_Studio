@@ -23,8 +23,8 @@ const AdminDashboard = ({ isAdmin }) => {
           </div>
           <div class="first-content small ">
             <h3 class="fitting">
-              <Link className="navbuttons" to="/products">
-                INVENTORY{" "}
+              <Link to="/admin-products">
+                <button>View and edit products</button>
               </Link>
             </h3>
             <p className="manage-p">

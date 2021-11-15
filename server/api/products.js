@@ -26,31 +26,25 @@ router.get("/:productId", async (req, res, next) => {
   }
 });
 
-// PUT api/products/:productId
-// Is this the cart route?
-// router.put("/:productId", async (req, res, next) => {
-//   try {
-//     const product = await Product.findByPk(req.params.productId, {
-//       include: [
-//         {
-//           model: OrderItem,
-//         },
-//       ],
-//     });
-//     const user = await User;
-//     // Order.create(product);
-//     res.status(201).send(await Product.setUser(req.body));
-//   } catch (error) {
-//     next(error);
-//   }
-// });
+router.delete("/:id", async (req, res, next) => {
+  try {
+    const { isAdmin } = await User.findByToken(req.headers.authorization);
+    if (isAdmin !== true) {
+      const error = Error("Unauthorized access");
+      error.status = 401;
+      throw error;
+    }
+    const product = await Product.findByPk(req.params.id);
+    await product.destroy();
+    res.send(product);
+  } catch (error) {
+    next(error);
+  }
+});
 
 // POST api/products/:productId
 router.post("/:productId", async (req, res, next) => {
   try {
-    //recieve an object with user id and order id attatched
-    //
-    // console.log(req.body);
     const product = await Product.findByPk(req.params.productId);
 
     const order = await Order.findOne({
