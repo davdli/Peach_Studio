@@ -6,6 +6,7 @@ import history from "../history";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const GET_CART_ITEMS = "GET_CART_ITEMS";
 export const INCREASE_QUANTITY = "INCREASE_QUANTITY";
+export const DECREASE_QUANTITY = "DECREASE_QUANTITY";
 export const UPDATED_CART = "UPDATED_CART";
 
 // action creators
@@ -24,6 +25,12 @@ export const _getCartItems = (cartItems) => {
 };
 
 export const _increaseQuantity = (cartItems) => {
+  return {
+    type: GET_CART_ITEMS,
+    cartItems,
+  };
+};
+export const _decreaseQuantity = (cartItems) => {
   return {
     type: GET_CART_ITEMS,
     cartItems,
@@ -79,6 +86,19 @@ export const increaseQuantity = (productId, userId) => {
     }
   };
 };
+export const decreaseQuantity = (productId, userId) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.put("/api/cart/decrease", {
+        productId,
+        userId,
+      });
+      dispatch(_decreaseQuantity(data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 
 export const fetchNewCart = (user) => {
   return async (dispatch) => {
@@ -98,6 +118,8 @@ export default function cartReducer(state = {}, action) {
     case GET_CART_ITEMS:
       return action.cartItems;
     case INCREASE_QUANTITY:
+      return action.cartItems;
+    case DECREASE_QUANTITY:
       return action.cartItems;
     default:
       return state;

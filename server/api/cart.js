@@ -60,5 +60,35 @@ router.put("/increase", async (req, res, next) => {
     next(error);
   }
 });
+//PUT api/cart/decrease
+router.put("/decrease", async (req, res, next) => {
+  try {
+    const order = await Order.findOne({
+      where: {
+        userId: req.body.userId,
+        isComplete: false,
+      },
+    });
+
+    const cartItem = await Cart.findOne({
+      where: {
+        orderId: order.id,
+        productId: req.body.productId,
+      },
+    });
+
+    cartItem.update({ quantity: cartItem.quantity - 1 });
+
+    const cartItems = await Order.findAll({
+      where: {
+        id: order.id,
+      },
+      include: [{ model: Product }],
+    });
+    res.send(cartItems);
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = router;
