@@ -11,6 +11,7 @@ import SingleProduct from "./components/SingleProduct";
 import { me } from "./store";
 import UserProfile from "./components/UserProfile";
 import CheckoutForm from "./components/CheckoutForm";
+import ConfirmationPage from "./components/Confirmation";
 
 /**
  * COMPONENT
@@ -36,6 +37,7 @@ class Routes extends Component {
             <Route exact path='/users' component={Users} />
             <Route exact path='/profile' component={UserProfile} />
             <Route exact path='/checkout' component={CheckoutForm} />
+            <Route exact path='/confirmation' component={ConfirmationPage} />
           </Switch>
         ) : (
           <Switch>
@@ -46,6 +48,7 @@ class Routes extends Component {
             <Route exact path='/products' component={AllProducts} />
             <Route exact path='/products/:id' component={SingleProduct} />
             <Route exact path='/checkout' component={CheckoutForm} />
+            <Route exact path='/checkout' component={ConfirmationPage} />
           </Switch>
         )}
       </div>

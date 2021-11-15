@@ -1,5 +1,6 @@
 const router = require("express").Router();
-const Order = require('../db/models/Order');
+const Cart = require("../db/models/Cart");
+const Order = require("../db/models/Order");
 const Product = require("../db/models/Product");
 
 // increment, decrement, remove product from cart
@@ -10,8 +11,9 @@ router.put("/", async (req, res, next) => {
       where: {
         userId: req.body.id,
         isComplete: false,
-      }
+      },
     });
+
     // console.log('This is usersOrder in cart',usersOrder);
     // const cartItems = await Order.findAll({
     //   where: {
@@ -41,6 +43,71 @@ router.post("/", async (req, res, next) => {
     let cartItems= await userOrder.removeProduct(req.body.productId);
     // console.log('This is the cartItems',cartItems);
     res.json(cartItems);
+  } catch (error) {
+    next(error);
+  }
+});
+
+//PUT api/cart/increase
+router.put("/increase", async (req, res, next) => {
+  try {
+    const order = await Order.findOne({
+      where: {
+        userId: req.body.userId,
+        isComplete: false,
+      },
+    });
+
+    const cartItem = await Cart.findOne({
+      where: {
+        orderId: order.id,
+        productId: req.body.productId,
+      },
+    });
+
+    cartItem.update({ quantity: cartItem.quantity + 1 });
+
+    // const cartItems = await Order.findAll({
+    //   where: {
+    //     id: order.id,
+    //   },
+    //   include: [{ model: Product }],
+    // });
+    let cartItems= await userOrder.getProducts();
+
+    res.send(cartItems);
+  } catch (error) {
+    next(error);
+  }
+});
+//PUT api/cart/decrease
+router.put("/decrease", async (req, res, next) => {
+  try {
+    const order = await Order.findOne({
+      where: {
+        userId: req.body.userId,
+        isComplete: false,
+      },
+    });
+
+    const cartItem = await Cart.findOne({
+      where: {
+        orderId: order.id,
+        productId: req.body.productId,
+      },
+    });
+
+    cartItem.update({ quantity: cartItem.quantity - 1 });
+
+    // const cartItems = await Order.findAll({
+    //   where: {
+    //     id: order.id,
+    //   },
+    //   include: [{ model: Product }],
+    // });
+    let cartItems= await userOrder.getProducts();
+
+    res.send(cartItems);
   } catch (error) {
     next(error);
   }
