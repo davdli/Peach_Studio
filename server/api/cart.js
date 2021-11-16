@@ -8,10 +8,11 @@ const User = require("../db/models/User");
 //PUT api/cart
 router.put("/", async (req, res, next) => {
   try {
-    // console.log('This is req.boody in cart',req.body);
+    // console.log('This is req.body in cart',req.body);
+    const {id}= req.body; // To protect against Injection of data to our server.
     const userOrder = await Order.findOne({
       where: {
-        userId: req.body.id,
+        userId: id,
         isComplete: false,
       },
     });
@@ -36,13 +37,14 @@ router.put("/", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     // console.log('This is req.body in cart',req.body);
+    const {userId, productId}= req.body;
     const userOrder = await Order.findOne({
       where: {
-        userId: req.body.userId,
+        userId: userId,
         isComplete: false,
       }
     });
-    let cartItems= await userOrder.removeProduct(req.body.productId);
+    let cartItems= await userOrder.removeProduct(productId);
     // console.log('This is the cartItems',cartItems);
     res.json(cartItems);
   } catch (error) {
