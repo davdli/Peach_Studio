@@ -1,6 +1,7 @@
 import axios from "axios";
 const TOKEN = "token";
 import history from "../history";
+import { fetchSingleProduct } from "./singleProduct";
 
 // action types
 export const ADD_TO_CART = "ADD_TO_CART";
@@ -56,7 +57,7 @@ export const _updatedCart = (cartItems) => {
 // thunks
 export const addToCart = (userObj) => async (dispatch) => {
   const token = window.localStorage.getItem(TOKEN);
-  console.log('This is the userObj inside cart THUNK:',{userObj});
+  // console.log('This is the userObj inside cart THUNK:',{userObj});
   if (token) {
     const { data } = await axios.post(
       `/api/products/${userObj.productId}`,
@@ -69,15 +70,12 @@ export const addToCart = (userObj) => async (dispatch) => {
     );
     return dispatch(_addToCart(data));
   } else {
-    // localStorage.removeItem('GuestCart');
     let guestCart = JSON.parse(localStorage.getItem('GuestCart')); // reads as object
     if (guestCart) {
       localStorage.setItem('GuestCart', JSON.stringify([...guestCart, userObj])); // local storage only supports string data types
-      // already in localstorage means we have products in the cart
     } else {
       const cartItem = [ userObj ];
       localStorage.setItem('GuestCart', JSON.stringify(cartItem));
-      console.log(JSON.parse(localStorage.getItem('GuestCart')));
     }
   }
 };
@@ -88,11 +86,45 @@ export const getCartItems = (user) => {
       // console.log('This is the user in the cart redux', user);
       // const {id}= user
       const { data } = await axios.put("/api/cart", user);
+      console.log({data});
       dispatch(_getCartItems(data));
     } catch (error) {
       console.log(error);
     }
   };
+}
+
+const fetchSingleItemById = async (id) => {
+  const { data } = await axios.get(`/api/products/${id}`); // helper function for getGuest Cart
+  return data;
+}
+
+export const getGuestCart = async (dispatch) => {
+  const cart = JSON.parse(localStorage.getItem('GuestCart'));
+  if (cart) {
+    const finalCart = [];
+    const hash = {};
+    for (let obj of cart) {
+        if (hash.hasOwnProperty(obj.productId)) {
+            hash[obj.productId] += obj.quantity;
+        } else {
+            hash[obj.productId] = obj.quantity; // { 1:6, 2:5 }
+        }
+    }
+    for (let key in hash) {
+        finalCart.push({ productId: key, quantity: hash[key] }); // {productId: 1, quantity: 6}
+    }
+    // logic to only display one instance of a product and increase its quantity in local storage
+
+    let cartItems = [];
+    for (let item of finalCart) { // finalCart => [ {productId: 1, quantity: 6 , {productId: 2, quantity: 5} ]
+      console.log(fetchSingleItemById(item.productId));
+      const singleProduct = await fetchSingleItemById(item.productId);
+      cartItems.push({ ...singleProduct, cart: item});
+    }
+    console.log({cartItems});
+    dispatch(_getCartItems(cartItems));
+  }
 };
 
 export const updateCart = (productId, userId) => {

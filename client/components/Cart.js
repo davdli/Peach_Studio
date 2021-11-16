@@ -2,22 +2,25 @@ import React from "react";
 import Footer from "./Footer";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
-import { getCartItems, updateCart, increaseQuantity, decreaseQuantity } from "../redux/cart";
+import { getCartItems, updateCart, increaseQuantity, decreaseQuantity, getGuestCart } from "../redux/cart";
 import { Link } from "react-router-dom";
 
 const Cart = (props) => {
-  const cart = useSelector((state) => state.cart);
+  let cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.auth);
-  console.log('This is the cart:', cart);
+
   const dispatch = useDispatch();
   // let [counter, changeQuantity] = useState(0);
   // console.log('This is the state.auth:', user);
   // console.log('This is counter: ', counter);
 
-
   //componentdidmount
   useEffect(() => {
-    dispatch(getCartItems(user));
+    if (user.id) {
+      dispatch(getCartItems(user));
+    } else {
+      getGuestCart(dispatch);
+    }
   }, [user]);
 
   // componentDidUpdate
