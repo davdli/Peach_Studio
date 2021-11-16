@@ -118,11 +118,11 @@ export const getGuestCart = async (dispatch) => {
 
     let cartItems = [];
     for (let item of finalCart) { // finalCart => [ {productId: 1, quantity: 6 , {productId: 2, quantity: 5} ]
-      console.log(fetchSingleItemById(item.productId));
+      // console.log(fetchSingleItemById(item.productId));
       const singleProduct = await fetchSingleItemById(item.productId);
       cartItems.push({ ...singleProduct, cart: item});
     }
-    console.log({cartItems});
+    // console.log({cartItems});
     dispatch(_getCartItems(cartItems));
   }
 };
@@ -153,6 +153,14 @@ export const increaseQuantity = (productId, userId) => {
   };
 };
 
+export const guestIncreaseQty = (cart) => {
+  return async (dispatch) => {
+    const guestCart = JSON.parse(localStorage.getItem('GuestCart'));
+    console.log('this is guestCart', guestCart)
+    dispatch(_getCartItems(cart));
+  }
+}
+
 export const decreaseQuantity = (productId, userId) => {
   return async (dispatch) => {
     try {
@@ -166,6 +174,14 @@ export const decreaseQuantity = (productId, userId) => {
     }
   };
 };
+
+export const guestDecreaseQty = (cart) => {
+  return async (dispatch) => {
+    const guestCart = JSON.parse(localStorage.getItem('GuestCart'));
+    console.log('this is guestCart', guestCart)
+    dispatch(_getCartItems(cart));
+  }
+}
 
 export const fetchNewCart = (user) => {
   return async (dispatch) => {
