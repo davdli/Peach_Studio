@@ -90,7 +90,7 @@ async function seed() {
   console.log("Seeded admin");
   const admin = await User.create({
     email: "admin@admin.com",
-    password: "Zitomer1",
+    password: "1234",
     isAdmin: true,
   });
   const nonAdmin = await User.create({

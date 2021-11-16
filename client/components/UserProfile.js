@@ -2,6 +2,7 @@ import React from "react";
 import { connect, useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import Footer from "./Footer";
+import { Link } from "react-router-dom";
 
 /**
  * COMPONENT
@@ -53,7 +54,7 @@ export const UserProfile = () => {
             src='https://cdn-icons.flaticon.com/png/512/1947/premium/1947199.png?token=exp=1636917805~hmac=ad713ffba51e1ca0e620070d9960e2aa'
 
           />{" "}
-          <p> HISTORY</p>
+          <p><Link to={`/profile/${user.id}`}>HISTORY</Link>  </p>
         </div>
 
 

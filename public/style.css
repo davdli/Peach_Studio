@@ -596,7 +596,6 @@ button:focus {
   background-repeat: no-repeat;
 }
 
-=======
 /* dummy data images/data for seed only below -- comment out before deploy */
 .test-products {
   text-align: center;
@@ -889,8 +888,8 @@ table img {
   min-height: 100px;
   font-family: "Reenie Beanie", cursive;
 }
-.userprofilebox {
-}
+/* .userprofilebox {
+} */
 
 /* CHECKOUT */
 
@@ -1098,7 +1097,7 @@ h3 .fitting {
   color: black;
 }
 
-.userinfo-div {
+/* .userinfo-div {
   width: 300px;
   padding: 200px 35px 35px 35px;
   display: flex;
@@ -1107,7 +1106,7 @@ h3 .fitting {
   align-items: center;
   text-align: center;
   margin-top: -100px;
-}
+} */
 .user-content {
   padding-left: 10px;
   padding-right: 10px;
