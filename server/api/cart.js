@@ -55,9 +55,10 @@ router.post("/", async (req, res, next) => {
 //PUT api/cart/increase
 router.put("/increase", async (req, res, next) => {
   try {
+    const {userId, productId}= req.body;
     const order = await Order.findOne({
       where: {
-        userId: req.body.userId,
+        userId: userId,
         isComplete: false,
       },
     });
@@ -65,7 +66,7 @@ router.put("/increase", async (req, res, next) => {
     const cartItem = await Cart.findOne({
       where: {
         orderId: order.id,
-        productId: req.body.productId,
+        productId: productId,
       },
     });
 
@@ -80,9 +81,10 @@ router.put("/increase", async (req, res, next) => {
 //PUT api/cart/decrease
 router.put("/decrease", async (req, res, next) => {
   try {
+    const {userId, productId}= req.body;
     const order = await Order.findOne({
       where: {
-        userId: req.body.userId,
+        userId: userId,
         isComplete: false,
       },
     });
@@ -90,7 +92,7 @@ router.put("/decrease", async (req, res, next) => {
     const cartItem = await Cart.findOne({
       where: {
         orderId: order.id,
-        productId: req.body.productId,
+        productId: productId,
       },
     });
 

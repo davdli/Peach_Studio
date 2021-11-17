@@ -6,7 +6,8 @@ module.exports = router;
 
 router.post("/login", async (req, res, next) => {
   try {
-    res.send({ token: await User.authenticate(req.body) });
+    const { email, password } = req.body; // prevents data injection
+    res.send({ token: await User.authenticate({ email, password }) });
   } catch (err) {
     next(err);
   }
