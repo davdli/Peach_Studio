@@ -10,6 +10,7 @@ import {
   decreaseQuantity,
   getGuestCart,
   guestIncreaseQty,
+  removeItem,
 } from "../redux/cart";
 
 import { Link } from "react-router-dom";
@@ -19,23 +20,17 @@ const Cart = (props) => {
   const user = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
-  // let [counter, changeQuantity] = useState(0);
-  // console.log('This is the state.auth:', user);
-  // console.log('This is counter: ', counter);
 
-  //componentdidmount
+
   useEffect(() => {
-    // if (user.id) {
-    dispatch(getCartItems(user));
-    // } else {
-    //   // getGuestCart(dispatch);
-    // }
+    if (user.id) {
+      dispatch(getCartItems(user));
+    } else {
+      getGuestCart(dispatch);
+    }
   }, [user]);
 
-  // componentDidUpdate
-  // useEffect(() => {
-  //   dispatch(fetchNewCart(user));
-  // }, [cart]);
+
 
   const handleDelete = (event) => {
     dispatch(removeItem(event.target.value, user.id));
