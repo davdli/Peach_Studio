@@ -22,9 +22,10 @@ export const updateOrder = (userId) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
+      // console.log('This is the token',token);
       const { data } = await axios.put(`/api/users/${userId}`, {
         headers: {
-          Authorization: token
+          authorization: token
         },
       });
       dispatch(_updatedOrder(data));
@@ -59,7 +60,7 @@ const initialState = {
 export default function userReducer(state = initialState, action) {
   switch (action.type) {
     case UPDATE_ORDER:
-      return { ...state, user: [...action.payload] };// This doesnt work :()
+      return { ...state, user: action.payload };// This doesnt work :( )
     case GET_ALL_USERS:
       return { ...state, users: action.payload };
     default:
