@@ -2,7 +2,17 @@ import React from "react";
 import Footer from "./Footer";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
-import { getCartItems, updateCart, increaseQuantity, decreaseQuantity, getGuestCart } from "../redux/cart";
+
+import {
+  getCartItems,
+  updateCart,
+  increaseQuantity,
+  decreaseQuantity,
+  getGuestCart,
+  guestIncreaseQty,
+  removeItem,
+} from "../redux/cart";
+
 import { Link } from "react-router-dom";
 
 const Cart = (props) => {
@@ -10,28 +20,46 @@ const Cart = (props) => {
   const user = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
-  // console.log('This is the state.auth:', user);
-  // console.log('This is counter: ', counter);
 
-  //componentdidmount
+
   useEffect(() => {
     if (user.id) {
       dispatch(getCartItems(user));
-      // Perhaps here remove the gust cart
     } else {
       getGuestCart(dispatch);
     }
   }, [user]);
 
+
   const handleDelete = (event) => {
-    dispatch(updateCart(event.target.value, user.id));
-  }
+    dispatch(removeItem(event.target.value, user.id));
+  };
 
   const handleIncrease = (event) => {
-    dispatch(increaseQuantity(event.target.value, user.id));
+    if (user.id) {
+      dispatch(increaseQuantity(event.target.value, user.id));
+    } else {
+      console.log("this is cart", cart);
+      for (let i = 0; i < cart.length; i++) {
+        if (cart[i].id === Number(event.target.value)) {
+          cart[i].cart.quantity++;
+          dispatch(guestIncreaseQty(cart));
+        }
+      }
+    }
   };
   const handleDecrease = (event) => {
-    dispatch(decreaseQuantity(event.target.value, user.id));
+    if (user.id) {
+      dispatch(decreaseQuantity(event.target.value, user.id));
+    } else {
+      console.log("this is cart", cart);
+      for (let i = 0; i < cart.length; i++) {
+        if (cart[i].id === Number(event.target.value)) {
+          cart[i].cart.quantity--;
+          dispatch(guestIncreaseQty(cart));
+        }
+      }
+    }
   };
 
   return cart.length > 0 ? (
@@ -52,7 +80,7 @@ const Cart = (props) => {
         </div>
         <div className='cart-bottom'>
           <div className='cart-bottom-info'>
-            {cart.map(product => (
+            {cart.map((product) => (
               <div className='cart-product' key={product.id}>
                 <div className='cart-product-detail'>
                   <img src={product.imageUrl} />
@@ -99,15 +127,31 @@ const Cart = (props) => {
             <p className='order-summary'>Order Summary</p>
             <div>
               <p>Subtotal</p>
-              <p>${cart.reduce((accum, product) => {
-                return accum + Number(product.price) * Number(product.cart.quantity)
-              }, 0).toFixed(2)}</p>
+              <p>
+                $
+                {cart
+                  .reduce((accum, product) => {
+                    return (
+                      accum +
+                      Number(product.price) * Number(product.cart.quantity)
+                    );
+                  }, 0)
+                  .toFixed(2)}
+              </p>
             </div>
             <div>
               <p>Estimated Tax</p>
-              <p>${(cart.reduce((accum, product) => {
-                return accum + Number(product.price) * Number(product.cart.quantity)
-              }, 0) * 0.045).toFixed(2)}</p>
+              <p>
+                $
+                {(
+                  cart.reduce((accum, product) => {
+                    return (
+                      accum +
+                      Number(product.price) * Number(product.cart.quantity)
+                    );
+                  }, 0) * 0.045
+                ).toFixed(2)}
+              </p>
             </div>
             <div>
               <p>Estimated Shipping</p>
@@ -115,10 +159,11 @@ const Cart = (props) => {
             </div>
             <div style={{ fontSize: "24px", fontWeight: "bolder" }}>
               <p>Total</p>
-              <p>${(Number(cart.reduce((accum, product) => {
-                return accum + Number(product.price)
+
+              <p>${Number(Number(cart.reduce((accum, product) => {
+                return accum + Number(product.price) * Number(product.cart.quantity)
               }, 0).toFixed(2)) + Number((cart.reduce((accum, product) => {
-                return accum + Number(product.price)
+                return accum + Number(product.price) * Number(product.cart.quantity)
               }, 0) * 0.045).toFixed(2)) + 100).toFixed(2)}</p>
             </div>
             <Link to='/checkout'>
