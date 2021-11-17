@@ -135,7 +135,17 @@ export const removeItem = (productId, userId) => {
   return async (dispatch) => {
     try {
       // console.log('This is the ProductId and the userId in removeItem call: ', productId, userId);
-      const { data } = await axios.post("/api/cart", { productId, userId });
+      const token= window.localStorage.getItem(TOKEN);
+      console.log('This is the token:',token);
+      const { data } = await axios.post("/api/cart", {
+        headers:{
+          authorization: token
+        }
+      }, {
+        productId,
+        userId,
+        
+      });
       dispatch(_updateCart(data));
     } catch (error) {
       console.log(error);

@@ -1,8 +1,7 @@
 const router = require("express").Router();
 const Cart = require("../db/models/Cart");
 const Order = require("../db/models/Order");
-const Product = require("../db/models/Product");
-const User = require("../db/models/User");
+const {requireToken}= require('./gatekeepingMiddleware');
 
 // increment, decrement, remove product from cart
 //PUT api/cart
@@ -34,7 +33,7 @@ router.put("/", async (req, res, next) => {
   }
 });
 // POST api/cart
-router.post("/", async (req, res, next) => {
+router.post("/", /* requireToken, */ async (req, res, next) => {
   try {
     // console.log('This is req.body in cart',req.body);
     const {userId, productId}= req.body;
@@ -46,6 +45,7 @@ router.post("/", async (req, res, next) => {
     });
     let cartItems= await userOrder.removeProduct(productId);
     // console.log('This is the cartItems',cartItems);
+    cartItems= await userOrder.getProducts();
     res.json(cartItems);
   } catch (error) {
     next(error);
