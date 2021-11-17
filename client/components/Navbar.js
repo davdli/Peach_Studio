@@ -5,47 +5,47 @@ import { logout } from "../store";
 
 const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
   <div>
-    <div class="navcontainer">
-      <Link class="navlink" to="/">
-        <h1 class="logo">PEACH STUDIO</h1>
+    <div class='navcontainer'>
+      <Link class='navlink' to='/'>
+        <h1 class='logo'>PEACH STUDIO</h1>
       </Link>
       {isLoggedIn ? (
-        <div class="navcontainer">
-          <div class="navbuttons">
-            <Link class="navlink" to="/products">
+        <div>
+          <div class='navbuttons'>
+            <Link class='navlink' to='/products'>
               SHOP
             </Link>
-            <Link class="navlink" to="/cart">
+            <Link class='navlink' to='/cart'>
               CART
             </Link>
-            <Link class="navlink" to="/profile">
+            <Link class='navlink' to='/profile'>
               PROFILE
             </Link>
 
             {isAdmin ? (
-              <Link class="navlink" to="/admin-dash">
+              <Link class='navlink' to='/admin-dash'>
                 ADMIN
               </Link>
             ) : null}
-            <Link class="navlink" onClick={handleClick} class="navlink" to="/">
+            <Link class='navlink' onClick={handleClick} class='navlink' to='/'>
               LOGOUT
             </Link>
           </div>
         </div>
       ) : (
-        <div class="navcontainer">
-          <div class="navbuttons">
-            <Link class="navlink" to="/products">
+        <div>
+          <div class='navbuttons'>
+            <Link class='navlink' to='/products'>
               SHOP
             </Link>
-            <Link class="navlink" to="/cart">
+            <Link class='navlink' to='/cart'>
               CART
             </Link>
-            <Link class="navlink" to="/login">
+            <Link class='navlink' to='/login'>
               LOGIN
             </Link>
-            <Link class="navlink" to="/signup">
-              JOIN
+            <Link class='navlink' to='/signup'>
+              SIGN UP
             </Link>
           </div>
         </div>

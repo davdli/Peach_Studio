@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { fetchSingleProduct } from "../redux/singleProduct";
 import { useSelector, useDispatch, connect } from "react-redux";
 import { addToCart } from "../redux/cart";
+import { Link } from "react-router-dom";
 
 const SingleProduct = (props) => {
   const { isLoggedIn } = props;
@@ -41,18 +42,18 @@ const SingleProduct = (props) => {
 
   return (
     <div>
-      <div className="single-product-view">
-        <div className="right">
+      <div className='single-product-view'>
+        <div className='right'>
           <h3>Left in stock: {product.inventory}</h3>
           <h3>Price: ${product.price}</h3>
-          <button className="btn first" onClick={addProduct} value={product.id}>
+          <button className='btn first' onClick={addProduct} value={product.id}>
             Add to Cart
           </button>
-          <button value="increase" onClick={handleQuantity}>
+          <button value='increase' onClick={handleQuantity}>
             +
           </button>
           <div>{quantity}</div>
-          <button value="decrease" onClick={handleQuantity}>
+          <button value='decrease' onClick={handleQuantity}>
             -
           </button>
         </div>
@@ -62,6 +63,9 @@ const SingleProduct = (props) => {
           <p>{product.description}</p>
         </div>
       </div>
+      <Link className='singleproductback' to='/products'>
+        BACK
+      </Link>
     </div>
   );
 };

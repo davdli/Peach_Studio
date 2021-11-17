@@ -42,7 +42,7 @@ router.post("/", async (req, res, next) => {
         isComplete: false,
       }
     });
-    let cartItems= await userOrder.removeProduct(req.body.productId);
+    let cartItems = await userOrder.removeProduct(req.body.productId);
     // console.log('This is the cartItems',cartItems);
     res.json(cartItems);
   } catch (error) {
