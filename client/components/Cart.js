@@ -9,16 +9,18 @@ import {
   decreaseQuantity,
   getGuestCart,
   guestIncreaseQty,
-  removeItem,
   guestRemoveItem
 } from "../redux/cart";
+import { removeItem } from "../redux/removedProduct";
+
 
 import { Link } from "react-router-dom";
 
 const Cart = (props) => {
   let cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.auth);
-  let [quantity,changeQty]=useState(0);
+  let removedProduct = useSelector((state) => state.removedItem);
+  // let [quantity,changeQty]=useState(0);
   const dispatch = useDispatch();
 
 
@@ -33,14 +35,15 @@ const Cart = (props) => {
   useEffect(() => {
     if (user.id) {
       dispatch(getCartItems(user));
+      console.log('Is this passing?')
     } 
-  }, [quantity]);
+  }, [removedProduct]);
 
 
   const handleDelete = (event) => {
     if (user.id) {
       dispatch(removeItem(event.target.value, user.id));
-      changeQty((prevQty)=> prevQty+1 );
+      // changeQty((prevQty)=> prevQty+1 );
     } else {
       console.log('this is cart', cart)
       for (let i = 0; i < cart.length; i++) {
