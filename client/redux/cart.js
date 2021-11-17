@@ -143,6 +143,12 @@ export const removeItem = (productId, userId) => {
   };
 };
 
+export const guestRemoveItem = (cart) => {
+  return async (dispatch) => {
+    dispatch(_getCartItems(cart))
+  }
+}
+
 export const increaseQuantity = (productId, userId) => {
   return async (dispatch) => {
     try {
