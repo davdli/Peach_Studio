@@ -15,46 +15,47 @@ export const Landing = () => {
         <h1>Peach Studio</h1>
         <p>make your home sweet</p>
       </header>
-      <section id='section-a'>
-        <p></p>
-      </section>
+
       <section id='section-b'>
         <div className='box-1'>
           {" "}
-          <img className='categimg ch' src='/chair3.jpg' /> <p> CHAIR</p>
+          <img className='categimg ch' src='/chair3.jpg' />{" "}
+          <p class='t'> CHAIR</p>
         </div>
         <div className='box-1'>
-          <img className='categimg tb' src='/table1.jpg' /> <p> TABLE</p>
+          <img className='categimg tb' src='/table1.jpg' />{" "}
+          <p class='t'> TABLE</p>
         </div>
         <div className='box-1'>
-          <img className='categimg co' src='/sofa1.jpg' /> <p>SOFA</p>
+          <img className='categimg co' src='/sofa1.jpg' /> <p class='t'>SOFA</p>
         </div>
         <div className='box-1'>
-          <img className='categimg dr' src='/dresser1.jpg' /> <p>DRESSER</p>
+          <img className='categimg dr' src='/dresser1.jpg' />{" "}
+          <p class='t'>DRESSER</p>
         </div>
       </section>
 
-      <Controller>
-        <Scene triggerHook='onLeave' duration={300} pin>
+      <Controller className='sticky'>
+        <Scene triggerHook='onLeave' duration={500} pin>
           {(progress) => (
-            <div className='sticky sticky-one'>
+            <div>
               <Timeline
                 totalProgress={progress}
                 paused
+             
                 target={
                   <section id='section-a'>
-                    <p>Well-made furniture for your everyday life </p>
+                    <p> Well-made furniture for your everyday life </p>
                   </section>
                 }
               >
-                <Tween from={{ opacity: 0 }} to={{ opacity: 4 }} />
-                <Tween to={{ x: "400px" }} />
-                <Tween from={{ scale: 6 }} to={{ scale: 1 }} />
+                <Tween from={{ opacity: 1 }} to={{ opacity: 4 }} />
+                <Tween to={{ x: 300 }} />
+                <Tween from={{ scale: 3 }} to={{ scale: 1 }} />
               </Timeline>
             </div>
           )}
         </Scene>
-
         <section id='section-d' className='trigger'>
           <video className='landingvideo' autoPlay muted loop>
             <source src='/landingp.mp4' type='video/mp4' />
@@ -70,13 +71,13 @@ export const Landing = () => {
           <div className='box-2 text'>
             <p>
               Let us help you curate beautiful items for you to enjoy in your
-              home{" "}
+              home <br />
             </p>
           </div>
-          <a href='#' className='button'>
-            ^
-          </a>
         </section>
+        <a href='#' className='button'>
+          UP
+        </a>{" "}
 
         <Footer></Footer>
       </Controller>

@@ -9,6 +9,8 @@ body {
   font-size: 17px;
   color: black;
   line-height: 1.6;
+  width: 100vw;
+  height: 100vh;
 }
 /* <-------- nav bar -------->*/
 .navbar {
@@ -87,16 +89,24 @@ form div {
 }
 
 /* <-------- landing section -------->*/
-
+.sticky {
+  min-width: 0px;
+  overflow: hidden;
+}
 #section-a {
   padding: 20px;
   background: white;
   color: black;
   text-align: left;
+  margin-top: 200px;
+  overflow: hidden;
 }
 #section-a p {
   font-size: 50px;
   transform: translateX(-100px);
+  width: 100vw;
+  overflow: hidden;
+  color: rgb(74, 74, 74);
 }
 
 #section-b {
@@ -109,6 +119,7 @@ form div {
   position: relative;
   height: 300px;
   overflow: hidden;
+  margin-top: 200px;
 }
 #section-b .box-1 {
   position: relative;
@@ -130,6 +141,9 @@ form div {
   max-width: 100%;
   height: 200px;
   object-fit: fill;
+}
+.t {
+  margin-top: 100px;
 }
 
 .categimg.ch:hover {
@@ -179,7 +193,7 @@ form div {
   padding: 20px;
 }
 
-#section-c .box-1 {
+# .box-1 {
   background: transparent;
   color: #fff;
   width: 30%;
@@ -193,12 +207,14 @@ form div {
   top: 50px;
   color: black;
   font-size: 16px;
+  margin-top: 100px;
 }
 
 .categimgstatic {
   display: flex;
-  width: 70%;
+  width: 80%;
   z-index: 1;
+  height: 100%;
 }
 #section-d {
   position: relative;
@@ -234,6 +250,7 @@ form div {
 
   color: rgb(201, 78, 78);
   padding: 4rem 0;
+  border-top: 1px solid rgb(170, 172, 174);
 }
 
 .section-footer .containerfooter {
@@ -1196,174 +1213,4 @@ h3 .fitting {
 .singleproductback {
   margin-top: 400px;
   margin-left: 100px;
-}
-
-/*EDIT USER PROFILE*/
-input::-webkit-input-placeholder,
-textarea::-webkit-input-placeholder {
-  color: #aca49c;
-  font-size: 0.875em;
-}
-
-input:focus::-webkit-input-placeholder,
-textarea:focus::-webkit-input-placeholder {
-  color: #bbb5af;
-}
-
-input::-moz-placeholder,
-textarea::-moz-placeholder {
-  color: #aca49c;
-  font-size: 0.875em;
-}
-
-input:focus::-moz-placeholder,
-textarea:focus::-moz-placeholder {
-  color: #bbb5af;
-}
-
-input::placeholder,
-textarea::placeholder {
-  color: #aca49c;
-  font-size: 0.875em;
-}
-
-input:focus::placeholder,
-textarea::focus:placeholder {
-  color: #bbb5af;
-}
-
-input::-ms-placeholder,
-textarea::-ms-placeholder {
-  color: #aca49c;
-  font-size: 0.875em;
-}
-
-input:focus::-ms-placeholder,
-textarea:focus::-ms-placeholder {
-  color: #bbb5af;
-}
-
-/* on hover placeholder */
-
-input:hover::-webkit-input-placeholder,
-textarea:hover::-webkit-input-placeholder {
-  color: #e2dedb;
-  font-size: 0.875em;
-}
-
-input:hover:focus::-webkit-input-placeholder,
-textarea:hover:focus::-webkit-input-placeholder {
-  color: #cbc6c1;
-}
-
-input:hover::-moz-placeholder,
-textarea:hover::-moz-placeholder {
-  color: #e2dedb;
-  font-size: 0.875em;
-}
-
-input:hover:focus::-moz-placeholder,
-textarea:hover:focus::-moz-placeholder {
-  color: #cbc6c1;
-}
-
-input:hover::placeholder,
-textarea:hover::placeholder {
-  color: #e2dedb;
-  font-size: 0.875em;
-}
-
-input:hover:focus::placeholder,
-textarea:hover:focus::placeholder {
-  color: #cbc6c1;
-}
-
-input:hover::placeholder,
-textarea:hover::placeholder {
-  color: #e2dedb;
-  font-size: 0.875em;
-}
-
-input:hover:focus::-ms-placeholder,
-textarea:hover::focus:-ms-placeholder {
-  color: #cbc6c1;
-}
-
-#form {
-  position: relative;
-  width: 500px;
-  margin: 50px auto 100px auto;
-}
-
-input {
-  font-family: "Lato", sans-serif;
-  font-size: 0.875em;
-
-  height: 50px;
-  padding: 0px 15px 0px 15px;
-
-  background: transparent;
-  outline: none;
-  color: #726659;
-
-  border: solid 1px #b3aca7;
-  border-bottom: none;
-
-  transition: all 0.3s ease-in-out;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -ms-transition: all 0.3s ease-in-out;
-}
-
-input:hover {
-  background: #b3aca7;
-  color: #e2dedb;
-}
-
-textarea {
-  width: 470px;
-  max-width: 470px;
-  height: 110px;
-  max-height: 110px;
-  padding: 15px;
-
-  background: transparent;
-  outline: none;
-
-  color: #726659;
-  font-family: "Lato", sans-serif;
-  font-size: 0.875em;
-
-  border: solid 1px #b3aca7;
-
-  transition: all 0.3s ease-in-out;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -ms-transition: all 0.3s ease-in-out;
-}
-
-textarea:hover {
-  background: #b3aca7;
-  color: #e2dedb;
-}
-
-#submit {
-  width: 502px;
-
-  padding: 0;
-  margin: -5px 0px 0px 0px;
-
-  font-family: "Lato", sans-serif;
-  font-size: 0.875em;
-  color: #b3aca7;
-
-  outline: none;
-  cursor: pointer;
-
-  border: solid 1px #b3aca7;
-  border-top: none;
-}
-
-#submit:hover {
-  color: #e2dedb;
 }
