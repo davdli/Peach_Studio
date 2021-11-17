@@ -124,17 +124,18 @@ export const getGuestCart = async (dispatch) => {
     for (let item of finalCart) { // finalCart => [ {productId: 1, quantity: 6 , {productId: 2, quantity: 5} ]
 
 
-    for (let item of finalCart) {
-      // finalCart => [ {productId: 1, quantity: 6 , {productId: 2, quantity: 5} ]
+      for (let item of finalCart) {
+        // finalCart => [ {productId: 1, quantity: 6 , {productId: 2, quantity: 5} ]
 
-      const singleProduct = await fetchSingleItemById(item.productId);
-      cartItems.push({ ...singleProduct, cart: item });
+        const singleProduct = await fetchSingleItemById(item.productId);
+        cartItems.push({ ...singleProduct, cart: item });
+      }
+
+
+      dispatch(_getCartItems(cartItems));
     }
-
-
-    dispatch(_getCartItems(cartItems));
   }
-};
+}
 
 export const updateCart = (productId, userId) => {
   return async (dispatch) => {
