@@ -1,10 +1,12 @@
 const router = require("express").Router();
 const {
-  models: { User },
+  models: { User, Order },
 } = require("../db");
+const { requireToken } = require('./gatekeepingMiddleware');
 module.exports = router;
 
-router.get("/", async (req, res, next) => {
+// /api/users
+router.get("/", requireToken, async (req, res, next) => {
   try {
     const { isAdmin } = await User.findByToken(req.headers.authorization);
     if (isAdmin !== true) {
@@ -19,6 +21,24 @@ router.get("/", async (req, res, next) => {
       attributes: ["id", "email"],
     });
     res.json(users);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// api/users/:id
+router.put("/:id", /* requireToken, */ async (req, res, next) => {// Is not authorizinng the token :/
+  try {
+    const userOrder = await Order.findOne({
+      where: {
+        userId: req.params.id,
+        isComplete: false,
+      }
+    });
+    await userOrder.update({ isComplete: true });
+    const user = await User.findByPk(req.params.id);
+    await user.createOrder();
+    res.json(userOrder);
   } catch (err) {
     next(err);
   }

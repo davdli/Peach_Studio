@@ -31,16 +31,13 @@ const Cart = (props) => {
   }, [user]);
 
 
-
   const handleDelete = (event) => {
     dispatch(removeItem(event.target.value, user.id));
-    // changeQuantity(prevCount => prevCount + 1);
   };
 
   const handleIncrease = (event) => {
     if (user.id) {
       dispatch(increaseQuantity(event.target.value, user.id));
-      // changeQuantity((prevCount) => prevCount + 1);
     } else {
       console.log("this is cart", cart);
       for (let i = 0; i < cart.length; i++) {
@@ -54,7 +51,6 @@ const Cart = (props) => {
   const handleDecrease = (event) => {
     if (user.id) {
       dispatch(decreaseQuantity(event.target.value, user.id));
-      // changeQuantity((prevCount) => prevCount - 1);
     } else {
       console.log("this is cart", cart);
       for (let i = 0; i < cart.length; i++) {

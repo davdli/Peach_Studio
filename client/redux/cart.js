@@ -131,10 +131,10 @@ export const getGuestCart = async (dispatch) => {
   }
 };
 
-export const updateCart = (productId, userId) => {
+export const removeItem = (productId, userId) => {
   return async (dispatch) => {
     try {
-      // console.log('This is the ProductId and the userId in updateCart call: ', productId, userId);
+      // console.log('This is the ProductId and the userId in removeItem call: ', productId, userId);
       const { data } = await axios.post("/api/cart", { productId, userId });
       dispatch(_updateCart(data));
     } catch (error) {

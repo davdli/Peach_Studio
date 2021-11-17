@@ -89,8 +89,10 @@ async function seed() {
   //create sample admin
   console.log("Seeded admin");
   const admin = await User.create({
+    firstName: faker.name.firstName(),
+    lastName: faker.name.lastName(),
     email: "admin@admin.com",
-    password: "Zitomer1",
+    password: "1234",
     isAdmin: true,
   });
   const nonAdmin = await User.create({
