@@ -5,7 +5,7 @@ import history from "../history";
 // action types
 export const ADD_TO_CART = "ADD_TO_CART";
 export const GET_CART_ITEMS = "GET_CART_ITEMS";
-// const UPDATE_CART = "UPDATE_CART";
+const UPDATE_CART = "UPDATE_CART";
 export const INCREASE_QUANTITY = "INCREASE_QUANTITY";
 export const DECREASE_QUANTITY = "DECREASE_QUANTITY";
 export const UPDATED_CART = "UPDATED_CART";
@@ -25,12 +25,12 @@ export const _getCartItems = (cartItems) => {
   };
 };
 
-// export const _updateCart = (cartItem) => {
-//   return {
-//     type: UPDATE_CART,
-//     removeProduct: cartItem,
-//   };
-// };
+export const _updateCart = (cartItem) => {
+  return {
+    type: UPDATE_CART,
+    removeProduct: cartItem,
+  };
+};
 
 export const _increaseQuantity = (cartItems) => {
   return {
@@ -130,17 +130,17 @@ export const getGuestCart = async (dispatch) => {
   }
 };
 
-// export const removeItem = (productId, userId) => {
-//   return async (dispatch) => {
-//     try {
-//       // console.log('This is the ProductId and the userId in removeItem call: ', productId, userId);
-//       const { data } = await axios.post("/api/cart", { productId, userId });
-//       dispatch(_updateCart(data));
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-// };
+export const removeItem = (productId, userId) => {
+  return async (dispatch) => {
+    try {
+      // console.log('This is the ProductId and the userId in removeItem call: ', productId, userId);
+      const { data } = await axios.post("/api/cart", { productId, userId });
+      dispatch(_updateCart(data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 
 export const guestRemoveItem = (cart) => {
   return async (dispatch) => {
@@ -208,8 +208,8 @@ export default function cartReducer(state = {}, action) {
       return { ...action.cartItem };
     case GET_CART_ITEMS:
       return [...action.cartItems];
-    // case UPDATE_CART:
-    //   return action.removeProduct;
+    case UPDATE_CART:
+      return action.removeProduct;
     case INCREASE_QUANTITY:
       return action.cartItems;
     case DECREASE_QUANTITY:

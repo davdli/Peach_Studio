@@ -33,7 +33,7 @@ router.put("/", async (req, res, next) => {
   }
 });
 // POST api/cart
-router.post("/", requireToken, async (req, res, next) => {
+router.post("/",/*  requireToken, */ async (req, res, next) => {
   try {
     // console.log('This is req.body in cart',req.body);
     const {userId, productId}= req.body;
@@ -45,6 +45,7 @@ router.post("/", requireToken, async (req, res, next) => {
     });
     let cartItems= await userOrder.removeProduct(productId);
     console.log('This is the cartItems',cartItems);
+    cartItems=await userOrder.getProducts();
     res.json(cartItems);
   } catch (error) {
     next(error);
