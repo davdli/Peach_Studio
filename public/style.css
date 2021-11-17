@@ -902,6 +902,13 @@ table img {
   text-align: center;
 }
 
+.checkout-wrapper button {
+  padding: 10px;
+  cursor: pointer;
+  background: #f4d0a56b;
+  border-style: none;
+}
+
 .checkout-top {
   display: flex;
   align-items: center;
@@ -1366,4 +1373,33 @@ textarea:hover {
 
 #submit:hover {
   color: #e2dedb;
+}
+
+/* ABOUT US */
+
+.about-container {
+  text-align: center;
+}
+
+.member-section {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.member-info {
+  padding: 30px;
+  margin: 30px;
+  border: 0.5px solid white;
+  border-radius: 10px;
+}
+
+.member-info img {
+  height: 200px;
+  width: 200px;
+}
+
+.linkedin {
+  height: 50px;
+  width: 50px;
 }
