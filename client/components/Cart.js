@@ -151,10 +151,10 @@ const Cart = (props) => {
             </div>
             <div style={{ fontSize: "24px", fontWeight: "bolder" }}>
               <p>Total</p>
-              <p>${(Number(cart.reduce((accum, product) => {
-                return accum + Number(product.price)
+              <p>${Number(Number(cart.reduce((accum, product) => {
+                return accum + Number(product.price) * Number(product.cart.quantity)
               }, 0).toFixed(2)) + Number((cart.reduce((accum, product) => {
-                return accum + Number(product.price)
+                return accum + Number(product.price) * Number(product.cart.quantity)
               }, 0) * 0.045).toFixed(2)) + 100).toFixed(2)}</p>
             </div>
             <Link to='/checkout'>
