@@ -9,6 +9,8 @@ body {
   font-size: 17px;
   color: black;
   line-height: 1.6;
+  width: 100vw;
+  height: 100vh;
 }
 /* <-------- nav bar -------->*/
 .navbar {
@@ -87,16 +89,24 @@ form div {
 }
 
 /* <-------- landing section -------->*/
-
+.sticky {
+  min-width: 0px;
+  overflow: hidden;
+}
 #section-a {
   padding: 20px;
   background: white;
   color: black;
   text-align: left;
+  margin-top: 200px;
+  max-width: 100vw;
 }
 #section-a p {
   font-size: 50px;
   transform: translateX(-100px);
+  width: 100vw;
+  overflow: hidden;
+  color: rgb(74, 74, 74);
 }
 
 #section-b {
@@ -109,6 +119,7 @@ form div {
   position: relative;
   height: 300px;
   overflow: hidden;
+  margin-top: 200px;
 }
 #section-b .box-1 {
   position: relative;
@@ -131,6 +142,9 @@ form div {
   height: 200px;
   object-fit: fill;
 }
+.t {
+  margin-top: 100px;
+}
 
 .categimg.ch:hover {
   opacity: 90%;
@@ -139,7 +153,7 @@ form div {
   left: -15px;
   height: auto;
   z-index: 999;
-  content: url("https://images.pexels.com/photos/6045056/pexels-photo-6045056.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+  content: url("https://i.pinimg.com/564x/cd/0a/f6/cd0af6b0418b8f049c18befe1511a889.jpg");
 }
 .categimg.tb:hover {
   opacity: 90%;
@@ -179,7 +193,7 @@ form div {
   padding: 20px;
 }
 
-#section-c .box-1 {
+# .box-1 {
   background: transparent;
   color: #fff;
   width: 30%;
@@ -193,12 +207,14 @@ form div {
   top: 50px;
   color: black;
   font-size: 16px;
+  margin-top: 100px;
 }
 
 .categimgstatic {
   display: flex;
-  width: 70%;
+  width: 80%;
   z-index: 1;
+  height: 100%;
 }
 #section-d {
   position: relative;
@@ -234,6 +250,7 @@ form div {
 
   color: rgb(201, 78, 78);
   padding: 4rem 0;
+  border-top: 1px solid rgb(170, 172, 174);
 }
 
 .section-footer .containerfooter {
@@ -876,7 +893,7 @@ table img {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin-top: 0;
+  margin-top: 200px;
 }
 .userinfofields {
   width: 100%;
@@ -1397,9 +1414,4 @@ textarea:hover {
 .member-info img {
   height: 200px;
   width: 200px;
-}
-
-.linkedin {
-  height: 50px;
-  width: 50px;
 }
