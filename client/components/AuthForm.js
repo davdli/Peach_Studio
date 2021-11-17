@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
  */
 const AuthForm = (props) => {
   const { name, displayName, handleSubmit, error } = props;
-  console.log(displayName);
+
   return (
     <div>
       {displayName === "SIGN UP" ? (
@@ -98,7 +98,7 @@ const AuthForm = (props) => {
           </section>
         </div>
       )}
-      <Footer></Footer>
+      <Footer />
     </div>
   );
 };
@@ -127,7 +127,7 @@ const mapDispatch = (dispatch) => {
   return {
     handleSubmit(evt) {
       evt.preventDefault();
-      console.log('This is evt.target.name:',evt.target.name);
+      console.log("This is evt.target.name:", evt.target.name);
       if (evt.target.name === "signup") {
         const formName = evt.target.name;
         const first = evt.target.first.value;
