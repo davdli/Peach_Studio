@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const UPDATE_ORDER = "UPDATE_ORDER";
 export const GET_ALL_USERS = "GET_ALL_USERS";
-const TOKEN= 'token';
+const TOKEN = 'token';
 //* ------------------ Actions creators --------------------
 //* Set the current user
 export const _updatedOrder = (userOrder) => ({
@@ -21,9 +21,11 @@ export const setUsers = (users) => ({
 export const updateOrder = (userId) => {
   return async (dispatch) => {
     try {
-      const token= window.localStorage.getItem(TOKEN);
+      const token = window.localStorage.getItem(TOKEN);
       const { data } = await axios.put(`/api/users/${userId}`, {
-        headers: { authorization: token },
+        headers: {
+          Authorization: token
+        },
       });
       dispatch(_updatedOrder(data));
     } catch (error) {
@@ -57,7 +59,7 @@ const initialState = {
 export default function userReducer(state = initialState, action) {
   switch (action.type) {
     case UPDATE_ORDER:
-      return { ...state, user: [...action.payload] };
+      return { ...state, user: [...action.payload] };// This doesnt work :()
     case GET_ALL_USERS:
       return { ...state, users: action.payload };
     default:
