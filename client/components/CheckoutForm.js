@@ -4,6 +4,7 @@ import Footer from './Footer'
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getCartItems } from "../redux/cart";
+import { updateOrder } from '../store/users';
 
 const CheckoutForm = (props) => {
   const cart = useSelector((state) => state.cart);
@@ -17,7 +18,7 @@ const CheckoutForm = (props) => {
   }, [])
 
   const pay = (event) => {
-    dispatch(thunkpay(user.id))
+    dispatch(updateOrder(user.id))
   }
 
   return cart.length > 0 ? (
