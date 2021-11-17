@@ -42,7 +42,6 @@ export const Landing = () => {
               <Timeline
                 totalProgress={progress}
                 paused
-             
                 target={
                   <section id='section-a'>
                     <p> Well-made furniture for your everyday life </p>
@@ -78,7 +77,6 @@ export const Landing = () => {
         <a href='#' className='button'>
           UP
         </a>{" "}
-
         <Footer></Footer>
       </Controller>
     </div>
