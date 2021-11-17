@@ -11,6 +11,7 @@ import {
   getGuestCart,
   guestIncreaseQty,
   removeItem,
+  guestRemoveItem
 } from "../redux/cart";
 
 import { Link } from "react-router-dom";
@@ -32,7 +33,17 @@ const Cart = (props) => {
 
 
   const handleDelete = (event) => {
-    dispatch(removeItem(event.target.value, user.id));
+    if (user.id) {
+      dispatch(removeItem(event.target.value, user.id));
+    } else {
+      console.log('this is cart', cart)
+      for (let i = 0; i < cart.length; i++) {
+        if (cart[i].id === Number(event.target.value)) {
+          cart.splice(i, 1);
+          dispatch(guestRemoveItem(cart))
+        }
+      }
+    }
   };
 
   const handleIncrease = (event) => {

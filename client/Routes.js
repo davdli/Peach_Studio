@@ -17,6 +17,7 @@ import AdminProducts from "./components/AdminProducts";
 import AdminEditProducts from "./components/AdminEditProducts";
 import AdminAdd from "./components/AdminAdd";
 import EditUserProfile from "./components/EditUserProfile";
+import About from "./components/About";
 /**
  * COMPONENT
  */
@@ -47,6 +48,7 @@ class Routes extends Component {
             <Route exact path='/profile/edit' component={EditUserProfile} />
             <Route exact path='/checkout' component={CheckoutForm} />
             <Route exact path='/confirmation' component={Confirmation} />
+            <Route exact path='/about' component={About} />
             <Redirect to='/' />
           </Switch>
         ) : (
@@ -59,6 +61,7 @@ class Routes extends Component {
             <Route exact path='/cart' component={Cart} />
             <Route exact path='/checkout' component={CheckoutForm} />
             <Route exact path='/confirmation' component={Confirmation} />
+            <Route exact path='/about' component={About} />
           </Switch>
         )}
       </div>
