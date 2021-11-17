@@ -902,6 +902,13 @@ table img {
   text-align: center;
 }
 
+.checkout-wrapper button {
+  padding: 10px;
+  cursor: pointer;
+  background: #f4d0a56b;
+  border-style: none;
+}
+
 .checkout-top {
   display: flex;
   align-items: center;
@@ -1390,4 +1397,9 @@ textarea:hover {
 .member-info img {
   height: 200px;
   width: 200px;
+}
+
+.linkedin {
+  height: 50px;
+  width: 50px;
 }

@@ -145,6 +145,7 @@ export const removeItem = (productId, userId) => {
 
 export const guestRemoveItem = (cart) => {
   return async (dispatch) => {
+    localStorage.setItem("GuestCart", JSON.stringify([...cart]));
     dispatch(_getCartItems(cart))
   }
 }
