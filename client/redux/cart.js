@@ -155,8 +155,9 @@ export const increaseQuantity = (productId, userId) => {
 
 export const guestIncreaseQty = (cart) => {
   return async (dispatch) => {
-    const guestCart = JSON.parse(localStorage.getItem('GuestCart'));
-    console.log('this is guestCart', guestCart)
+    // const guestCart = JSON.parse(localStorage.getItem('GuestCart'));
+    // console.log('this is guestCart', guestCart)
+    localStorage.setItem('GuestCart', JSON.stringify([...cart]))
     dispatch(_getCartItems(cart));
   }
 }
@@ -177,8 +178,9 @@ export const decreaseQuantity = (productId, userId) => {
 
 export const guestDecreaseQty = (cart) => {
   return async (dispatch) => {
-    const guestCart = JSON.parse(localStorage.getItem('GuestCart'));
-    console.log('this is guestCart', guestCart)
+    // localStorage.setItem('GuestCart', JSON.stringify([...guestCart, userObj]));
+    localStorage.setItem('GuestCart', JSON.stringify([...cart]))
+    // console.log('this is cart', cart)
     dispatch(_getCartItems(cart));
   }
 }
