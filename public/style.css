@@ -1367,3 +1367,27 @@ textarea:hover {
 #submit:hover {
   color: #e2dedb;
 }
+
+/* ABOUT US */
+
+.about-container {
+  text-align: center;
+}
+
+.member-section {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.member-info {
+  padding: 30px;
+  margin: 30px;
+  border: 0.5px solid lightgray;
+  border-radius: 10px;
+}
+
+.member-info img {
+  height: 350px;
+  width: 200px;
+}
