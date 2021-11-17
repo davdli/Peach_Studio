@@ -1,7 +1,6 @@
 import axios from "axios";
 const TOKEN = "token";
 import history from "../history";
-import { fetchSingleProduct } from "./singleProduct";
 
 // action types
 export const ADD_TO_CART = "ADD_TO_CART";

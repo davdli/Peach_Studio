@@ -8,8 +8,8 @@ const AdminDashboard = ({ isAdmin }) => {
       <div className="manage">
         <div className="admin-home">
           <h2 className="admin-side"> Admin Dashboard</h2>
-          <div class="first-content small ">
-            <h3 class="fitting">
+          <div className="first-content small ">
+            <h3 className="fitting">
               {" "}
               <Link className="navbuttons" to="/admin-users">
                 CUSTOMERS
@@ -21,8 +21,8 @@ const AdminDashboard = ({ isAdmin }) => {
               View and manage current registered customers here.
             </p>
           </div>
-          <div class="first-content small ">
-            <h3 class="fitting">
+          <div className="first-content small ">
+            <h3 className="fitting">
               <Link to="/admin-products">
                 <button>View and edit products</button>
               </Link>
@@ -45,13 +45,3 @@ const mapState = (state) => {
 
 export default connect(mapState)(AdminDashboard);
 
-// } else {
-//   return (
-//     <div>
-//       <h3>Access Denied. Must be administrator.</h3>
-//       <Link to="/">
-//         <button>Back to Shopping!</button>
-//       </Link>
-//     </div>
-//   );
-// }
