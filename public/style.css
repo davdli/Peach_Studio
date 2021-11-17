@@ -1383,11 +1383,11 @@ textarea:hover {
 .member-info {
   padding: 30px;
   margin: 30px;
-  border: 0.5px solid lightgray;
+  border: 0.5px solid white;
   border-radius: 10px;
 }
 
 .member-info img {
-  height: 350px;
+  height: 200px;
   width: 200px;
 }
