@@ -120,13 +120,18 @@ export const getGuestCart = async (dispatch) => {
     // logic to only display one instance of a product and increase its quantity in local storage
 
     let cartItems = [];
+
+    for (let item of finalCart) { // finalCart => [ {productId: 1, quantity: 6 , {productId: 2, quantity: 5} ]
+
+
     for (let item of finalCart) {
       // finalCart => [ {productId: 1, quantity: 6 , {productId: 2, quantity: 5} ]
-      console.log(fetchSingleItemById(item.productId));
+
       const singleProduct = await fetchSingleItemById(item.productId);
       cartItems.push({ ...singleProduct, cart: item });
     }
-    console.log({ cartItems });
+
+
     dispatch(_getCartItems(cartItems));
   }
 };
@@ -157,6 +162,14 @@ export const increaseQuantity = (productId, userId) => {
   };
 };
 
+export const guestIncreaseQty = (cart) => {
+  return async (dispatch) => {
+    // console.log({cart})
+    localStorage.setItem('GuestCart', JSON.stringify([...cart]))
+    dispatch(_getCartItems(cart));
+  }
+}
+
 export const decreaseQuantity = (productId, userId) => {
   return async (dispatch) => {
     try {
@@ -170,6 +183,13 @@ export const decreaseQuantity = (productId, userId) => {
     }
   };
 };
+
+export const guestDecreaseQty = (cart) => {
+  return async (dispatch) => {
+    localStorage.setItem('GuestCart', JSON.stringify([...cart]))
+    dispatch(_getCartItems(cart));
+  }
+}
 
 export const fetchNewCart = (user) => {
   return async (dispatch) => {
