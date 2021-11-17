@@ -15,6 +15,8 @@ export const UserProfile = () => {
           <div className='box-2 text'>
             <div className='userinfo-div'>
               <div className='userimg'></div>
+
+  
               <div className='title'>welcome, {user.firstName}</div>
               <form className='userinfofields'>
                 <div>
@@ -34,7 +36,6 @@ export const UserProfile = () => {
           </div>
         </section>
       </div>
-
       <section id='history-edit'>
         <div className='box-1'>
           {" "}

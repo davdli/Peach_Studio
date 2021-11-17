@@ -92,7 +92,11 @@ form div {
   padding: 20px;
   background: white;
   color: black;
-  text-align: center;
+  text-align: left;
+}
+#section-a p {
+  font-size: 50px;
+  transform: translateX(-100px);
 }
 
 #section-b {
@@ -188,6 +192,7 @@ form div {
   position: relative;
   top: 50px;
   color: black;
+  font-size: 16px;
 }
 
 .categimgstatic {
@@ -1304,7 +1309,7 @@ textarea:hover::focus:-ms-placeholder {
 input {
   font-family: "Lato", sans-serif;
   font-size: 0.875em;
-  width: 470px;
+
   height: 50px;
   padding: 0px 15px 0px 15px;
 
