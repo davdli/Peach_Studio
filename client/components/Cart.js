@@ -10,7 +10,6 @@ const Cart = (props) => {
   const user = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
-  // let [counter, changeQuantity] = useState(0);
   // console.log('This is the state.auth:', user);
   // console.log('This is counter: ', counter);
 
@@ -18,38 +17,23 @@ const Cart = (props) => {
   useEffect(() => {
     if (user.id) {
       dispatch(getCartItems(user));
+      // Perhaps here remove the gust cart
     } else {
       getGuestCart(dispatch);
     }
   }, [user]);
 
-  // componentDidUpdate
-  // useEffect(() => {
-  //   dispatch(getCartItems(user));
-  // }, []);
-
   const handleDelete = (event) => {
     dispatch(updateCart(event.target.value, user.id));
-    // changeQuantity(prevCount => prevCount + 1);
   }
 
   const handleIncrease = (event) => {
     dispatch(increaseQuantity(event.target.value, user.id));
-    // changeQuantity((prevCount) => prevCount + 1);
   };
   const handleDecrease = (event) => {
     dispatch(decreaseQuantity(event.target.value, user.id));
-    // changeQuantity((prevCount) => prevCount - 1);
   };
 
-  // const addProduct = (event) => {
-  //   const userObj = {
-  //     productId: event.target.value,
-  //     userId: user.id,
-  //     quantity: quantity,
-  //   };
-  //   dispatch(addToCart(userObj));
-  // };
   return cart.length > 0 ? (
     <div>
       <div className='cart-wrapper'>
