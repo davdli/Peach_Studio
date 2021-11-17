@@ -18,7 +18,8 @@ const CheckoutForm = (props) => {
   }, [])
 
   const pay = (event) => {
-    dispatch(updateOrder(user.id))
+    dispatch(updateOrder(user.id));
+    window.localStorage.removeItem('GuestCart');
   }
 
   return cart.length > 0 ? (
