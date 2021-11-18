@@ -8,6 +8,7 @@ import singleProductReducer from "../redux/singleProduct";
 import cartReducer from "../redux/cart";
 import usersReducer from "./users";
 import customers from "./customers";
+import removedProduct from "../redux/removedProduct";
 
 const reducer = combineReducers({
   auth,

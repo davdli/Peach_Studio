@@ -5,21 +5,20 @@ import { useState, useEffect } from "react";
 
 import {
   getCartItems,
-  updateCart,
   increaseQuantity,
   decreaseQuantity,
+  removeItem,
   getGuestCart,
   guestIncreaseQty,
-  removeItem,
   guestRemoveItem
 } from "../redux/cart";
+
 
 import { Link } from "react-router-dom";
 
 const Cart = (props) => {
   let cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.auth);
-
   const dispatch = useDispatch();
 
 
@@ -30,6 +29,12 @@ const Cart = (props) => {
       getGuestCart(dispatch);
     }
   }, [user]);
+
+  // useEffect(() => {
+  //   if (user.id) {
+  //     dispatch(getCartItems(user));
+  //   } 
+  // }, [cart]);
 
 
   const handleDelete = (event) => {

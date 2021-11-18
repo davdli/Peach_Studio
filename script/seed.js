@@ -70,7 +70,7 @@ function generateCarts(qtyOfActiveOrders) {
 const qtyOfUsers = 10;
 const totalCategories = ["chair", "dresser", "sofa", "table"];
 const qtyOfCategories = totalCategories.length;
-const qtyOfProducts = 4;
+const qtyOfProducts = 5;
 const dummyUsers = generateUsers(qtyOfUsers);
 const dummyProducts = generateProducts(qtyOfProducts, qtyOfCategories);
 const dummyOrders = generateOrders(qtyOfUsers);

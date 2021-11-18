@@ -1,7 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
-import Landing from "./Landing";
-import { useSelector } from "react-redux";
 
 /**
  * COMPONENT

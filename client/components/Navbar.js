@@ -5,49 +5,50 @@ import { logout } from "../store";
 
 const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
   <div>
-    <div className="navcontainer">
-      <Link className="navlink" to="/">
-        <h1 className="logo">PEACH STUDIO</h1>
+    <div className='navcontainer'>
+      <Link className='navlink' to='/'>
+        <h1 className='logo'>PEACH STUDIO</h1>
       </Link>
       {isLoggedIn ? (
-        <div className="navcontainer">
-          <div className="navbuttons">
-            <Link className="navlink" to="/products">
-              SHOP
-            </Link>
-            <Link className="navlink" to="/cart">
-              CART
-            </Link>
-            <Link className="navlink" to="/profile">
-              PROFILE
-            </Link>
+        <div className='navbuttons'>
+          <Link className='navlink' to='/products'>
+            SHOP
+          </Link>
+          <Link className='navlink' to='/cart'>
+            CART
+          </Link>
+          <Link className='navlink' to='/profile'>
+            PROFILE
+          </Link>
 
-            {isAdmin ? (
-              <Link className="navlink" to="/admin-dash">
-                ADMIN
-              </Link>
-            ) : null}
-            <Link className="navlink" onClick={handleClick} className="navlink" to="/">
-              LOGOUT
+          {isAdmin ? (
+            <Link className='navlink' to='/admin-dash'>
+              ADMIN
             </Link>
-          </div>
+          ) : null}
+          <Link
+            className='navlink'
+            onClick={handleClick}
+            className='navlink'
+            to='/'
+          >
+            LOGOUT
+          </Link>
         </div>
       ) : (
-        <div className="navcontainer">
-          <div className="navbuttons">
-            <Link className="navlink" to="/products">
-              SHOP
-            </Link>
-            <Link className="navlink" to="/cart">
-              CART
-            </Link>
-            <Link className="navlink" to="/login">
-              LOGIN
-            </Link>
-            <Link className="navlink" to="/signup">
-              JOIN
-            </Link>
-          </div>
+        <div className='navbuttons'>
+          <Link className='navlink' to='/products'>
+            SHOP
+          </Link>
+          <Link className='navlink' to='/cart'>
+            CART
+          </Link>
+          <Link className='navlink' to='/login'>
+            LOGIN
+          </Link>
+          <Link className='navlink' to='/signup'>
+            JOIN
+          </Link>
         </div>
       )}
     </div>
