@@ -28,7 +28,7 @@ const AdminEditProducts = () => {
   };
 
   return (
-    <div>
+    <div className="card-holder">
       <Link to={`/products/${product.id}`}>
         <button>Cancel Editing</button>
       </Link>

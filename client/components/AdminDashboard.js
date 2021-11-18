@@ -9,26 +9,18 @@ const AdminDashboard = ({ isAdmin }) => {
         <div className="admin-home">
           <h2 className="admin-side"> Admin Dashboard</h2>
           <div className="first-content small ">
-            <h3 className="fitting">
+            <p className="manage-p">
               {" "}
               <Link className="navbuttons" to="/admin-users">
                 CUSTOMERS
               </Link>
-            </h3>
-
-            <p className="manage-p">
-              {" "}
-              View and manage current registered customers here.
             </p>
           </div>
           <div className="first-content small ">
-            <h3 className="fitting">
-              <Link to="/admin-products">
-                <button>View and edit products</button>
-              </Link>
-            </h3>
             <p className="manage-p">
-              View, create or update current stock of furntiure
+              <Link className="navbuttons" to="/admin-products">
+                INVENTORY
+              </Link>
             </p>
           </div>
         </div>
@@ -44,4 +36,3 @@ const mapState = (state) => {
 };
 
 export default connect(mapState)(AdminDashboard);
-
