@@ -33,9 +33,9 @@ const AdminAdd = () => {
   };
 
   return (
-    <div>
-      <Link to={`/admin-products`}>
-        <button>Cancel Creating</button>
+    <div className="admin-product-container">
+      <Link to="/admin-portal">
+        <button className="admin-button">←Admin Portal</button>
       </Link>
       <h3>Creating New Inventory:</h3>
       <form id="create-product" onSubmit={handleSubmit}>
@@ -76,7 +76,9 @@ const AdminAdd = () => {
         <br />
 
         <br />
-        <button type="submit">Submit Changes</button>
+        <button className="admin-button" type="submit">
+          Submit Changes
+        </button>
       </form>
     </div>
   );
