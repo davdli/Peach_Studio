@@ -70,13 +70,12 @@ export const addToCart = (userObj) => async (dispatch) => {
     return dispatch(_addToCart(data));
   } else {
     let guestCart = JSON.parse(localStorage.getItem("GuestCart")); // reads as object
+    const product = await fetchSingleItemById(userObj.productId);
+    const productToAdd = {...product, cart: userObj};
     if (guestCart) {
-      localStorage.setItem(
-        "GuestCart",
-        JSON.stringify([...guestCart, userObj])
-      ); // local storage only supports string data types
+      localStorage.setItem("GuestCart", JSON.stringify([...guestCart, productToAdd])); // local storage only supports string data types
     } else {
-      const cartItem = [userObj];
+      const cartItem = [productToAdd];
       localStorage.setItem("GuestCart", JSON.stringify(cartItem));
     }
   }
@@ -102,31 +101,24 @@ const fetchSingleItemById = async (id) => {
 };
 
 export const getGuestCart = async (dispatch) => {
-  const cart = JSON.parse(localStorage.getItem("GuestCart"));
+  const cart = JSON.parse(localStorage.getItem("GuestCart")); // [{ id, cart: { productId:, quantity}, ...other properties }]
   if (cart) {
     const finalCart = [];
     const hash = {};
     for (let obj of cart) {
-      if (hash.hasOwnProperty(obj.productId)) {
-        hash[obj.productId] += obj.quantity;
+      if (hash.hasOwnProperty(obj.id)) {
+        hash[obj.id] += obj.cart.quantity;
       } else {
-        hash[obj.productId] = obj.quantity; // { 1:6, 2:5 }
+        hash[obj.id] = obj.cart.quantity; // { 1:6, 2:5 }
       }
-    }
-    for (let key in hash) {
-      finalCart.push({ productId: key, quantity: hash[key] }); // {productId: 1, quantity: 6}
     }
     // logic to only display one instance of a product and increase its quantity in local storage
 
-    let cartItems = [];
-
-    for (let item of finalCart) {
-      // finalCart => [ {productId: 1, quantity: 6 , {productId: 2, quantity: 5} ]
-      const singleProduct = await fetchSingleItemById(item.productId);
-      cartItems.push({ ...singleProduct, cart: item });
+    for (let key in hash) {
+      const singleProduct = await fetchSingleItemById(key);
+      finalCart.push({ ...singleProduct, cart: { productId: key, quantity: hash[key] }}); // reconstruct back into same format
     }
-
-    dispatch(_getCartItems(cartItems));
+    dispatch(_getCartItems(finalCart));
   }
 };
 

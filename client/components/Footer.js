@@ -6,7 +6,7 @@ const Footer = () => (
     {" "}
     <footer className='section-footer'>
       <div className='containerfooter'>
-        <div>
+        <div stylte={{textAlign: 'center', marginLeft: '20px'}}>
           <Link className='footerlink' to='/products'>
             SHOP
           </Link>
@@ -15,9 +15,9 @@ const Footer = () => (
             ABOUT PEACH STUDIO
           </Link>
 
-          <a href='#' className='button'>
+          <Link className='footerlink' to='/'>
             HOME
-          </a>
+          </Link>
         </div>
         <div></div>
       </div>
