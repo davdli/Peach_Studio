@@ -1,17 +1,17 @@
 const router = require("express").Router();
 const Cart = require("../db/models/Cart");
 const Order = require("../db/models/Order");
-const Product = require("../db/models/Product");
-const User = require("../db/models/User");
+const {requireToken}= require('./gatekeepingMiddleware');
 
 // increment, decrement, remove product from cart
 //PUT api/cart
 router.put("/", async (req, res, next) => {
   try {
-    // console.log('This is req.boody in cart',req.body);
+    // console.log('This is req.body in cart',req.body);
+    const {id}= req.body; // To protect against Injection of data to our server.
     const userOrder = await Order.findOne({
       where: {
-        userId: req.body.id,
+        userId: id,
         isComplete: false,
       },
     });
@@ -33,17 +33,19 @@ router.put("/", async (req, res, next) => {
   }
 });
 // POST api/cart
-router.post("/", async (req, res, next) => {
+router.post("/", /* requireToken, */ async (req, res, next) => {
   try {
     // console.log('This is req.body in cart',req.body);
+    const {userId, productId}= req.body;
     const userOrder = await Order.findOne({
       where: {
-        userId: req.body.userId,
+        userId: userId,
         isComplete: false,
       }
     });
-    let cartItems= await userOrder.removeProduct(req.body.productId);
+    let cartItems= await userOrder.removeProduct(productId);
     // console.log('This is the cartItems',cartItems);
+    cartItems= await userOrder.getProducts();
     res.json(cartItems);
   } catch (error) {
     next(error);
@@ -53,9 +55,10 @@ router.post("/", async (req, res, next) => {
 //PUT api/cart/increase
 router.put("/increase", async (req, res, next) => {
   try {
+    const {userId, productId}= req.body;
     const order = await Order.findOne({
       where: {
-        userId: req.body.userId,
+        userId: userId,
         isComplete: false,
       },
     });
@@ -63,7 +66,7 @@ router.put("/increase", async (req, res, next) => {
     const cartItem = await Cart.findOne({
       where: {
         orderId: order.id,
-        productId: req.body.productId,
+        productId: productId,
       },
     });
 
@@ -78,9 +81,10 @@ router.put("/increase", async (req, res, next) => {
 //PUT api/cart/decrease
 router.put("/decrease", async (req, res, next) => {
   try {
+    const {userId, productId}= req.body;
     const order = await Order.findOne({
       where: {
-        userId: req.body.userId,
+        userId: userId,
         isComplete: false,
       },
     });
@@ -88,7 +92,7 @@ router.put("/decrease", async (req, res, next) => {
     const cartItem = await Cart.findOne({
       where: {
         orderId: order.id,
-        productId: req.body.productId,
+        productId: productId,
       },
     });
 

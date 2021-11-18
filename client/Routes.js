@@ -17,6 +17,7 @@ import AdminProducts from "./components/AdminProducts";
 import AdminEditProducts from "./components/AdminEditProducts";
 import AdminAdd from "./components/AdminAdd";
 import OrderHistory from "./components/OrderHistory"
+import EditUserProfile from "./components/EditUserProfile";
 /**
  * COMPONENT
  */
@@ -37,28 +38,28 @@ class Routes extends Component {
             <Route path="/admin-users" component={AdminUsers} />
             <Route exact path="/admin-products" component={AdminProducts} />
             <Route path="/admin-products/create" component={AdminAdd} />
-            <Route path="/profile/:id" component={OrderHistory} />
-            <Route exact path="/profile" component={UserProfile} />
             <Route exact path="/products" component={AllProducts} />
             <Route exact path="/products/:id" component={SingleProduct} />
             <Route path="/products/:id/edit" component={AdminEditProducts} />
             <Route exact path="/cart" component={Cart} />
-            <Route exact path="/profile" component={UserProfile} />
             <Route exact path="/checkout" component={CheckoutForm} />
             <Route exact path="/confirmation" component={Confirmation} />
-            {/* <Route exact path="/history" component={OrderHistory} /> */}
             <Redirect to="/" />
+            <Route exact path='/profile' component={UserProfile} />
+            <Route path="/profile/:id" component={OrderHistory} />
+            <Route exact path='/profile/edit' component={EditUserProfile} />
+            <Redirect to='/' />
           </Switch>
         ) : (
           <Switch>
-            <Route exact path="/" component={Landing} />
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-            <Route exact path="/products" component={AllProducts} />
-            <Route exact path="/products/:id" component={SingleProduct} />
-            <Route exact path="/cart" component={Cart} />
-            <Route exact path="/checkout" component={CheckoutForm} />
-            <Route exact path="/confirmation" component={Confirmation} />
+            <Route exact path='/' component={Landing} />
+            <Route path='/login' component={Login} />
+            <Route path='/signup' component={Signup} />
+            <Route exact path='/products' component={AllProducts} />
+            <Route exact path='/products/:id' component={SingleProduct} />
+            <Route exact path='/cart' component={Cart} />
+            <Route exact path='/checkout' component={CheckoutForm} />
+            <Route exact path='/confirmation' component={Confirmation} />
           </Switch>
         )}
       </div>

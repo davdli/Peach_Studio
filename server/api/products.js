@@ -45,11 +45,11 @@ router.delete("/:id", async (req, res, next) => {
 // POST api/products/:productId
 router.post("/:productId", async (req, res, next) => {
   try {
-    const product = await Product.findByPk(req.params.productId);
-
+    // const product = await Product.findByPk(req.params.productId);
+    const { userId, quantity } = req.body;
     const order = await Order.findOne({
       where: {
-        userId: req.body.userId,
+        userId: userId,
         isComplete: false,
       },
     });
@@ -65,10 +65,10 @@ router.post("/:productId", async (req, res, next) => {
       await Cart.create({
         orderId: order.id,
         productId: req.params.productId,
-        quantity: req.body.quantity,
+        quantity: quantity,
       });
     } else {
-      cartItem.update({ quantity: cartItem.quantity + req.body.quantity });
+      cartItem.update({ quantity: cartItem.quantity + quantity });
     }
 
     // const cartItem = await order.addProduct(product);
@@ -81,7 +81,7 @@ router.post("/:productId", async (req, res, next) => {
 
 // DELETE api/products/:productId
 
-router.delete("/:productId");
+// router.delete("/:productId");
 
 // const cartItem = await Cart.findOne({
 //   where: {

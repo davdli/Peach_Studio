@@ -8,47 +8,47 @@ import { Link } from "react-router-dom";
  */
 const AuthForm = (props) => {
   const { name, displayName, handleSubmit, error } = props;
-  console.log(displayName);
+
   return (
     <div>
       {displayName === "SIGN UP" ? (
         <div>
           <section id='sectionform'>
-            <div class='box-1'>
+            <div className='box-1'>
               {" "}
               <hr />
             </div>
-            <div class='box-2 text'>
-              <div class='login-div'>
-                <div class='logopeach'></div>
-                <div class='title'>{displayName}</div>
-                <form class='fields' onSubmit={handleSubmit} name={name}>
+            <div className='box-2 text'>
+              <div className='login-div'>
+                <div className='logopeach'></div>
+                <div className='title'>{displayName}</div>
+                <form className='fields' onSubmit={handleSubmit} name={name}>
                   <div>
                     <label htmlFor='first'>
                       <small>First</small>
                     </label>
-                    <input class='first' name='first' type='text' />
+                    <input className='first' name='first' type='text' />
                   </div>
                   <div>
                     <label htmlFor='last'>
                       <small>Last</small>
                     </label>
-                    <input class='last' name='last' type='text' />
+                    <input className='last' name='last' type='text' />
                   </div>
                   <div>
                     <label htmlFor='email'>
                       <small>Email</small>
                     </label>
-                    <input class='username' name='email' type='text' />
+                    <input className='username' name='email' type='text' />
                   </div>
                   <div>
                     <label htmlFor='password'>
                       <small>Password</small>
                     </label>
-                    <input class='password' name='password' type='password' />
+                    <input className='password' name='password' type='password' />
                   </div>
                   <div>
-                    <button class='signin-button' type='submit'>
+                    <button className='signin-button' type='submit'>
                       {displayName}
                     </button>
                   </div>
@@ -63,29 +63,29 @@ const AuthForm = (props) => {
       ) : (
         <div>
           <section id='sectionform'>
-            <div class='box-1'>
+            <div className='box-1'>
               {" "}
               <hr />
             </div>
-            <div class='box-2 text'>
-              <div class='login-div'>
-                <div class='logopeach'></div>
-                <div class='title'>{displayName}</div>
-                <form class='fields' onSubmit={handleSubmit} name={name}>
+            <div className='box-2 text'>
+              <div className='login-div'>
+                <div className='logopeach'></div>
+                <div className='title'>{displayName}</div>
+                <form className='fields' onSubmit={handleSubmit} name={name}>
                   <div>
                     <label htmlFor='email'>
                       <small>Email</small>
                     </label>
-                    <input class='username' name='email' type='text' />
+                    <input className='username' name='email' type='text' />
                   </div>
                   <div>
                     <label htmlFor='password'>
                       <small>Password</small>
                     </label>
-                    <input class='username' name='password' type='password' />
+                    <input className='username' name='password' type='password' />
                   </div>
                   <div>
-                    <button class='signin-button' type='submit'>
+                    <button className='signin-button' type='submit'>
                       {displayName}
                     </button>
                   </div>
@@ -98,7 +98,7 @@ const AuthForm = (props) => {
           </section>
         </div>
       )}
-      <Footer></Footer>
+      <Footer />
     </div>
   );
 };
@@ -127,7 +127,7 @@ const mapDispatch = (dispatch) => {
   return {
     handleSubmit(evt) {
       evt.preventDefault();
-      console.log('This is evt.target.name:',evt.target.name);
+      console.log("This is evt.target.name:", evt.target.name);
       if (evt.target.name === "signup") {
         const formName = evt.target.name;
         const first = evt.target.first.value;

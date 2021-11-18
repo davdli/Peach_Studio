@@ -6,7 +6,7 @@ import { fetchSingleProduct } from "./singleProduct";
 // action types
 export const ADD_TO_CART = "ADD_TO_CART";
 export const GET_CART_ITEMS = "GET_CART_ITEMS";
-const UPDATE_CART = 'UPDATE_CART';
+const UPDATE_CART = "UPDATE_CART";
 export const INCREASE_QUANTITY = "INCREASE_QUANTITY";
 export const DECREASE_QUANTITY = "DECREASE_QUANTITY";
 export const UPDATED_CART = "UPDATED_CART";
@@ -30,8 +30,8 @@ export const _updateCart = (cartItem) => {
   return {
     type: UPDATE_CART,
     removeProduct: cartItem,
-  }
-}
+  };
+};
 
 export const _increaseQuantity = (cartItems) => {
   return {
@@ -70,12 +70,15 @@ export const addToCart = (userObj) => async (dispatch) => {
     );
     return dispatch(_addToCart(data));
   } else {
-    let guestCart = JSON.parse(localStorage.getItem('GuestCart')); // reads as object
+    let guestCart = JSON.parse(localStorage.getItem("GuestCart")); // reads as object
     if (guestCart) {
-      localStorage.setItem('GuestCart', JSON.stringify([...guestCart, userObj])); // local storage only supports string data types
+      localStorage.setItem(
+        "GuestCart",
+        JSON.stringify([...guestCart, userObj])
+      ); // local storage only supports string data types
     } else {
-      const cartItem = [ userObj ];
-      localStorage.setItem('GuestCart', JSON.stringify(cartItem));
+      const cartItem = [userObj];
+      localStorage.setItem("GuestCart", JSON.stringify(cartItem));
     }
   }
 };
@@ -86,58 +89,75 @@ export const getCartItems = (user) => {
       // console.log('This is the user in the cart redux', user);
       // const {id}= user
       const { data } = await axios.put("/api/cart", user);
-      console.log({data});
+      console.log({ data });
       dispatch(_getCartItems(data));
     } catch (error) {
       console.log(error);
     }
   };
-}
+};
 
 const fetchSingleItemById = async (id) => {
   const { data } = await axios.get(`/api/products/${id}`); // helper function for getGuest Cart
   return data;
-}
+};
 
 export const getGuestCart = async (dispatch) => {
-  const cart = JSON.parse(localStorage.getItem('GuestCart'));
+  const cart = JSON.parse(localStorage.getItem("GuestCart"));
   if (cart) {
     const finalCart = [];
     const hash = {};
     for (let obj of cart) {
-        if (hash.hasOwnProperty(obj.productId)) {
-            hash[obj.productId] += obj.quantity;
-        } else {
-            hash[obj.productId] = obj.quantity; // { 1:6, 2:5 }
-        }
+      if (hash.hasOwnProperty(obj.productId)) {
+        hash[obj.productId] += obj.quantity;
+      } else {
+        hash[obj.productId] = obj.quantity; // { 1:6, 2:5 }
+      }
     }
     for (let key in hash) {
-        finalCart.push({ productId: key, quantity: hash[key] }); // {productId: 1, quantity: 6}
+      finalCart.push({ productId: key, quantity: hash[key] }); // {productId: 1, quantity: 6}
     }
     // logic to only display one instance of a product and increase its quantity in local storage
 
     let cartItems = [];
-    for (let item of finalCart) { // finalCart => [ {productId: 1, quantity: 6 , {productId: 2, quantity: 5} ]
-      console.log(fetchSingleItemById(item.productId));
+
+    for (let item of finalCart) {
+      // finalCart => [ {productId: 1, quantity: 6 , {productId: 2, quantity: 5} ]
       const singleProduct = await fetchSingleItemById(item.productId);
-      cartItems.push({ ...singleProduct, cart: item});
+      cartItems.push({ ...singleProduct, cart: item });
     }
-    console.log({cartItems});
+
     dispatch(_getCartItems(cartItems));
   }
 };
 
-export const updateCart = (productId, userId) => {
+export const removeItem = (productId, userId) => {
   return async (dispatch) => {
     try {
-      // console.log('This is the ProductId and the userId in updateCart call: ', productId, userId);
-      const { data } = await axios.post("/api/cart", {productId, userId});
+      // console.log('This is the ProductId and the userId in removeItem call: ', productId, userId);
+      const token= window.localStorage.getItem(TOKEN);
+      console.log('This is the token:',token);
+      const { data } = await axios.post("/api/cart", {
+        headers:{
+          authorization: token
+        }
+      }, {
+        productId,
+        userId,
+        
+      });
       dispatch(_updateCart(data));
     } catch (error) {
       console.log(error);
     }
   };
 };
+
+export const guestRemoveItem = (cart) => {
+  return async (dispatch) => {
+    dispatch(_getCartItems(cart))
+  }
+}
 
 export const increaseQuantity = (productId, userId) => {
   return async (dispatch) => {
@@ -153,6 +173,14 @@ export const increaseQuantity = (productId, userId) => {
   };
 };
 
+export const guestIncreaseQty = (cart) => {
+  return async (dispatch) => {
+    // console.log({cart})
+    localStorage.setItem("GuestCart", JSON.stringify([...cart]));
+    dispatch(_getCartItems(cart));
+  };
+};
+
 export const decreaseQuantity = (productId, userId) => {
   return async (dispatch) => {
     try {
@@ -164,6 +192,13 @@ export const decreaseQuantity = (productId, userId) => {
     } catch (error) {
       console.log(error);
     }
+  };
+};
+
+export const guestDecreaseQty = (cart) => {
+  return async (dispatch) => {
+    localStorage.setItem("GuestCart", JSON.stringify([...cart]));
+    dispatch(_getCartItems(cart));
   };
 };
 

@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useRef } from "react";
 import { connect } from "react-redux";
 import Footer from "./Footer";
+import { Controller, Scene } from "react-scrollmagic";
+import { Tween, Timeline } from "react-gsap";
+import { useEffect } from "react";
 
 /**
  * COMPONENT
@@ -8,80 +11,75 @@ import Footer from "./Footer";
 export const Landing = () => {
   return (
     <div>
-      <header className="headerbanner">
+      <header className='headerbanner'>
         <h1>Peach Studio</h1>
         <p>make your home sweet</p>
       </header>
-      <section id="section-a">
+      <section id='section-a'>
         <p></p>
       </section>
-      <section id="section-a">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore{" "}
-        </p>
-      </section>
-      <section id="section-b">
-        <div className="box-1">
+      <section id='section-b'>
+        <div className='box-1'>
           {" "}
-          <img
-            className="categimg ch"
-            src="https://images.pexels.com/photos/6044919/pexels-photo-6044919.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-          />{" "}
-          <p> CHAIR</p>
+          <img className='categimg ch' src='/chair3.jpg' /> <p> CHAIR</p>
         </div>
-        <div className="box-1">
-          <img
-            className="categimg tb"
-            src="https://images.unsplash.com/photo-1611486212355-d276af4581c0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDF8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-          />{" "}
-          <p> TABLE</p>
+        <div className='box-1'>
+          <img className='categimg tb' src='/table1.jpg' /> <p> TABLE</p>
         </div>
-        <div className="box-1">
-          <img
-            className="categimg co"
-            src="https://images.unsplash.com/photo-1605774337664-7a846e9cdf17?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1548&q=80"
-          />{" "}
-          <p>SOFA</p>
+        <div className='box-1'>
+          <img className='categimg co' src='/sofa1.jpg' /> <p>SOFA</p>
         </div>
-        <div className="box-1">
-          <img
-            className="categimg dr"
-            src="https://images.pexels.com/photos/6758235/pexels-photo-6758235.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-          />{" "}
-          <p>DRESSER</p>
+        <div className='box-1'>
+          <img className='categimg dr' src='/dresser1.jpg' /> <p>DRESSER</p>
         </div>
       </section>
-      <section id="section-c">
-        <div className="box-1">
-          <img
-            className="categimgstatic"
-            src="https://i.pinimg.com/originals/80/b9/99/80b99980cf3f8232610c001d7b8a24f5.png"
-          />{" "}
-        </div>
-        <div className="box-2 text">
-          <hr />
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore{" "}
-          </p>
-        </div>
-        <a href="#" className="button">
-          ^
-        </a>
-      </section>
-      <section id="section-d">
-        <video className="landingvideo" autoPlay muted loop>
-          <source src="/landingp.mp4" type="video/mp4" />
-        </video>
-      </section>
-      <section id="section-e">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore{" "}
-        </p>
-      </section>
-      <Footer></Footer>
+
+      <Controller>
+        <Scene triggerHook='onLeave' duration={300} pin>
+          {(progress) => (
+            <div className='sticky sticky-one'>
+              <Timeline
+                totalProgress={progress}
+                paused
+                target={
+                  <section id='section-a'>
+                    <p>Well-made furniture for your everyday life </p>
+                  </section>
+                }
+              >
+                <Tween from={{ opacity: 0 }} to={{ opacity: 4 }} />
+                <Tween to={{ x: "400px" }} />
+                <Tween from={{ scale: 6 }} to={{ scale: 1 }} />
+              </Timeline>
+            </div>
+          )}
+        </Scene>
+
+        <section id='section-d' className='trigger'>
+          <video className='landingvideo' autoPlay muted loop>
+            <source src='/landingp.mp4' type='video/mp4' />
+          </video>
+        </section>
+        <section id='section-c'>
+          <div className='box-1'>
+            <img
+              className='categimgstatic'
+              src='https://i.pinimg.com/564x/6b/4f/69/6b4f690e4fdacdaa553d515881c1dfee.jpg'
+            />{" "}
+          </div>
+          <div className='box-2 text'>
+            <p>
+              Let us help you curate beautiful items for you to enjoy in your
+              home{" "}
+            </p>
+          </div>
+          <a href='#' className='button'>
+            ^
+          </a>
+        </section>
+
+        <Footer></Footer>
+      </Controller>
     </div>
   );
 };

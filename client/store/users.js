@@ -1,12 +1,13 @@
 import axios from "axios";
 
-export const GET_USER = "GET_USER";
+export const UPDATE_ORDER = "UPDATE_ORDER";
 export const GET_ALL_USERS = "GET_ALL_USERS";
+const TOKEN = 'token';
 //* ------------------ Actions creators --------------------
 //* Set the current user
-export const setUser = (user) => ({
-  type: GET_USER,
-  payload: user,
+export const _updatedOrder = (userOrder) => ({
+  type: UPDATE_ORDER,
+  payload: userOrder,
 });
 
 //* Set all the users
@@ -17,16 +18,19 @@ export const setUsers = (users) => ({
 
 //* ------------------ Thunk creators -----------------------
 //* Used to fetch the current user
-export const fetchUser = (userId, token) => {
+export const updateOrder = (userId) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`/api/users/${userId}`, {
-        headers: { authorization: token },
+      const token = window.localStorage.getItem(TOKEN);
+      // console.log('This is the token',token);
+      const { data } = await axios.put(`/api/users/${userId}`, {
+        headers: {
+          authorization: token
+        },
       });
-      dispatch(setUser(data));
+      dispatch(_updatedOrder(data));
     } catch (error) {
-      console.log("Failed to fetch current user: " + userId);
-      return;
+      console.log(error);
     }
   };
 };
@@ -55,8 +59,8 @@ const initialState = {
 //*==================== REDUCER FUNCTION ====================
 export default function userReducer(state = initialState, action) {
   switch (action.type) {
-    case GET_USER:
-      return { ...state, user: action.payload };
+    case UPDATE_ORDER:
+      return { ...state, user: action.payload };// This doesnt work :( )
     case GET_ALL_USERS:
       return { ...state, users: action.payload };
     default:
