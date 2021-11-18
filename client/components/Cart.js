@@ -107,24 +107,26 @@ const Cart = (props) => {
                     <p>
                       <b>Id:</b> {product.id}
                     </p>
-
-                    <div
+                    {/* <div
                       className='cart-product-color'
                       style={{ backgroundColor: "#f4d0a5" }}
-                    ></div>
+                    ></div> */}
                   </div>
                 </div>
                 <div className='cart-product-price'>
                   <div className='cart-product-cost'>
-                    <p>Price: ${product.price}</p>
-                    <button value={product.id} onClick={handleIncrease}>
-                      +
-                    </button>
-                    <p>Quantity: {product.cart.quantity}</p>
-                    <button value={product.id} onClick={handleDecrease}>
-                      -
-                    </button>
+                    <p style={{fontSize: '18px', marginLeft: '15px'}}>${product.price}</p>
+                    <div style={{display: 'flex', alignItems: 'center'}}>
+                      <button value={product.id} onClick={handleIncrease} style={{margin: '10px'}}>
+                        +
+                      </button>
+                      <p style={{fontSize: '18px'}}>{product.cart.quantity}</p>
+                      <button value={product.id} onClick={handleDecrease} style={{margin: '10px'}}>
+                        -
+                      </button>
+                    </div>
                   </div>
+                  <br />
                   <div className='cart-product-amount'>
                     <button
                       className=''
