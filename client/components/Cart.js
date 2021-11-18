@@ -33,7 +33,7 @@ const Cart = (props) => {
   // useEffect(() => {
   //   if (user.id) {
   //     dispatch(getCartItems(user));
-  //   } 
+  //   }
   // }, [cart]);
 
 
@@ -45,9 +45,9 @@ const Cart = (props) => {
       for (let i = 0; i < cart.length; i++) {
         if (cart[i].id === Number(event.target.value)) {
           cart.splice(i, 1);
-          dispatch(guestRemoveItem(cart))
         }
       }
+      dispatch(guestRemoveItem(cart));
     }
   };
 
@@ -59,9 +59,9 @@ const Cart = (props) => {
       for (let i = 0; i < cart.length; i++) {
         if (cart[i].id === Number(event.target.value)) {
           cart[i].cart.quantity++;
-          dispatch(guestIncreaseQty(cart));
         }
       }
+      dispatch(guestIncreaseQty(cart));
     }
   };
   const handleDecrease = (event) => {
@@ -72,9 +72,9 @@ const Cart = (props) => {
       for (let i = 0; i < cart.length; i++) {
         if (cart[i].id === Number(event.target.value)) {
           cart[i].cart.quantity--;
-          dispatch(guestIncreaseQty(cart));
         }
       }
+      dispatch(guestIncreaseQty(cart));
     }
   };
 
