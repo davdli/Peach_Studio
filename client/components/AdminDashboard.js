@@ -15,7 +15,6 @@ const AdminDashboard = ({ isAdmin }) => {
                 CUSTOMERS
               </Link>
             </h3>
-
             <p className="manage-p">
               {" "}
               View and manage current registered customers here.

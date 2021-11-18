@@ -45,12 +45,9 @@ class Routes extends Component {
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/checkout" component={CheckoutForm} />
             <Route exact path="/confirmation" component={Confirmation} />
-            <Redirect to="/" />
             <Route exact path='/profile' component={UserProfile} />
             <Route path="/profile/:id" component={OrderHistory} />
             <Route exact path='/profile/edit' component={EditUserProfile} />
-            <Route exact path='/checkout' component={CheckoutForm} />
-            <Route exact path='/confirmation' component={Confirmation} />
             <Route exact path='/about' component={About} />
             <Redirect to='/' />
           </Switch>
