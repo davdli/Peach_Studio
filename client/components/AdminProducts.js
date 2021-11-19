@@ -17,26 +17,40 @@ const AdminProducts = () => {
   }, []);
 
   return (
-    <div className="content">
-      <div className="container">
-        <Link to="/admin-products/create">
-          <button>Create New Peachy Item</button>
-        </Link>
-        <h1>Product List</h1>
-        <div id="admin-products">
-          {products.map((product) => (
-            <div key={product.id} id="product">
-              {product.name}
-              <br />
-              <Link to={`/products/${product.id}`}>
-                <button>View Product Page</button>
-              </Link>
-            </div>
-          ))}
-        </div>
+    <div className="admin-product-container">
+      <div className="card-holder">
         <Link to="/admin-portal">
-          <button>Back to Administrator Portal</button>
+          <button className="admin-button">←Admin Portal</button>
         </Link>
+        <Link to="/admin-products/create">
+          <button className="admin-button">+Add Inventory</button>
+        </Link>
+        <h1>Current Inventory</h1>
+        <div className="card">
+          <table>
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Sales Price</th>
+              <th>Current Stock</th>
+              <th>Category</th>
+            </tr>
+            {products.map((product) => (
+              <tr key={product.id} id="product">
+                <td>
+                  <img src={product.imageUrl} className="theimage" />
+                </td>
+                <td>
+                  {" "}
+                  <Link to={`/products/${product.id}`}>{product.name} </Link>
+                </td>
+                <td>${product.price}</td>
+                <td>{product.inventory}</td>
+                <td>{product.category}</td>
+              </tr>
+            ))}
+          </table>
+        </div>
       </div>
     </div>
   );

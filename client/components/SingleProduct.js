@@ -31,16 +31,18 @@ const SingleProduct = (props) => {
       <div className='single-product-view'>
         <div className='right'>
           <h3>Left in stock: {product.inventory}</h3>
-          <h3>Price: ${product.price}</h3>
+          <h3>${product.price}</h3>
+          <div style={{display: 'flex', alignItems: 'center', marginLeft: '30px'}}>
+            <button value="increase" onClick={() => changeQuantity(quantity + 1)} style={{margin: '10px'}}>
+              +
+            </button>
+            <div>{quantity}</div>
+            <button value="decrease" onClick={() => changeQuantity(quantity - 1)} style={{margin: '10px'}}>
+              -
+            </button>
+          </div>
           <button className='btn first' onClick={addProduct} value={product.id}>
             Add to Cart
-          </button>
-          <button value="increase" onClick={() => changeQuantity(quantity + 1)}>
-            +
-          </button>
-          <div>{quantity}</div>
-          <button value="decrease" onClick={() => changeQuantity(quantity - 1)}>
-            -
           </button>
         </div>
         <div>

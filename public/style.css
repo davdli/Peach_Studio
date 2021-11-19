@@ -780,9 +780,11 @@ button:focus {
 }
 
 .cart-product-amount button {
-  font-size: 24px;
+  font-size: 18px;
+  font-weight: lighter;
   background-color: white;
   border-style: none;
+  text-decoration: underline;
   cursor: pointer;
 }
 
@@ -1012,7 +1014,8 @@ table img {
   padding: 10px;
   cursor: pointer;
   background: #f4d0a56b;
-  border-style: none;
+  border-style: lightgray;
+  border-radius: 10px;
 }
 
 /* CONFIRMATION PAGE */
@@ -1068,7 +1071,7 @@ table img {
 .first-content {
   border-radius: 25px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  background-color: #f5ccb9;
+  background-image: url("https://media.istockphoto.com/photos/peach-color-painted-old-cement-plaster-wall-texture-picture-id949072836?k=20&m=949072836&s=170667a&w=0&h=z_isRf5t62DCk-3IhD7PDDeTNsYvYG3YLzJtftWg4g4=");
   position: relative;
   display: flex;
   justify-content: center;
@@ -1080,7 +1083,7 @@ table img {
   font-family: "Courier New", Courier, monospace;
   font-size: 22px;
   text-align: center;
-  color: whitesmoke;
+  color: black;
 }
 
 .admin-customers {
@@ -1096,12 +1099,12 @@ table img {
   font-size: 20px;
 }
 .manage-p {
-  background-color: rgb(167, 140, 140);
+  background-image: url("https://image.freepik.com/free-photo/white-brush-paint-texture-background_23-2148545279.jpg");
   color: white;
   border: 3px solid white;
-  width: 80%;
+  /* width: 80%; */
   margin: 2px;
-  padding: 10px;
+  padding: 50px;
   font-family: "Montserrat";
 }
 
@@ -1140,7 +1143,47 @@ h3 .fitting {
   height: 50px;
   width: 50px;
 }
+@media (max-width: 768px) {
+  .card-holder {
+    grid-template-columns: 1fr 6fr 1fr;
+  }
+  .card {
+    padding: 20px;
+  }
+}
 
+table img {
+  width: 40px;
+  height: 40px;
+}
+
+.admin-product-container {
+  margin-left: 20%;
+  margin-right: 20%;
+}
+.admin-button {
+  outline: none;
+  border: none;
+  cursor: pointer;
+  width: 150px;
+  height: 30px;
+  border-radius: 0px;
+
+  color: black;
+  text-align: center;
+  background-color: transparent;
+  transition: 0.5s;
+}
+.admin-button:hover {
+  background: #f3c0c0;
+  color: white;
+  width: 150px;
+  height: 30px;
+}
+.admin-button:active {
+  background: #f59292;
+  color: white;
+}
 .customer-container {
   display: -webkit-box;
   display: -webkit-flex;
