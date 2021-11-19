@@ -8,7 +8,7 @@ import singleProductReducer from "../redux/singleProduct";
 import cartReducer from "../redux/cart";
 import usersReducer from "./users";
 import customers from "./customers";
-import removedProduct from "../redux/removedProduct";
+import orders from "../redux/orders";
 
 const reducer = combineReducers({
   auth,
@@ -17,6 +17,7 @@ const reducer = combineReducers({
   cart: cartReducer,
   user: usersReducer,
   customers,
+  orders: orders,
 });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))

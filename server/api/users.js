@@ -43,3 +43,18 @@ router.put("/:id", /* requireToken, */ async (req, res, next) => {// Is not auth
     next(err);
   }
 });
+
+// /api/users/:id/orders
+router.get("/:id/orders", requireToken, async (req, res, next) => {
+  try {
+    const orders = await Order.findAll({
+      where:{
+        userId: req.params.id,
+        isComplete: true,
+      }
+    });
+    res.json(orders);
+  } catch (err) {
+    next(err);
+  }
+});

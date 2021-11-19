@@ -1,43 +1,40 @@
 import axios from "axios";
 const TOKEN = "token";
-import history from "../history";
 
 // action types
-const REMOVED_ITEM = "REMOVED_ITEM";
+const GOT_ORDERS = "GOT_ORDERS";
 
 // action creators
-export const _removedItem = (cartItem) => {
+export const _gotOrders = (orders) => {
     return {
-        type: REMOVED_ITEM,
-        removeProduct: cartItem,
+        type: GOT_ORDERS,
+        orderArr: orders,
     };
 };
 
 // thunks
-export const removeItem = (productId, userId) => {
+export const getOrders = (userId) => {
     return async (dispatch) => {
         try {
             // console.log('This is the ProductId and the userId in removeItem call: ', productId, userId);
             const token = window.localStorage.getItem(TOKEN);
-            const { data } = await axios.post("/api/cart", { productId, userId }, {
+            const { data } = await axios.get(`/api/users/${userId}/orders`, {
                 headers: {
-                    Authorization: token
+                    authorization: token
                 }
             });
-            dispatch(_removedItem(data));
+            dispatch(_gotOrders(data));
         } catch (error) {
             console.log(error);
         }
     };
 };
 
-
-
-
-export default function removedProduct(state = {}, action) {
+// Reducer
+export default function orders(state = [], action) {
     switch (action.type) {
-        case REMOVED_ITEM:
-            return action.removeProduct;
+        case GOT_ORDERS:
+            return action.orderArr;
         default:
             return state;
     }

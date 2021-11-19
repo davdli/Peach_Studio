@@ -16,6 +16,7 @@ import Confirmation from "./components/Confirmation";
 import AdminProducts from "./components/AdminProducts";
 import AdminEditProducts from "./components/AdminEditProducts";
 import AdminAdd from "./components/AdminAdd";
+import OrderHistory from "./components/OrderHistory"
 import EditUserProfile from "./components/EditUserProfile";
 import About from "./components/About";
 /**
@@ -33,21 +34,20 @@ class Routes extends Component {
       <div>
         {isLoggedIn ? (
           <Switch>
-            <Route exact path='/' component={Home} />
-            <Route path='/admin-dash' component={AdminDashboard} />
-            <Route path='/admin-users' component={AdminUsers} />
-            <Route exact path='/admin-products' component={AdminProducts} />
-            <Route path='/admin-products/create' component={AdminAdd} />
-            <Route path='/profile/:id' component={UserProfile} />
-            <Route path='/profile' component={UserProfile} />
-            <Route exact path='/products' component={AllProducts} />
-            <Route exact path='/products/:id' component={SingleProduct} />
-            <Route path='/products/:id/edit' component={AdminEditProducts} />
-            <Route exact path='/cart' component={Cart} />
+            <Route exact path="/" component={Home} />
+            <Route path="/admin-dash" component={AdminDashboard} />
+            <Route path="/admin-users" component={AdminUsers} />
+            <Route exact path="/admin-products" component={AdminProducts} />
+            <Route path="/admin-products/create" component={AdminAdd} />
+            <Route exact path="/products" component={AllProducts} />
+            <Route exact path="/products/:id" component={SingleProduct} />
+            <Route path="/products/:id/edit" component={AdminEditProducts} />
+            <Route exact path="/cart" component={Cart} />
+            <Route exact path="/checkout" component={CheckoutForm} />
+            <Route exact path="/confirmation" component={Confirmation} />
             <Route exact path='/profile' component={UserProfile} />
+            <Route exact path="/profile/:id" component={OrderHistory} />
             <Route exact path='/profile/edit' component={EditUserProfile} />
-            <Route exact path='/checkout' component={CheckoutForm} />
-            <Route exact path='/confirmation' component={Confirmation} />
             <Route exact path='/about' component={About} />
             <Redirect to='/' />
           </Switch>

@@ -44,8 +44,8 @@ router.post("/",/*  requireToken, */ async (req, res, next) => {
       }
     });
     let cartItems= await userOrder.removeProduct(productId);
-    console.log('This is the cartItems',cartItems);
-    cartItems=await userOrder.getProducts();
+    // console.log('This is the cartItems',cartItems);
+    cartItems= await userOrder.getProducts();
     res.json(cartItems);
   } catch (error) {
     next(error);
