@@ -9,11 +9,14 @@ import { useSelector } from "react-redux";
 
 export const Home = (props) => {
   const { email } = props;
-  const welcomeName = email.split("@");
+  let welcomeName = email.split("@");
+  const fLetter= welcomeName[0][0].toUpperCase();
+  welcomeName= fLetter + welcomeName[0].slice(1);
+
   return (
     <div>
 
-      <h3 className="welcomeuser">Welcome, {welcomeName[0]}</h3>
+      <h3 className="welcomeuser">Welcome, {welcomeName}</h3>
 
       <Landing></Landing>
     </div>

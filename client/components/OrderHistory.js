@@ -13,7 +13,7 @@ const OrderHistory = (props) => {
     useEffect(() => {
         dispatch(getOrders(props.match.params.id));
     }, [user]);
-    
+
     return (
         <div>
             {
@@ -38,7 +38,7 @@ const OrderHistory = (props) => {
                                                     return (
                                                         <tr key={order.id}>
                                                             <td>
-                                                                {index+1}
+                                                                {index + 1}
                                                             </td>
                                                             <td>
                                                                 {Date(order.updatedAt)}
@@ -57,7 +57,8 @@ const OrderHistory = (props) => {
                         </div>
                     </div>
             }
-            <Footer />
+
+            <Footer></Footer>
         </div>
 
     )
