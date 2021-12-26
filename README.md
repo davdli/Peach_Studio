@@ -1,4 +1,4 @@
-# Tagd
+# Peach Studio
 An e-commerce website specializing in furniture to make your home .... sweet home.
 
 ## Tech Stack
