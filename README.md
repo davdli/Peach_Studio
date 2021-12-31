@@ -1,6 +1,10 @@
 # Peach Studio
 An e-commerce website specializing in furniture to make your home .... sweet home.
 
+## Preview
+<img width='75%' src="public/PeachStudioDemo1.gif">
+<img width='75%' src="public/PeachStudioDemo2.gif">
+
 ## Tech Stack
 - ![Node.js](https://img.shields.io/badge/-Node.js-339933A?logo=node.js&logoColor=white&style=flat)
 - ![React](https://img.shields.io/badge/-React-61DAFB?logo=react&logoColor=white&style=flat)
