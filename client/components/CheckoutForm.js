@@ -93,7 +93,7 @@ const CheckoutForm = (props) => {
             {cart.map(product => (
               <div key={product.id}>
                 <p>{product.name} ({product.cart.quantity})</p>
-                <p>${Number(product.price).toFixed(2)}</p>
+                <p>${(product.cart.quantity) * Number(product.price).toFixed(2)}</p>
               </div>
             ))}
             <hr />
