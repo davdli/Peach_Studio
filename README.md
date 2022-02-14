@@ -1,5 +1,5 @@
 # Peach Studio
-An e-commerce website specializing in furniture to make your home .... sweet home.
+Peach Studio is an e-commerce website for you to find stylish furiniture, making your home .... sweet home.
 
 ## Preview
 <img width='75%' src="public/PeachStudioDemo1.gif">
